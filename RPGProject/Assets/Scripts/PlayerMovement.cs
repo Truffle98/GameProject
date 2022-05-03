@@ -26,6 +26,17 @@ public class PlayerMovement : MonoBehaviour
 
         body.velocity = new Vector2(horizontalInput * speed, verticalInput * speed);
 
+        //Flips sprites and helps facilitate sprite transitions
+        changeSprite(horizontalInput, verticalInput);
+
+        //Set animator parameters
+        anim.SetBool("Running", horizontalInput != 0);
+        anim.SetBool("UpRunning", movingUp);
+        anim.SetBool("DownRunning", movingDown);
+    }
+
+    private void changeSprite(float horizontalInput, float verticalInput)
+    {
         if (horizontalInput > .01f)
         {
             transform.localScale = new Vector3(-6, 6, 6);
@@ -54,9 +65,5 @@ public class PlayerMovement : MonoBehaviour
         {
             movingDown = true;
         }
-
-        //Set animator parameters
-        anim.SetBool("Running", horizontalInput != 0);
-        anim.SetBool("UpRunning", movingUp);
     }
 }

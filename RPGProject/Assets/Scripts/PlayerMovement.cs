@@ -2,9 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : BaseClass
 {
-    [SerializeField] private float speed;
     private float horizontalInput;
     private float verticalInput;
     private Rigidbody2D body;
@@ -24,7 +23,7 @@ public class PlayerMovement : MonoBehaviour
         horizontalInput = Input.GetAxis("Horizontal");
         verticalInput = Input.GetAxis("Vertical");
 
-        body.velocity = new Vector2(horizontalInput * speed, verticalInput * speed);
+        body.velocity = new Vector2(horizontalInput * getSpeed(), verticalInput * getSpeed());
 
         //Flips sprites and helps facilitate sprite transitions
         changeSprite(horizontalInput, verticalInput);

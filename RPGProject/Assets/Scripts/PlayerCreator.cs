@@ -9,7 +9,6 @@ public class PlayerCreator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        player = gameObject.transform.FindChild("Mage").gameObject;
         Instantiate(player, new Vector3(0, 0, 0), new Quaternion(0,0,0,0));
         Destroy(gameObject);
     }

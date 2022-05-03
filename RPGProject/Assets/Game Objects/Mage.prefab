@@ -101,7 +101,7 @@ GameObject:
   - component: {fileID: 6015606291606298041}
   m_Layer: 0
   m_Name: Mage
-  m_TagString: Untagged
+  m_TagString: Character
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -225,7 +225,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fireball: {fileID: -6374930260739555608, guid: 65c1838bbf3af424988fa910f0aefc25, type: 3}
-  speed: 10
 --- !u!50 &6015606291606298043
 Rigidbody2D:
   serializedVersion: 4

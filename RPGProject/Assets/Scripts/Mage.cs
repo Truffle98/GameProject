@@ -8,7 +8,7 @@ public class Mage : BaseClass
 {
     private void Start()
     {
-        //Debug.Log(getDamage());
+        //Debug.Log(GetBaseDamage());
 
     }
 }

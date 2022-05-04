@@ -25,7 +25,7 @@ public class EnemyScript : MonoBehaviour
 
         if (timer > 100) {
             playerStats = GameObject.Find("Player Stats").GetComponent<PlayerStats>();
-            playerDamage = playerStats.GiveDamage();
+            playerDamage = playerStats.GetDamage();
             count = false;
         }
         

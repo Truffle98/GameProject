@@ -5,12 +5,12 @@ using UnityEngine;
 public class PlayerStats : BaseClass
 {
     private MenuTest menuTest;
-    private float cringeDamage;
+    private float damage;
     private int decision;
 
-    public float GiveDamage() {
+    public float GetDamage() {
 
-        return cringeDamage;
+        return damage;
 
     }
     // Start is called before the first frame update
@@ -19,9 +19,9 @@ public class PlayerStats : BaseClass
         menuTest = GameObject.Find("Test").GetComponent<MenuTest>();
         decision = menuTest.ReturnDecision();
         if (decision == 0) {
-            cringeDamage = 15;
+            damage = 4 * baseDamage;
         } else if (decision == 1) {
-            cringeDamage = 25;
+            damage = 8 * baseDamage;
         }
         
     }

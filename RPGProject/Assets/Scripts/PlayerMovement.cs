@@ -23,7 +23,7 @@ public class PlayerMovement : BaseClass
         horizontalInput = Input.GetAxis("Horizontal");
         verticalInput = Input.GetAxis("Vertical");
 
-        body.velocity = new Vector2(horizontalInput * getSpeed(), verticalInput * getSpeed());
+        body.velocity = new Vector2(horizontalInput * baseSpeed, verticalInput * baseSpeed);
 
         //Flips sprites and helps facilitate sprite transitions
         changeSprite(horizontalInput, verticalInput);

@@ -6,22 +6,23 @@ using UnityEngine;
 
 public class BaseClass : MonoBehaviour
 {
-    protected int damage = 10;
-    protected int speed = 6;
-    protected int health = 100;
+    //protected int baseDamage = 10;
+    protected int baseSpeed = 6;
+    //protected int baseHealth = 100;
 
-    public float getDamage()
+/*    public float getDamage()
     {
-        return damage;
+        return baseDamage;
     }
-
+*/
     public float getSpeed()
     {
-        return speed;
+        return baseSpeed;
     }
 
-    public float getHealth()
+/*    public float getHealth()
     {
-        return health;
+        return baseHealth;
     }
+    */
 }

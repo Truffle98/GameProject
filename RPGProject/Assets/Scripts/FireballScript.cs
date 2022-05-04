@@ -24,4 +24,12 @@ public class FireballScript : MonoBehaviour
     {
         transform.Translate(shootDirection / 500 * speed);
     }
+
+    void OnTriggerEnter2D(Collider2D other) {
+
+        if(other.gameObject.CompareTag("Wall") || other.gameObject.CompareTag("Enemy")) {
+            Destroy(gameObject);
+        }
+    }
+
 }

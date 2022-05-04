@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerAttack : MonoBehaviour
+public class PlayerAttack : BaseClass
 {
     public Rigidbody2D fireball;
     private Vector3 shootDirection;

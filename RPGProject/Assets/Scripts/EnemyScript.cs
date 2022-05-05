@@ -8,6 +8,9 @@ public class EnemyScript : MonoBehaviour
     private float maxHealth = 100, playerDamage, currentHealth;
     private int timer = 0;
     private bool count = true;
+    public int itemDrop;
+    //private Items itemsScript;
+    private Items itemsList;
 
     public HealthBar1 healthBar;
 
@@ -27,6 +30,7 @@ public class EnemyScript : MonoBehaviour
 
         if (timer > 100) {
             playerStats = GameObject.Find("Player Stats").GetComponent<PlayerStats>();
+            itemsList = GameObject.Find("ItemObjectList").GetComponent<Items>();
             count = false;
         }
         
@@ -41,6 +45,7 @@ public class EnemyScript : MonoBehaviour
             healthBar.SetHealth(currentHealth);
 
             if(currentHealth <= 0) {
+                Instantiate(itemsList.GetItemObject(itemDrop), transform.position, new Quaternion(0, 0, 0, 0));
                 Destroy(gameObject);
             }
         }

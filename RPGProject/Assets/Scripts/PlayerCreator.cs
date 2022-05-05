@@ -4,12 +4,19 @@ using UnityEngine;
 
 public class PlayerCreator : MonoBehaviour
 {
-    public GameObject player;
+    private MenuTest menuTest;
+    public GameObject mage;
+    private int decision;
 
     // Start is called before the first frame update
     void Start()
     {
-        Instantiate(player, new Vector3(0, 0, 0), new Quaternion(0,0,0,0));
+        menuTest = GameObject.Find("Test").GetComponent<MenuTest>();
+        decision = menuTest.ReturnDecision();
+        if (decision == 0)
+        {
+            Instantiate(mage, new Vector3(0, 0, 0), new Quaternion(0, 0, 0, 0));
+        }
         Destroy(gameObject);
     }
 

@@ -27,6 +27,7 @@ public class FireballScript : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other) {
 
+        //Checks for collisions. If fireball projectile collides with game objects walls or enemies it destorys itself
         if(other.gameObject.CompareTag("Wall") || other.gameObject.CompareTag("Enemy")) {
             Destroy(gameObject);
         }

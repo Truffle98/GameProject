@@ -5,6 +5,7 @@ using UnityEngine;
 public class Items : MonoBehaviour
 {
     private string[] itemNames = new string[] {"Gold Coin", "Silver Coin", "Copper Coin"};
+    private float[] itemDamages = new float[] {0, 0, 0};
     // Start is called before the first frame update
     void Start()
     {
@@ -15,5 +16,10 @@ public class Items : MonoBehaviour
     void Update()
     {
         
+    }
+
+    private float GetItemDamage(int itemTag)
+    {
+        return itemDamages[itemTag];
     }
 }

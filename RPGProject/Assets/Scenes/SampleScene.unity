@@ -263,7 +263,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a0dbb8a81bdc5f4a8a3b68cb39e6409, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 6015606291606298047, guid: aa95e6bf0a7540e4da564cc7afb57915, type: 3}
+  mage: {fileID: 6015606291606298047, guid: aa95e6bf0a7540e4da564cc7afb57915, type: 3}
 --- !u!4 &1222444574
 Transform:
   m_ObjectHideFlags: 0
@@ -338,7 +338,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: d8b1b49eb6144b94698c242cbd90c600, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

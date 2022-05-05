@@ -33,11 +33,10 @@ public class EnemyScript : MonoBehaviour
     }
 
     void OnTriggerEnter2D(Collider2D other) {
-
+        
         if(other.gameObject.CompareTag("Item1")) {
             playerDamage = playerStats.GetDamage(0);
             currentHealth -= playerDamage;
-            Debug.Log(currentHealth);
 
             healthBar.SetHealth(currentHealth);
 

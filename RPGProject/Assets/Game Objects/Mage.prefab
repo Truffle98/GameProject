@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 6015606291606298045}
   - component: {fileID: 6015606291606298046}
   - component: {fileID: 6015606291606298042}
-  - component: {fileID: 6015606291606298040}
+  - component: {fileID: 2023114099248456654}
   - component: {fileID: 7453350098181501595}
   - component: {fileID: 6015606291606298043}
   - component: {fileID: 6015606291606298041}
@@ -201,7 +201,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.1063689, y: 0.13456638}
   m_EdgeRadius: 0
---- !u!114 &6015606291606298040
+--- !u!114 &2023114099248456654
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -210,9 +210,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 6015606291606298047}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b97df4a080c0034da7f93d61fed2745, type: 3}
+  m_Script: {fileID: 11500000, guid: e6c58983bba8f6b4ab5923b257c8925f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameItems: []
 --- !u!114 &7453350098181501595
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -225,6 +226,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30dccc08910bf0546b487e67fd24c68a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameItems: []
+  itemNames:
+  - Fireball
+  - Gold Coin
+  - Silver Coin
+  - Copper Coin
+  itemDamages:
+  - 1
+  - 0
+  - 0
+  - 0
   fireball: {fileID: -6374930260739555608, guid: 65c1838bbf3af424988fa910f0aefc25, type: 3}
 --- !u!50 &6015606291606298043
 Rigidbody2D:
@@ -274,6 +286,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6015606291606298045}
     m_Modifications:
+    - target: {fileID: -143864795023892166, guid: 0a651968f6cb6da4db9415bc5d305698, type: 3}
+      propertyPath: itemDamages.Array.data[0]
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 1898754722440032962, guid: 0a651968f6cb6da4db9415bc5d305698, type: 3}
       propertyPath: m_RootOrder
       value: 1

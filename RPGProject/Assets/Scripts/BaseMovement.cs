@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : BaseClass
+public class BaseMovement : BaseClass
 {
     private float horizontalInput;
     private float verticalInput;
@@ -11,7 +11,7 @@ public class PlayerMovement : BaseClass
     private bool movingUp;
     private bool movingDown;
 
-    private void Awake()
+    private void Start()
     {
         //Grab references for rigidbody and animator from object
         body = GetComponent<Rigidbody2D>();

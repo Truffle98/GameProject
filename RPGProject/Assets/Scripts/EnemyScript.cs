@@ -9,6 +9,7 @@ public class EnemyScript : MonoBehaviour
     private int timer = 0;
     private bool count = true;
     public int itemDrop;
+    private ProjectileScript projectileStats;
     //private Items itemsScript;
     private Items itemsList;
 
@@ -37,11 +38,12 @@ public class EnemyScript : MonoBehaviour
     }
 
     void OnTriggerEnter2D(Collider2D other) {
-        
-        if(other.gameObject.CompareTag("Item1")) {
-            playerDamage = playerStats.GetDamage(0);
+        //On collision with something, it checks if its a projectile. If it is, then it gets the damage from the projectile's script
+        if(other.gameObject.CompareTag("Projectile")) {
+            projectileStats = other.GetComponent<ProjectileScript>();
+            playerDamage = projectileStats.GetProjectileDamage();
+            Destroy(other.gameObject);
             currentHealth -= playerDamage;
-
             healthBar.SetHealth(currentHealth);
 
             if(currentHealth <= 0) {

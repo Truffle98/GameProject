@@ -1027,8 +1027,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameItems:
   - {fileID: 904752622962932206, guid: 26b9bea57d411814baf55c188b395690, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 1366894027564291036, guid: 30525332a35f36b4fb3dc09311e76ecd, type: 3}
+  - {fileID: 4539330481133690886, guid: 026b19286b2436049ae6ef9206b87dbe, type: 3}
   - {fileID: 8413102441884550948, guid: 65c1838bbf3af424988fa910f0aefc25, type: 3}
   - {fileID: 4677624160778609120, guid: 11508ab3e1b359a4cb7452f3dccaa6cf, type: 3}
 --- !u!4 &682062857
@@ -3265,6 +3265,10 @@ PrefabInstance:
     - target: {fileID: 515296463042163574, guid: a9d666e75dc7d06408dda37a0cf159cc, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 515296463042163576, guid: a9d666e75dc7d06408dda37a0cf159cc, type: 3}
+      propertyPath: itemDrop
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 515296463061800124, guid: a9d666e75dc7d06408dda37a0cf159cc, type: 3}
       propertyPath: m_SizeDelta.y

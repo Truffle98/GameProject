@@ -226,11 +226,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30dccc08910bf0546b487e67fd24c68a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameItems: []
-  inventory: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
-  inventoryStacks: 000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
-  coinPurse: 000000000000000000000000
-  fireball: {fileID: -6374930260739555608, guid: 65c1838bbf3af424988fa910f0aefc25, type: 3}
+  item1: 4
 --- !u!50 &6015606291606298043
 Rigidbody2D:
   serializedVersion: 4

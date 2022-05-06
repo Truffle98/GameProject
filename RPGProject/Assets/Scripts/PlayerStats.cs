@@ -8,6 +8,7 @@ public class PlayerStats : Items
     private MenuTest menuTest;
     private float damage;
     private int decision, itemID;
+    private string itemIDString;
 
     //Lists for four usable items [id] in your 'item lineup,' items [id] in armor lineup, and all items [id] in inventory
     //Indexes 0 and 1 are reserved for 'on-hand' [left-click] and 'off-hand' [right-click] items. Index 0 is therefore 'fireball' on mage class
@@ -20,7 +21,7 @@ public class PlayerStats : Items
                                      0, 0, 0, 0, 0,
                                      0, 0, 0, 0, 0};   
     public int[] coinPurse = {0, 0, 0};   
-    private int inventoryFailedPickupCooldown = 0, messageCooldown = 0;                
+    private int inventoryFailedPickupCooldown = 0, messageCooldown = 0;
 
     public float GetDamage(int indexInItemLineup)
     {
@@ -87,11 +88,14 @@ public class PlayerStats : Items
     void OnTriggerStay2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Dropped Item")){
+            itemIDClass = other.GetComponent<ItemID>();
+            itemID = itemIDClass.GetItemID();
+            itemIDString = itemNames[itemID];
+
+            //Debug.Log($"Press 'E' to pick up {itemIDString}");
             if (Input.GetKey(KeyCode.E))
             {
                 if (inventoryFailedPickupCooldown <= 0) {
-                    itemIDClass = other.GetComponent<ItemID>();
-                    itemID = itemIDClass.GetItemID();
                     PutItemInInventory(itemID, other);
                     itemID = -1;
                 } else if (messageCooldown <= 0) {

@@ -227,17 +227,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameItems: []
-  itemNames:
-  - Gold Coin
-  - Silver Coin
-  - Copper Coin
-  - Fireball
-  itemDamages:
-  - 0
-  - 0
-  - 0
-  - 4
-  itemStacks: 00000000640000006400000001000000
+  inventory: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+  inventoryStacks: 000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  coinPurse: 000000000000000000000000
   fireball: {fileID: -6374930260739555608, guid: 65c1838bbf3af424988fa910f0aefc25, type: 3}
 --- !u!50 &6015606291606298043
 Rigidbody2D:

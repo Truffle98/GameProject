@@ -16,6 +16,7 @@ TagManager:
   - Item6
   - Dropped Item
   - Item Pickup
+  - Enemy Projectile
   layers:
   - Default
   - TransparentFX

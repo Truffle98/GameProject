@@ -5,11 +5,15 @@ using UnityEngine;
 public class EnemyScript : MonoBehaviour
 {
     private PlayerStats playerStats;
+    private GameObject player;
+    public GameObject enemyProjectile;
     private float maxHealth = 100, playerDamage, currentHealth;
-    private int timer = 0;
+    private int timer = 0, cooldown;
     private bool count = true;
-    public int itemDrop;
+    public int itemDrop, cooldownMax;
+    public float engageDistance;
     private ProjectileScript projectileStats;
+    private Vector3 shootDirection;
     //private Items itemsScript;
     private Items itemsList;
 
@@ -32,9 +36,26 @@ public class EnemyScript : MonoBehaviour
         if (timer > 100) {
             playerStats = GameObject.Find("Player Stats").GetComponent<PlayerStats>();
             itemsList = GameObject.Find("ItemObjectList").GetComponent<Items>();
+            player = GameObject.FindWithTag("Character");
             count = false;
         }
-        
+
+        if (cooldown > 0 && Time.timeScale == 1) {
+            cooldown--;
+        }
+
+        if (!count) {
+            if (Vector3.Distance(player.transform.position, transform.position) < engageDistance && cooldown <= 0 && Time.timeScale == 1) {
+
+                shootDirection = player.transform.position;
+                shootDirection.z = 0.0f;
+                shootDirection = shootDirection-transform.position;
+                shootDirection = shootDirection.normalized;
+
+                Instantiate(enemyProjectile, (new Vector3(shootDirection.x, shootDirection.y, 0) + transform.position), Quaternion.Euler(new Vector3(0,0,0)));
+                cooldown = cooldownMax;
+            }
+        }
     }
 
     void OnTriggerEnter2D(Collider2D other) {

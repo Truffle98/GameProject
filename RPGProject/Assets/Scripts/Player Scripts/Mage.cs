@@ -6,18 +6,23 @@ using UnityEngine;
 
 public class Mage : BaseClass
 {
-    private float horizontalInput;
-    private float verticalInput;
+    private float horizontalInput, verticalInput, maxHealth = baseHealth * 2, currentHealth, enemyDamage;
     private Rigidbody2D body;
     private Animator anim;
     private bool movingUp;
     private bool movingDown;
+
+    private EnemyProjectileScript enemyProjectileScript;
+
+    public HealthBar1 healthbar;
 
     private void Start()
     {
         //Grab references for rigidbody and animator from object
         body = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        healthbar.SetMaxHealth(maxHealth);
+        currentHealth = maxHealth;
     }
 
     //Runs every frame
@@ -68,6 +73,22 @@ public class Mage : BaseClass
         else if (verticalInput < -.01f)
         {
             movingDown = true;
+        }
+    }
+
+    void OnTriggerEnter2D(Collider2D other) {
+        //On collision with something, it checks if its a projectile. If it is, then it gets the damage from the projectile's script
+        if(other.gameObject.CompareTag("Enemy Projectile")) {
+            enemyProjectileScript = other.GetComponent<EnemyProjectileScript>();
+            enemyDamage = enemyProjectileScript.GetProjectileDamage();
+            Destroy(other.gameObject);
+            currentHealth -= enemyDamage;
+
+            healthbar.SetHealth(currentHealth);
+
+            if(currentHealth <= 0) {
+                Destroy(gameObject);
+            }
         }
     }
 }

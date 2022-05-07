@@ -14,10 +14,10 @@ public class PlayerStats : Items
     //Indexes 0 and 1 are reserved for 'on-hand' [left-click] and 'off-hand' [right-click] items. Index 0 is therefore 'fireball' on mage class
     private int[] itemLineup = { 3, -1, -1, -1, -1, -1 };
     private int[] armorLinup = { -1, -1, -1, -1 };
-    private int[] inventory = {-1, -1, -1, -1, -1,
+    public int[] inventory = {-1, -1, -1, -1, -1,
                                -1, -1, -1, -1, -1,
                                -1, -1, -1, -1, -1};
-    private int[] inventoryStacks = {0, 0, 0, 0, 0,
+    public int[] inventoryStacks = {0, 0, 0, 0, 0,
                                      0, 0, 0, 0, 0,
                                      0, 0, 0, 0, 0};   
     private int[] coinPurse = {0, 0, 0};   
@@ -28,6 +28,9 @@ public class PlayerStats : Items
 
         return itemLineup[indexInItemLineup];
 
+    }
+    public int GetItemInInventory(int indexInInventory){
+        return inventory[indexInInventory];
     }
     public float GetDamage(int indexInItemLineup)
     {

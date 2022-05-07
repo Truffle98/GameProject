@@ -6,9 +6,9 @@ using UnityEngine;
 
 public class BaseClass : MonoBehaviour
 {
-    protected int baseDamage = 5;
-    protected int baseSpeed = 6;
-    protected int baseHealth = 100;
+    protected static int baseDamage = 5;
+    protected static int baseSpeed = 6;
+    protected static int baseHealth = 100;
     public GameObject[] gameItems;
 
     public float GetBaseDamage()

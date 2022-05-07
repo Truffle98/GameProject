@@ -30,6 +30,7 @@ public class PlayerAttack : PlayerStats
             cooldown = 100;
 
         }
+
         if (cooldown > 0) {
             cooldown--;
         }

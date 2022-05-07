@@ -8,11 +8,11 @@ public class PlayerStats : Items
     private MenuTest menuTest;
     private float damage;
     private int decision, itemID;
-    private string itemIDString;
+    private string itemName;
 
     //Lists for four usable items [id] in your 'item lineup,' items [id] in armor lineup, and all items [id] in inventory
     //Indexes 0 and 1 are reserved for 'on-hand' [left-click] and 'off-hand' [right-click] items. Index 0 is therefore 'fireball' on mage class
-    private int[] itemLineup = { 3, -1, -1, -1, -1, -1 };
+    private int[] itemLineup = { 3, -1, -1, -1};
     private int[] armorLinup = { -1, -1, -1, -1 };
     public int[] inventory = {-1, -1, -1, -1, -1,
                                -1, -1, -1, -1, -1,
@@ -42,6 +42,7 @@ public class PlayerStats : Items
 
     //This function is intended to work with the 2D collider that detects when an item is attempted to be picked up. If it can fit it in the inventory it will pick up the item, otherwise it will leave it on the ground.
     public void PutItemInInventory(int newItemID, Collider2D other) {
+        itemName = itemNames[itemID];
         //If items ID is 0, 1, or 2, it adds to the coin purse because it is a coin
         if (newItemID >= 0 && newItemID <= 2) {
             switch(newItemID) {
@@ -73,7 +74,7 @@ public class PlayerStats : Items
                     if (inventoryStacks[i] < itemStacks[newItemID]) {
                         inventoryStacks[i]++;
                         Destroy(other.gameObject);
-                        Debug.Log("Picked up item in stack");
+                        Debug.Log($"Picked up {itemName} in stack");
                         return;
                     }
                 }
@@ -84,13 +85,13 @@ public class PlayerStats : Items
                     inventory[i] = newItemID;
                     inventoryStacks[i] = 1;
                     Destroy(other.gameObject);
-                    Debug.Log("Picked up item in new spot");
+                    Debug.Log($"Picked up {itemName} in new spot");
                     return;
                 }
             }
         }
         inventoryFailedPickupCooldown = 2000;
-        Debug.Log("Could not pick up item");
+        Debug.Log($"Could not pick up {itemName}");
         return;
     }
 
@@ -99,9 +100,7 @@ public class PlayerStats : Items
         if (other.gameObject.CompareTag("Dropped Item")){
             itemIDClass = other.GetComponent<ItemID>();
             itemID = itemIDClass.GetItemID();
-            itemIDString = itemNames[itemID];
 
-            //Debug.Log($"Press 'E' to pick up {itemIDString}");
             if (Input.GetKey(KeyCode.E))
             {
                 if (inventoryFailedPickupCooldown <= 0) {

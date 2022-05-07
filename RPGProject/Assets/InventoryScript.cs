@@ -8,9 +8,8 @@ public class InventoryScript : MonoBehaviour
     public GameObject[] slots;
     private SlotEditor slotEditor;
     private PlayerStats playerStats;
-    private int itemID;
     private Items items;
-    private Image itemImage;
+    private int itemID;
     private Sprite itemSprite;
 
     public void UpdateInventory(){

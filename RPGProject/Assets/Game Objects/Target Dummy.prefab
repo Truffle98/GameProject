@@ -26,7 +26,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 515296463042163572}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 5.576216, y: 2.5504165, z: -0.05649446}
   m_LocalScale: {x: 4, y: 4, z: 1}
   m_ConstrainProportionsScale: 0
@@ -55,7 +55,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a7873e5c9d9000e4bb0d0ce98932e832, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -125,7 +125,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efaa8ff7d34fe874788c10de8314f671, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyProjectile: {fileID: 0}
   itemDrop: 4
+  cooldownMax: 0
+  engageDistance: 0
   healthBar: {fileID: 515296462437470117}
 --- !u!1001 &2173285725021246517
 PrefabInstance:
@@ -141,6 +144,10 @@ PrefabInstance:
     - target: {fileID: 1805869495788933627, guid: 345884359f45e16459d4371ce4430582, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1805869495788933627, guid: 345884359f45e16459d4371ce4430582, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.018005371
       objectReference: {fileID: 0}
     - target: {fileID: 1805869495961632905, guid: 345884359f45e16459d4371ce4430582, type: 3}
       propertyPath: m_Pivot.x
@@ -229,6 +236,14 @@ PrefabInstance:
     - target: {fileID: 1805869495961632909, guid: 345884359f45e16459d4371ce4430582, type: 3}
       propertyPath: m_Name
       value: Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 1805869496452799383, guid: 345884359f45e16459d4371ce4430582, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 11.419983
+      objectReference: {fileID: 0}
+    - target: {fileID: 1805869496626253004, guid: 345884359f45e16459d4371ce4430582, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.018005371
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 345884359f45e16459d4371ce4430582, type: 3}

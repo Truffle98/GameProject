@@ -19,7 +19,6 @@ public class Mage : BaseClass
     private GameObject item1Object, item2Object;
     public ManaBar manaBar;
     private EnemyProjectileScript enemyProjectileScript;
-    private MeleeScript1 meleeScript;
 
     public HealthBar1 healthbar;
 
@@ -43,7 +42,6 @@ public class Mage : BaseClass
         item2Object = itemsList.GetItemObject(item2);
         //Right now we know that the second item is a melee item. However, in the future if we don't know what type an object is [melee, projectile, etc] we might need to
         //add another script to the item game object that returns the item type [GetItemTypeScript for example]
-        meleeScript = item2Object.GetComponent<MeleeScript1>();
 
         manaRegenerationSpeed = .02f;
 
@@ -79,12 +77,10 @@ public class Mage : BaseClass
         if (horizontalInput > .01f)
         {
             transform.localScale = new Vector3(-6, 6, 6);
-            gameObject.transform.GetChild(3).gameObject.transform.localScale = Vector3.one;
         }
         else if (horizontalInput < -.01f)
         {
             transform.localScale = Vector3.one * 6;
-            gameObject.transform.GetChild(3).gameObject.transform.localScale = new Vector3(-1, 1, 1);
         }
 
         if (verticalInput > .01f)
@@ -127,11 +123,14 @@ public class Mage : BaseClass
             }
         }
 
+        //Accesses second item in hotbar
         else if (Input.GetMouseButtonDown(1) && cooldown == 0 && Time.timeScale == 1)
         {
             if(currentMana>itemsList.GetManaCost(playerStats.GetEquippedItem(1)))
             {
+                //sets the sprite of the sword in mage as visable when you attack. the change in scale is messed up when you face one side vs the other
                 gameObject.transform.GetChild(3).gameObject.SetActive(true);
+
                 shootDirection = Input.mousePosition;
                 shootDirection.z = 0.0f;
                 shootDirection = Camera.main.ScreenToWorldPoint(shootDirection);
@@ -139,8 +138,8 @@ public class Mage : BaseClass
                 shootDirection = shootDirection.normalized;
 
                 Instantiate(item2Object, (new Vector3(shootDirection.x, shootDirection.y, 0) + transform.position), Quaternion.Euler(new Vector3(0,0,0)));
-                //item2Object.SetActive(false);
 
+                //less cooldown than a spell
                 cooldown = 50;
                 currentMana -= itemsList.GetManaCost(playerStats.GetEquippedItem(1));
             }

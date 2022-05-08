@@ -11,6 +11,7 @@ TagManager:
   - Dropped Item
   - Item Pickup
   - Enemy Projectile
+  - Long Sword
   layers:
   - Default
   - TransparentFX

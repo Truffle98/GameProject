@@ -5,9 +5,8 @@ using UnityEngine;
 
 public class Items : BaseClass
 {
-    protected string[] itemNames = new string[] { "Gold Coin", "Silver Coin", "Copper Coin", "Fireball", "Stick" };
-    protected int[,] itemStats = new int[5, 3] { {0,0,0}, {0,100,0}, {0,100,0}, {10,1,20}, {0,3,0}};
-    protected int[] itemStacks = new int[] {0, 100, 100, 1, 3};
+    protected string[] itemNames = new string[] { "Gold Coin", "Silver Coin", "Copper Coin", "Fireball", "Stick", "Long Sword" };
+    protected int[,] itemStats = new int[6, 3] { {0,0,0}, {0,100,0}, {0,100,0}, {10,1,20}, {0,3,0}, {5,1,5}};
 
     public float GetItemDamage(int itemID)
     {

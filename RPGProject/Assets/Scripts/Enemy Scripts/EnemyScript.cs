@@ -13,6 +13,7 @@ public class EnemyScript : MonoBehaviour
     public int itemDrop = -1, cooldownMax, maxHealth = 100, movementPattern;
     public float engageDistance, shootDistance, maxSpeed;
     private ProjectileScript projectileStats;
+    private MeleeScript1 meleeWeaponStats;
     private Vector3 shootDirection, direction;
     private Items itemsList;
     private Rigidbody2D rb;
@@ -84,10 +85,24 @@ public class EnemyScript : MonoBehaviour
     }
 
     void OnTriggerEnter2D(Collider2D other) {
+
         //On collision with something, it checks if its a projectile. If it is, then it gets the damage from the projectile's script
         if(other.gameObject.CompareTag("Projectile")) {
             projectileStats = other.GetComponent<ProjectileScript>();
             playerDamage = projectileStats.GetProjectileDamage();
+            Destroy(other.gameObject);
+            currentHealth -= playerDamage;
+            healthBar.SetHealth(currentHealth);
+
+            if(currentHealth <= 0) {
+                Instantiate(itemsList.GetItemObject(itemDrop), transform.position, new Quaternion(0, 0, 0, 0));
+                Destroy(gameObject);
+            }
+        }
+        else if (other.gameObject.CompareTag("Long Sword"))
+        {
+            meleeWeaponStats = other.GetComponent<MeleeScript1>();
+            playerDamage = meleeWeaponStats.GetDamage();
             Destroy(other.gameObject);
             currentHealth -= playerDamage;
             healthBar.SetHealth(currentHealth);

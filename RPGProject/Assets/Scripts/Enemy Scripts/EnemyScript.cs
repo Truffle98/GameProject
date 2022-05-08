@@ -7,11 +7,11 @@ public class EnemyScript : MonoBehaviour
     private PlayerStats playerStats;
     private GameObject player;
     public GameObject enemyProjectile;
-    private float maxHealth = 100, playerDamage, currentHealth;
+    private float playerDamage, currentHealth;
     private int timer = 0, cooldown;
     private bool count = true;
-    public int itemDrop, cooldownMax;
-    public float engageDistance;
+    public int itemDrop = -1, cooldownMax, maxHealth = 100, speed, movementPattern;
+    public float engageDistance, shootDistance;
     private ProjectileScript projectileStats;
     private Vector3 shootDirection;
     //private Items itemsScript;
@@ -45,7 +45,7 @@ public class EnemyScript : MonoBehaviour
         }
 
         if (!count) {
-            if (Vector3.Distance(player.transform.position, transform.position) < engageDistance && cooldown <= 0 && Time.timeScale == 1) {
+            if (Vector3.Distance(player.transform.position, transform.position) < shootDistance && cooldown <= 0 && Time.timeScale == 1) {
 
                 shootDirection = player.transform.position;
                 shootDirection.z = 0.0f;

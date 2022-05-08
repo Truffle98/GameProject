@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5084030230772879686}
   - component: {fileID: 1483561904}
   - component: {fileID: 2351591672552922381}
+  - component: {fileID: 1483561907}
   m_Layer: 0
   m_Name: John Partney
   m_TagString: Enemy
@@ -102,7 +103,11 @@ MonoBehaviour:
   enemyProjectile: {fileID: 3246578418983402623, guid: 99755d472385ae442a71a0cf5adde0a2, type: 3}
   itemDrop: 0
   cooldownMax: 500
-  engageDistance: 5
+  maxHealth: 200
+  movementPattern: 0
+  engageDistance: 0
+  shootDistance: 5
+  maxSpeed: 2
   healthBar: {fileID: 4252532295865217900}
 --- !u!58 &2351591672552922381
 CircleCollider2D:
@@ -120,6 +125,27 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
+--- !u!50 &1483561907
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4682850731514513326}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
 --- !u!1001 &2453260213984454908
 PrefabInstance:
   m_ObjectHideFlags: 0

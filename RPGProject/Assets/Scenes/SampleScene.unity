@@ -1465,14 +1465,14 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: b485c339f538f87419b59cc73adfba5b, type: 3}
-  m_Color: {r: 0.05999601, g: 0.6320754, b: 0.032796368, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 32fbe2508b7d37e4bb5540eb87b0b209, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
-  m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_DrawMode: 2
+  m_Size: {x: 25, y: 12}
   m_AdaptiveModeThreshold: 0.5
-  m_SpriteTileMode: 0
+  m_SpriteTileMode: 1
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
@@ -1485,7 +1485,7 @@ Transform:
   m_GameObject: {fileID: 1763472876}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 1}
-  m_LocalScale: {x: 22.100775, y: 10.245758, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1681259209}
@@ -2049,18 +2049,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2068485916}
     m_Modifications:
-    - target: {fileID: 1483561904, guid: 79f3716cd8914d3429f6850d14f93165, type: 3}
-      propertyPath: maxHealth
-      value: 200
-      objectReference: {fileID: 0}
-    - target: {fileID: 1483561904, guid: 79f3716cd8914d3429f6850d14f93165, type: 3}
-      propertyPath: shootDistance
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1483561904, guid: 79f3716cd8914d3429f6850d14f93165, type: 3}
-      propertyPath: engageDistance
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4252532296001976583, guid: 79f3716cd8914d3429f6850d14f93165, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -2095,15 +2083,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5471843585039785665, guid: 79f3716cd8914d3429f6850d14f93165, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5471843585039785665, guid: 79f3716cd8914d3429f6850d14f93165, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5471843585039785665, guid: 79f3716cd8914d3429f6850d14f93165, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5471843585039785665, guid: 79f3716cd8914d3429f6850d14f93165, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

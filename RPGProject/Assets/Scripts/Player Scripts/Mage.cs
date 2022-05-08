@@ -37,7 +37,6 @@ public class Mage : BaseClass
         itemsList = GameObject.Find("ItemObjectList").GetComponent<Items>();
 
         currentMana = maxMana;
-        Debug.Log(currentMana);
         manaBar.SetMaxMana(maxMana);
         item1 = playerStats.GetEquippedItem(0);
         item1Object = itemsList.GetItemObject(item1);

@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class ProjectileScript : MonoBehaviour
 {
-    public float speed, lifespan, damage;
+    public float speed, lifespan;
     public int itemID;
+    private float damage;
     private Vector3 shootDirection;
     private PlayerStats playerStats;
     

@@ -34,10 +34,8 @@ public class PlayerStats : Items
     }
     public float GetDamage(int indexInItemLineup)
     {
-
         //Uses indexes to access damage of item
         return GetItemDamage(itemLineup[indexInItemLineup]);
-
     }
 
     //This function is intended to work with the 2D collider that detects when an item is attempted to be picked up. If it can fit it in the inventory it will pick up the item, otherwise it will leave it on the ground.
@@ -53,8 +51,8 @@ public class PlayerStats : Items
                 case 1:
                     coinPurse[1]++;
                     Destroy(other.gameObject);
-                    if (coinPurse[1] >= itemStacks[1]) {
-                        coinPurse[1] -= itemStacks[1];
+                    if (coinPurse[1] >= itemStats[1,1]) {
+                        coinPurse[1] -= itemStats[1,1];
                         coinPurse[0]++;
                         
                     }
@@ -62,8 +60,8 @@ public class PlayerStats : Items
                 case 2:
                     coinPurse[2]++;
                     Destroy(other.gameObject);
-                    if (coinPurse[2] >= itemStacks[2]) {
-                        coinPurse[2] -= itemStacks[2];
+                    if (coinPurse[2] >= itemStats[2,1]) {
+                        coinPurse[2] -= itemStats[2,1];
                         coinPurse[1]++;
                     }
                     return;           
@@ -71,7 +69,7 @@ public class PlayerStats : Items
         } else {//Otherwise it will check the inventory if that item already exists, then sees if it can add it to the stack. Otherwise it will add it to the first available spot
             for (int i = 0; i < inventory.Length; i++) {
                 if (inventory[i] == newItemID) {
-                    if (inventoryStacks[i] < itemStacks[newItemID]) {
+                    if (inventoryStacks[i] < itemStats[newItemID,1]) {
                         inventoryStacks[i]++;
                         Destroy(other.gameObject);
                         Debug.Log($"Picked up {itemName} in stack");

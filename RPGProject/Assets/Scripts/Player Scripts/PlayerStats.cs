@@ -37,6 +37,10 @@ public class PlayerStats : Items
         //Uses indexes to access damage of item
         return GetItemDamage(itemLineup[indexInItemLineup]);
     }
+    public int GetItemStack(int indexInInventory)
+    {
+        return inventoryStacks[indexInInventory];
+    }
 
     //This function is intended to work with the 2D collider that detects when an item is attempted to be picked up. If it can fit it in the inventory it will pick up the item, otherwise it will leave it on the ground.
     public void PutItemInInventory(int newItemID, Collider2D other) {

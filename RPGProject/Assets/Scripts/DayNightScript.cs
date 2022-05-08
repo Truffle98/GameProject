@@ -1,12 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 
 public class DayNightScript : MonoBehaviour
 {
     [SerializeField] private Gradient lightColor;
-    [SerializeField] private UnityEngine.Rendering.Universal.Light2D light;
+    [SerializeField] public UnityEngine.Rendering.Universal.Light2D light;
 
     private int days;
     public float time = 50;

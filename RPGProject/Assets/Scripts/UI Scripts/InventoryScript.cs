@@ -6,9 +6,12 @@ using UnityEngine.UI;
 public class InventoryScript : MonoBehaviour
 {
     public GameObject[] slots;
+    public GameObject[] stacks;
     private SlotEditor slotEditor;
+    private textEditorScript textEditor;
     private PlayerStats playerStats;
     private Items items;
+    private string stackNum;
     private int itemID;
     private Sprite itemSprite;
 
@@ -22,6 +25,10 @@ public class InventoryScript : MonoBehaviour
                 itemSprite = items.GetItemObject(itemID).GetComponent<SpriteRenderer>().sprite;
                 slotEditor = slots[inventoryIndex].GetComponent<SlotEditor>();
                 slotEditor.SetSprite(itemSprite);
+
+                stackNum = playerStats.GetItemStack(inventoryIndex).ToString();
+                textEditor = stacks[inventoryIndex].GetComponent<textEditorScript>();
+                textEditor.ChangeStackNumber(stackNum);
             }
         }
     }

@@ -6,21 +6,44 @@ using UnityEngine;
 
 public class Mage : BaseClass
 {
-    private float horizontalInput, verticalInput, maxHealth = baseHealth * 2, currentHealth, enemyDamage;
+    public float manaRegenerationSpeed;
+    private float horizontalInput, verticalInput, maxHealth = baseHealth * 2, currentHealth, enemyDamage, maxMana = baseMana * 2, currentMana;
+    private Vector3 shootDirection;
+    private int item1, cooldown = 0;
     private Rigidbody2D body;
     private Animator anim;
     private bool movingUp;
     private bool movingDown;
-
+    private PlayerStats playerStats;
+    private Items itemsList;
+    private GameObject item1Object;
+    public ManaBar manaBar;
     private EnemyProjectileScript enemyProjectileScript;
 
     public HealthBar1 healthbar;
+
+    public float GetMaxMana()
+    {
+        return maxMana;
+    }
 
     private void Start()
     {
         //Grab references for rigidbody and animator from object
         body = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+
+        playerStats = GameObject.Find("Player Stats").GetComponent<PlayerStats>();
+        itemsList = GameObject.Find("ItemObjectList").GetComponent<Items>();
+
+        currentMana = maxMana;
+        Debug.Log(currentMana);
+        manaBar.SetMaxMana(maxMana);
+        item1 = playerStats.GetEquippedItem(0);
+        item1Object = itemsList.GetItemObject(item1);
+
+        manaRegenerationSpeed = .02f;
+
         healthbar.SetMaxHealth(maxHealth);
         currentHealth = maxHealth;
     }
@@ -41,6 +64,8 @@ public class Mage : BaseClass
         anim.SetBool("Running", horizontalInput != 0);
         anim.SetBool("UpRunning", movingUp);
         anim.SetBool("DownRunning", movingDown);
+
+        Attack();
     }
 
     //Handles animation changes
@@ -74,6 +99,37 @@ public class Mage : BaseClass
         {
             movingDown = true;
         }
+    }
+
+    private void Attack()
+    {
+if (Input.GetMouseButtonDown(0) && cooldown == 0 && Time.timeScale == 1) 
+        {
+            if(currentMana>itemsList.GetManaCost(playerStats.GetEquippedItem(0)))
+            {
+            shootDirection = Input.mousePosition;
+            shootDirection.z = 0.0f;
+            shootDirection = Camera.main.ScreenToWorldPoint(shootDirection);
+            shootDirection = shootDirection-transform.position;
+            shootDirection = shootDirection.normalized;
+
+            Instantiate(item1Object, (new Vector3(shootDirection.x, shootDirection.y, 0) + transform.position), Quaternion.Euler(new Vector3(0,0,0)));
+            cooldown = 100;
+
+            currentMana -= itemsList.GetManaCost(playerStats.GetEquippedItem(0));
+            }
+        }
+
+        if (currentMana<maxMana) 
+        {
+            currentMana += manaRegenerationSpeed;
+        }
+
+        if (cooldown > 0 && Time.timeScale == 1) {
+            cooldown--;
+        }
+
+        manaBar.SetMana(currentMana);
     }
 
     void OnTriggerEnter2D(Collider2D other) {

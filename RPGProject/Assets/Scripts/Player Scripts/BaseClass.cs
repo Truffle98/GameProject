@@ -9,6 +9,7 @@ public class BaseClass : MonoBehaviour
     protected static int baseDamage = 5;
     protected static int baseSpeed = 6;
     protected static int baseHealth = 100;
+    protected static int baseMana = 50;
     public GameObject[] gameItems;
 
     public float GetBaseDamage()

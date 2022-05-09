@@ -10,4 +10,9 @@ public class ItemID : MonoBehaviour
     {
         return itemID;
     }
+
+    void Update() {
+        transform.RotateAround(transform.position, Vector3.up, 50 * Time.deltaTime);
+    }
+    
 }

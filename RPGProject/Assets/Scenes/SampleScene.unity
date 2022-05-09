@@ -334,7 +334,7 @@ MonoBehaviour:
   - {fileID: 4539330481133690886, guid: 026b19286b2436049ae6ef9206b87dbe, type: 3}
   - {fileID: 8413102441884550948, guid: 65c1838bbf3af424988fa910f0aefc25, type: 3}
   - {fileID: 4677624160778609120, guid: 11508ab3e1b359a4cb7452f3dccaa6cf, type: 3}
-  - {fileID: 5409340373745656159, guid: 081c03afe75dc444ab6b5998e456b863, type: 3}
+  - {fileID: 6410972012924807927, guid: eb5d60e6bac349e4a8d7e5b46c9bbeb6, type: 3}
 --- !u!4 &682062857
 Transform:
   m_ObjectHideFlags: 0
@@ -2050,6 +2050,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2068485916}
     m_Modifications:
+    - target: {fileID: 1483561904, guid: 79f3716cd8914d3429f6850d14f93165, type: 3}
+      propertyPath: maxSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1483561904, guid: 79f3716cd8914d3429f6850d14f93165, type: 3}
+      propertyPath: shootDistance
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1483561904, guid: 79f3716cd8914d3429f6850d14f93165, type: 3}
+      propertyPath: engageDistance
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 4252532296001976583, guid: 79f3716cd8914d3429f6850d14f93165, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -2068,11 +2080,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5471843585039785665, guid: 79f3716cd8914d3429f6850d14f93165, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -9.013783
+      value: -11.79
       objectReference: {fileID: 0}
     - target: {fileID: 5471843585039785665, guid: 79f3716cd8914d3429f6850d14f93165, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -5.0395837
+      value: -5.68
       objectReference: {fileID: 0}
     - target: {fileID: 5471843585039785665, guid: 79f3716cd8914d3429f6850d14f93165, type: 3}
       propertyPath: m_LocalPosition.z

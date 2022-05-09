@@ -7,7 +7,7 @@ using UnityEngine;
 public class Mage : BaseClass
 {
     public float manaRegenerationSpeed;
-    private float horizontalInput, verticalInput, maxHealth = baseHealth * 2, currentHealth, enemyDamage, maxMana = baseMana * 2, currentMana;
+    private float horizontalInput, verticalInput, maxHealth = baseHealth * 2, currentHealth, enemyDamage, maxMana = baseMana * 2, currentMana, angle;
     private Vector3 shootDirection;
     private int cooldown = 0, item1, item2;
     private Rigidbody2D body;
@@ -16,7 +16,7 @@ public class Mage : BaseClass
     private bool movingDown;
     private PlayerStats playerStats;
     private Items itemsList;
-    private GameObject item1Object, item2Object;
+    private GameObject item1Object, item2Object, newSword;
     public ManaBar manaBar;
     private EnemyProjectileScript enemyProjectileScript;
 
@@ -115,7 +115,7 @@ public class Mage : BaseClass
                 shootDirection = Camera.main.ScreenToWorldPoint(shootDirection);
                 shootDirection = shootDirection-transform.position;
                 shootDirection = shootDirection.normalized;
-
+                
                 Instantiate(item1Object, (new Vector3(shootDirection.x, shootDirection.y, 0) + transform.position), Quaternion.Euler(new Vector3(0,0,0)));
                 cooldown = 100;
 
@@ -129,26 +129,38 @@ public class Mage : BaseClass
             if(currentMana>itemsList.GetManaCost(playerStats.GetEquippedItem(1)))
             {
                 //sets the sprite of the sword in mage as visable when you attack. the change in scale is messed up when you face one side vs the other
-                gameObject.transform.GetChild(3).gameObject.SetActive(true);
 
                 shootDirection = Input.mousePosition;
                 shootDirection.z = 0.0f;
                 shootDirection = Camera.main.ScreenToWorldPoint(shootDirection);
                 shootDirection = shootDirection-transform.position;
+                shootDirection.x *= 2.2f;
+                shootDirection.y *= 2.2f;
                 shootDirection = shootDirection.normalized;
+                angle = Mathf.Atan2(shootDirection.y, shootDirection.x) * Mathf.Rad2Deg;
 
-                Instantiate(item2Object, (new Vector3(shootDirection.x, shootDirection.y, 0) + transform.position), Quaternion.Euler(new Vector3(0,0,0)));
+                if (Mathf.Abs(shootDirection.x) < 0.3) {
+                    shootDirection.x *= 2.5f;
+                } else if (Mathf.Abs(shootDirection.x) < 0.5) {
+                    shootDirection.x *= 1.5f;
+                }
+
+                if (Mathf.Abs(shootDirection.y) < 0.3) {
+                    shootDirection.y *= 2.5f;
+                } else if (Mathf.Abs(shootDirection.y) < 0.5) {
+                    shootDirection.y *= 1.5f;
+                }
+
+                newSword = Instantiate(item2Object, (new Vector3(shootDirection.x, shootDirection.y, 0) + transform.position), Quaternion.Euler(0, 0, angle - 45));
+                newSword.transform.parent = gameObject.transform;
 
                 //less cooldown than a spell
                 cooldown = 50;
                 currentMana -= itemsList.GetManaCost(playerStats.GetEquippedItem(1));
             }
         }
-        if (cooldown == 25)
-        {
-            gameObject.transform.GetChild(3).gameObject.SetActive(false);
-        }
-        if (currentMana<maxMana) 
+
+        if (currentMana<maxMana && Time.timeScale == 1) 
         {
             currentMana += manaRegenerationSpeed;
         }

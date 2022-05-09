@@ -13,7 +13,7 @@ public class EnemyScript : MonoBehaviour
     public int itemDrop = -1, cooldownMax, maxHealth = 100, movementPattern;
     public float engageDistance, shootDistance, maxSpeed;
     private ProjectileScript projectileStats;
-    private MeleeScript1 meleeWeaponStats;
+    private MeleeScript meleeWeaponStats;
     private Vector3 shootDirection, direction;
     private Items itemsList;
     private Rigidbody2D rb;
@@ -101,11 +101,10 @@ public class EnemyScript : MonoBehaviour
                 Destroy(gameObject);
             }
         }
-        else if (other.gameObject.CompareTag("Long Sword"))
+        else if (other.gameObject.CompareTag("Sword"))
         {
-            meleeWeaponStats = other.GetComponent<MeleeScript1>();
+            meleeWeaponStats = other.GetComponent<MeleeScript>();
             playerDamage = meleeWeaponStats.GetDamage();
-            Destroy(other.gameObject);
             currentHealth -= playerDamage;
             healthBar.SetHealth(currentHealth);
 

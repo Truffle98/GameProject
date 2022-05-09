@@ -105,8 +105,8 @@ MonoBehaviour:
   cooldownMax: 500
   maxHealth: 200
   movementPattern: 0
-  engageDistance: 0
-  shootDistance: 5
+  engageDistance: 8
+  shootDistance: 4
   maxSpeed: 2
   healthBar: {fileID: 4252532295865217900}
 --- !u!58 &2351591672552922381

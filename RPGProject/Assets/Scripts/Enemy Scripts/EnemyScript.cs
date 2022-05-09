@@ -54,7 +54,7 @@ public class EnemyScript : MonoBehaviour
 
         if (!count) {
             
-            if (Vector3.Distance(player.transform.position, transform.position) < shootDistance && Time.timeScale == 1) {
+            if (Vector3.Distance(player.transform.position, transform.position) < engageDistance && Time.timeScale == 1) {
                 playerSpotted = true;
             } else {
                 playerSpotted = false;
@@ -64,8 +64,10 @@ public class EnemyScript : MonoBehaviour
 
         if (playerSpotted) {
             
-            if (cooldown <= 0) {
-                ShootPlayer();
+            if (Vector3.Distance(player.transform.position, transform.position) < shootDistance && Time.timeScale == 1) {
+                if (cooldown <= 0) {
+                    ShootPlayer();
+                }
             }
             
         }

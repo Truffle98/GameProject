@@ -14,7 +14,7 @@ public class SlotEditor : MonoBehaviour
     private string stackNum;
     private Image img;
     private PlayerStats playerStats;
-    private Items items;
+    [SerializeField] private Items items;
     private textEditorScript textEditor;
 
     public void SetSprite(Sprite itemSprite, int ID)

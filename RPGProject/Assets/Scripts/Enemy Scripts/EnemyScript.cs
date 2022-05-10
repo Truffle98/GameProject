@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class EnemyScript : MonoBehaviour
 {
@@ -18,6 +19,7 @@ public class EnemyScript : MonoBehaviour
     private Items itemsList;
     private Rigidbody2D rb;
     private Vector2 movement;
+    private NavMeshAgent agent;
     //public bool shouldRotate = false;
 
     public HealthBar1 healthBar;
@@ -28,6 +30,9 @@ public class EnemyScript : MonoBehaviour
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
         rb = this.GetComponent<Rigidbody2D>();
+        agent = GetComponent<NavMeshAgent>();
+        agent.updateRotation = false;
+        agent.updateUpAxis = false;
     }
 
     // Update is called once per frame
@@ -77,7 +82,8 @@ public class EnemyScript : MonoBehaviour
 
         if (playerSpotted) {
             if (movementPattern == 0) {
-                MoveCharacter(movement);
+                agent.SetDestination(player.transform.position);
+                //MoveCharacter(movement);
             } else if (movementPattern == 1) {
                 MoveCharacter(-movement);
             }

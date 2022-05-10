@@ -12,8 +12,7 @@ public class Mage : BaseClass
     private int cooldown = 0, item1, item2;
     private Rigidbody2D body;
     private Animator anim;
-    private bool movingUp;
-    private bool movingDown;
+    private bool movingUp, movingDown;
     private PlayerStats playerStats;
     private Items itemsList;
     private GameObject item1Object, item2Object, newSword;
@@ -114,6 +113,7 @@ public class Mage : BaseClass
                 shootDirection.z = 0.0f;
                 shootDirection = Camera.main.ScreenToWorldPoint(shootDirection);
                 shootDirection = shootDirection-transform.position;
+                shootDirection.z = 0.0f;
                 shootDirection = shootDirection.normalized;
                 
                 Instantiate(item1Object, (new Vector3(shootDirection.x, shootDirection.y, 0) + transform.position), Quaternion.Euler(new Vector3(0,0,0)));
@@ -129,29 +129,14 @@ public class Mage : BaseClass
             if(currentMana>itemsList.GetManaCost(playerStats.GetEquippedItem(1)))
             {
                 //sets the sprite of the sword in mage as visable when you attack. the change in scale is messed up when you face one side vs the other
-
                 shootDirection = Input.mousePosition;
                 shootDirection.z = 0.0f;
                 shootDirection = Camera.main.ScreenToWorldPoint(shootDirection);
                 shootDirection = shootDirection-transform.position;
-                shootDirection.x *= 2.2f;
-                shootDirection.y *= 2.2f;
                 shootDirection = shootDirection.normalized;
-                angle = Mathf.Atan2(shootDirection.y, shootDirection.x) * Mathf.Rad2Deg;
-
-                if (Mathf.Abs(shootDirection.x) < 0.3) {
-                    shootDirection.x *= 2.5f;
-                } else if (Mathf.Abs(shootDirection.x) < 0.5) {
-                    shootDirection.x *= 1.5f;
-                }
-
-                if (Mathf.Abs(shootDirection.y) < 0.3) {
-                    shootDirection.y *= 2.5f;
-                } else if (Mathf.Abs(shootDirection.y) < 0.5) {
-                    shootDirection.y *= 1.5f;
-                }
-
-                newSword = Instantiate(item2Object, (new Vector3(shootDirection.x, shootDirection.y, 0) + transform.position), Quaternion.Euler(0, 0, angle - 45));
+                angle = Mathf.Atan2(shootDirection.y, shootDirection.x);
+                
+                newSword = Instantiate(item2Object, (new Vector3(Mathf.Cos(angle - 0.5f), Mathf.Sin(angle - 0.5f) , 0) + transform.position), Quaternion.Euler(0, 0, angle * Mathf.Rad2Deg - 90));
                 newSword.transform.parent = gameObject.transform;
 
                 //less cooldown than a spell
@@ -187,4 +172,5 @@ public class Mage : BaseClass
             }
         }
     }
+
 }

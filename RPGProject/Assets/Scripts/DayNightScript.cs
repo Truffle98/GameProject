@@ -4,7 +4,7 @@ using UnityEngine;
 public class DayNightScript : MonoBehaviour
 {
     [SerializeField] private Gradient lightColor;
-    [SerializeField] public UnityEngine.Rendering.Universal.Light2D light;
+    [SerializeField] public UnityEngine.Rendering.Universal.Light2D lightVar;
 
     private int days;
     public float time = 50;
@@ -37,6 +37,6 @@ public class DayNightScript : MonoBehaviour
         }
 
         time += Time.deltaTime;
-        light.color = lightColor.Evaluate(time * 0.002f);
+        lightVar.color = lightColor.Evaluate(time * 0.002f);
     }
 }

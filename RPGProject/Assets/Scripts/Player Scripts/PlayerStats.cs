@@ -103,7 +103,7 @@ public class PlayerStats : Items
             itemIDClass = other.GetComponent<ItemID>();
             itemID = itemIDClass.GetItemID();
 
-            if (Input.GetKey(KeyCode.E))
+            if (Input.GetKey(KeyCode.F))
             {
                 if (inventoryFailedPickupCooldown <= 0) {
                     PutItemInInventory(itemID, other);

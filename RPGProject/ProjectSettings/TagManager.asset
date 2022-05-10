@@ -12,6 +12,8 @@ TagManager:
   - Item Pickup
   - Enemy Projectile
   - Sword
+  - Long Sword
+  - Door
   layers:
   - Default
   - TransparentFX

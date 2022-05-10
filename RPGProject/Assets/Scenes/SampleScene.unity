@@ -150,6 +150,7 @@ GameObject:
   - component: {fileID: 269221715}
   - component: {fileID: 269221714}
   - component: {fileID: 269221713}
+  - component: {fileID: 269221716}
   m_Layer: 0
   m_Name: Door
   m_TagString: Door
@@ -250,6 +251,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &269221716
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 269221712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f02bb8f21abd0e64da9908d7db0cf753, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  newLocX: 0
+  newLocY: 0
+  cameraSize: 3
+  scene: Room
 --- !u!114 &293922254 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6109957575100580516, guid: a9d666e75dc7d06408dda37a0cf159cc, type: 3}
@@ -1005,7 +1022,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 21d1c1222ee861044bd72566b284a9c5, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8a14a67cb845c3c49bd18e56a2b70ba6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1048,7 +1065,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 3.2, y: 3.2}
+    oldSize: {x: 1, y: 1}
     newSize: {x: 1, y: 5}
     adaptiveTilingThreshold: 0.5
     drawMode: 2
@@ -1781,11 +1798,11 @@ MonoBehaviour:
   lightColor:
     serializedVersion: 2
     key0: {r: 1, g: 0.9082705, b: 0.6933962, a: 1}
-    key1: {r: 1, g: 0.44705883, b: 0.23137255, a: 1}
+    key1: {r: 1, g: 0.5882353, b: 0.42745098, a: 1}
     key2: {r: 0.3387718, g: 0.3066038, b: 1, a: 0}
     key3: {r: 0.21013674, g: 0.1745283, b: 1, a: 0}
     key4: {r: 0.3372549, g: 0.30588236, b: 1, a: 0}
-    key5: {r: 1, g: 0.44520906, b: 0.23113209, a: 0}
+    key5: {r: 1, g: 0.5894061, b: 0.4292453, a: 0}
     key6: {r: 1, g: 0.9098039, b: 0.69411767, a: 0}
     key7: {r: 1, g: 0.9098039, b: 0.69411767, a: 0}
     ctime0: 0
@@ -1807,7 +1824,7 @@ MonoBehaviour:
     m_Mode: 0
     m_NumColorKeys: 8
     m_NumAlphaKeys: 2
-  light: {fileID: 2050526408}
+  lightVar: {fileID: 0}
   time: 50
 --- !u!114 &2050526408
 MonoBehaviour:

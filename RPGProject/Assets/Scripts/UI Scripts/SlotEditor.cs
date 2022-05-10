@@ -19,8 +19,8 @@ public class SlotEditor : MonoBehaviour
 
     public void SetSprite(Sprite itemSprite, int ID)
     {
-        img.sprite = itemSprite;
         img.enabled = true;
+        img.sprite = itemSprite;
         itemID = ID;
         damage = items.GetItemDamage(itemID);
     }

@@ -9,14 +9,14 @@ public class Mage : BaseClass
     public float manaRegenerationSpeed;
     private float horizontalInput, verticalInput, maxHealth = baseHealth * 2, currentHealth, enemyDamage, maxMana = baseMana * 2, currentMana, angle;
     private Vector3 shootDirection;
-    private int cooldown = 0, item1, item2;
+    private int cooldown = 0, item1, item2, itemType;
     private Rigidbody2D body;
     private Animator anim;
     private bool movingUp;
     private bool movingDown;
     private PlayerStats playerStats;
     private Items itemsList;
-    private GameObject item1Object, item2Object, newSword;
+    private GameObject item1Object, item2Object, newMelee;
     public ManaBar manaBar;
     private EnemyProjectileScript enemyProjectileScript;
 
@@ -68,6 +68,18 @@ public class Mage : BaseClass
         anim.SetBool("UpRunning", movingUp);
         anim.SetBool("DownRunning", movingDown);
 
+        item1 = playerStats.GetEquippedItem(0);
+        if (item1>0)
+        {
+            item1Object = itemsList.GetItemObject(item1);
+        }
+        
+        item2 = playerStats.GetEquippedItem(1);
+        if (item2>0)
+        {
+            item2Object = itemsList.GetItemObject(item2);
+        }
+
         Attack();
     }
 
@@ -112,16 +124,47 @@ public class Mage : BaseClass
             {
                 if(currentMana>itemsList.GetManaCost(playerStats.GetEquippedItem(0)))
                 {
-                    shootDirection = Input.mousePosition;
-                    shootDirection.z = 0.0f;
-                    shootDirection = Camera.main.ScreenToWorldPoint(shootDirection);
-                    shootDirection = shootDirection-transform.position;
-                    shootDirection = shootDirection.normalized;
-                    
-                    Instantiate(item1Object, (new Vector3(shootDirection.x, shootDirection.y, 0) + transform.position), Quaternion.Euler(new Vector3(0,0,0)));
-                    cooldown = 100;
+                    itemType = item1Object.GetComponent<ItemType>().getItemType();
+                    if (itemType==0)
+                    {
+                        shootDirection = Input.mousePosition;
+                        shootDirection.z = 0.0f;
+                        shootDirection = Camera.main.ScreenToWorldPoint(shootDirection);
+                        shootDirection = shootDirection-transform.position;
+                        shootDirection.x *= 2.2f;
+                        shootDirection.y *= 2.2f;
+                        shootDirection = shootDirection.normalized;
+                        angle = Mathf.Atan2(shootDirection.y, shootDirection.x) * Mathf.Rad2Deg;
 
-                    currentMana -= itemsList.GetManaCost(playerStats.GetEquippedItem(0));
+                        if (Mathf.Abs(shootDirection.x) < 0.3) {
+                            shootDirection.x *= 2.5f;
+                        } else if (Mathf.Abs(shootDirection.x) < 0.5) {
+                            shootDirection.x *= 1.5f;
+                        }
+
+                        if (Mathf.Abs(shootDirection.y) < 0.3) {
+                            shootDirection.y *= 2.5f;
+                        } else if (Mathf.Abs(shootDirection.y) < 0.5) {
+                            shootDirection.y *= 1.5f;
+                        }
+
+                        newMelee = Instantiate(item1Object, (new Vector3(shootDirection.x, shootDirection.y, 0) + transform.position), Quaternion.Euler(0, 0, angle - 45));
+                        newMelee.transform.parent = gameObject.transform;
+
+                        cooldown = itemsList.GetCooldown(item1);
+                    }
+                    else if (itemType==1)
+                    {
+                        shootDirection = Input.mousePosition;
+                        shootDirection.z = 0.0f;
+                        shootDirection = Camera.main.ScreenToWorldPoint(shootDirection);
+                        shootDirection = shootDirection-transform.position;
+                        shootDirection = shootDirection.normalized;
+                        
+                        Instantiate(item1Object, (new Vector3(shootDirection.x, shootDirection.y, 0) + transform.position), Quaternion.Euler(new Vector3(0,0,0)));
+                    }
+                    cooldown = itemsList.GetCooldown(item1);
+                    currentMana -= itemsList.GetManaCost(item1);
                 }
             }
         }
@@ -129,37 +172,53 @@ public class Mage : BaseClass
         //Accesses second item in hotbar
         else if (Input.GetMouseButtonDown(1) && cooldown == 0 && Time.timeScale == 1)
         {
-            if(currentMana>itemsList.GetManaCost(playerStats.GetEquippedItem(1)))
+            if (playerStats.GetEquippedItem(1)>-1)
             {
-                //sets the sprite of the sword in mage as visable when you attack. the change in scale is messed up when you face one side vs the other
+                if(currentMana>itemsList.GetManaCost(playerStats.GetEquippedItem(1)))
+                {
+                    itemType = item1Object.GetComponent<ItemType>().getItemType();
+                    if (itemType==0)
+                    {
+                        shootDirection = Input.mousePosition;
+                        shootDirection.z = 0.0f;
+                        shootDirection = Camera.main.ScreenToWorldPoint(shootDirection);
+                        shootDirection = shootDirection-transform.position;
+                        shootDirection = shootDirection.normalized;
+                        
+                        Instantiate(item2Object, (new Vector3(shootDirection.x, shootDirection.y, 0) + transform.position), Quaternion.Euler(new Vector3(0,0,0)));
+                        cooldown = itemsList.GetCooldown(item2);
+                    }
+                    else if (itemType==1)
+                    {
+                        //sets the sprite of the sword in mage as visable when you attack. the change in scale is messed up when you face one side vs the other
+                        shootDirection = Input.mousePosition;
+                        shootDirection.z = 0.0f;
+                        shootDirection = Camera.main.ScreenToWorldPoint(shootDirection);
+                        shootDirection = shootDirection-transform.position;
+                        shootDirection.x *= 2.2f;
+                        shootDirection.y *= 2.2f;
+                        shootDirection = shootDirection.normalized;
+                        angle = Mathf.Atan2(shootDirection.y, shootDirection.x) * Mathf.Rad2Deg;
 
-                shootDirection = Input.mousePosition;
-                shootDirection.z = 0.0f;
-                shootDirection = Camera.main.ScreenToWorldPoint(shootDirection);
-                shootDirection = shootDirection-transform.position;
-                shootDirection.x *= 2.2f;
-                shootDirection.y *= 2.2f;
-                shootDirection = shootDirection.normalized;
-                angle = Mathf.Atan2(shootDirection.y, shootDirection.x) * Mathf.Rad2Deg;
+                        if (Mathf.Abs(shootDirection.x) < 0.3) {
+                            shootDirection.x *= 2.5f;
+                        } else if (Mathf.Abs(shootDirection.x) < 0.5) {
+                            shootDirection.x *= 1.5f;
+                        }
 
-                if (Mathf.Abs(shootDirection.x) < 0.3) {
-                    shootDirection.x *= 2.5f;
-                } else if (Mathf.Abs(shootDirection.x) < 0.5) {
-                    shootDirection.x *= 1.5f;
+                        if (Mathf.Abs(shootDirection.y) < 0.3) {
+                            shootDirection.y *= 2.5f;
+                        } else if (Mathf.Abs(shootDirection.y) < 0.5) {
+                            shootDirection.y *= 1.5f;
+                        }
+
+                        newMelee = Instantiate(item2Object, (new Vector3(shootDirection.x, shootDirection.y, 0) + transform.position), Quaternion.Euler(0, 0, angle - 45));
+                        newMelee.transform.parent = gameObject.transform;
+                    }
+                    //less cooldown than a spell
+                    cooldown = itemsList.GetCooldown(item2);
+                    currentMana -= itemsList.GetManaCost(item2);
                 }
-
-                if (Mathf.Abs(shootDirection.y) < 0.3) {
-                    shootDirection.y *= 2.5f;
-                } else if (Mathf.Abs(shootDirection.y) < 0.5) {
-                    shootDirection.y *= 1.5f;
-                }
-
-                newSword = Instantiate(item2Object, (new Vector3(shootDirection.x, shootDirection.y, 0) + transform.position), Quaternion.Euler(0, 0, angle - 45));
-                newSword.transform.parent = gameObject.transform;
-
-                //less cooldown than a spell
-                cooldown = 50;
-                currentMana -= itemsList.GetManaCost(playerStats.GetEquippedItem(1));
             }
         }
 

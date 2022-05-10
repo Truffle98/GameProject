@@ -1824,7 +1824,7 @@ MonoBehaviour:
     m_Mode: 0
     m_NumColorKeys: 8
     m_NumAlphaKeys: 2
-  lightVar: {fileID: 0}
+  lightVar: {fileID: 2050526408}
   time: 50
 --- !u!114 &2050526408
 MonoBehaviour:

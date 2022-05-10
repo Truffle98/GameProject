@@ -9,7 +9,7 @@ public class InventoryOpener : MonoBehaviour
     private GameObject inventory;
 
     void Start(){
-        isOpen = false;
+        isOpen = true;
         inventory = gameObject.transform.GetChild(0).gameObject.transform.GetChild(0).gameObject;
     }
     void Update(){

@@ -43,12 +43,13 @@ public class PlayerStats : Items
     }
     public void switchItemToInventory(int indexInItemLineup, int itemID)
     {
+        itemName = itemNames[itemID];
         for (int i = 0; i < inventory.Length; i++) 
         {
             if (inventory[i] == -1) {
                 inventory[i] = itemID;
                 inventoryStacks[i] = 1;
-                Debug.Log($"Picked up {itemName} in new spot {i}");
+                Debug.Log($"Picked up {itemName} in new spot {i+1}");
                 itemLineup[indexInItemLineup] = -1;
                 return;
             }
@@ -56,12 +57,13 @@ public class PlayerStats : Items
     }
     public void switchItemToHotBar(int indexInInventory, int itemID)
     {
+        itemName = itemNames[itemID];
         for (int i = 0; i < itemLineup.Length; i++) 
         {
             if (itemLineup[i] == -1) {
                 itemLineup[i] = itemID;
                 inventoryStacks[indexInInventory] -= 1;
-                Debug.Log($"Picked up {itemName} in hot bar slot {i}");
+                Debug.Log($"Picked up {itemName} in hot bar slot {i+1}");
                 inventory[indexInInventory] = -1;
                 return;
             }
@@ -138,7 +140,6 @@ public class PlayerStats : Items
                     Debug.Log("inventory pickup failed, currently on cooldown");
                     messageCooldown = 500;
                 }
-                
             }
         }
     }

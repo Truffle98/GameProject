@@ -24,7 +24,7 @@ public class InventoryScript : MonoBehaviour
             if (itemID>0){
                 itemSprite = items.GetItemObject(itemID).GetComponent<SpriteRenderer>().sprite;
                 slotEditor = slots[inventoryIndex].GetComponent<SlotEditor>();
-                slotEditor.SetSprite(itemSprite);
+                slotEditor.SetSprite(itemSprite, itemID);
 
                 stackNum = playerStats.GetItemStack(inventoryIndex).ToString();
                 textEditor = stacks[inventoryIndex].GetComponent<textEditorScript>();

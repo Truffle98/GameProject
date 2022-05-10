@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HotBarScript : MonoBehaviour
 {
@@ -26,7 +27,7 @@ public class HotBarScript : MonoBehaviour
             if (itemID > 0){
                 itemSprite = items.GetItemObject(itemID).GetComponent<SpriteRenderer>().sprite;
                 hotBarEditor = slots[hotBarIndex].GetComponent<HotBarEditor>();
-                hotBarEditor.SetSprite(itemSprite);
+                hotBarEditor.SetSprite(itemSprite, itemID);
             }
         }
     }

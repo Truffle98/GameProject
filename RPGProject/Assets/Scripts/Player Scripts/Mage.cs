@@ -108,18 +108,21 @@ public class Mage : BaseClass
     {
         if (Input.GetMouseButtonDown(0) && cooldown == 0 && Time.timeScale == 1) 
         {
-            if(currentMana>itemsList.GetManaCost(playerStats.GetEquippedItem(0)))
+            if (playerStats.GetEquippedItem(0)>-1)
             {
-                shootDirection = Input.mousePosition;
-                shootDirection.z = 0.0f;
-                shootDirection = Camera.main.ScreenToWorldPoint(shootDirection);
-                shootDirection = shootDirection-transform.position;
-                shootDirection = shootDirection.normalized;
-                
-                Instantiate(item1Object, (new Vector3(shootDirection.x, shootDirection.y, 0) + transform.position), Quaternion.Euler(new Vector3(0,0,0)));
-                cooldown = 100;
+                if(currentMana>itemsList.GetManaCost(playerStats.GetEquippedItem(0)))
+                {
+                    shootDirection = Input.mousePosition;
+                    shootDirection.z = 0.0f;
+                    shootDirection = Camera.main.ScreenToWorldPoint(shootDirection);
+                    shootDirection = shootDirection-transform.position;
+                    shootDirection = shootDirection.normalized;
+                    
+                    Instantiate(item1Object, (new Vector3(shootDirection.x, shootDirection.y, 0) + transform.position), Quaternion.Euler(new Vector3(0,0,0)));
+                    cooldown = 100;
 
-                currentMana -= itemsList.GetManaCost(playerStats.GetEquippedItem(0));
+                    currentMana -= itemsList.GetManaCost(playerStats.GetEquippedItem(0));
+                }
             }
         }
 

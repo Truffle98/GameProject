@@ -12,7 +12,7 @@ public class PlayerStats : Items
 
     //Lists for four usable items [id] in your 'item lineup,' items [id] in armor lineup, and all items [id] in inventory
     //Indexes 0 and 1 are reserved for 'on-hand' [left-click] and 'off-hand' [right-click] items. Index 0 is therefore 'fireball' on mage class
-    private int[] itemLineup = { 3, 5, -1, -1};
+    public int[] itemLineup = { 3, 5, -1, -1};
     private int[] armorLinup = { -1, -1, -1, -1 };
     public int[] inventory = {-1, -1, -1, -1, -1,
                                -1, -1, -1, -1, -1,
@@ -40,6 +40,32 @@ public class PlayerStats : Items
     public int GetItemStack(int indexInInventory)
     {
         return inventoryStacks[indexInInventory];
+    }
+    public void switchItemToInventory(int indexInItemLineup, int itemID)
+    {
+        for (int i = 0; i < inventory.Length; i++) 
+        {
+            if (inventory[i] == -1) {
+                inventory[i] = itemID;
+                inventoryStacks[i] = 1;
+                Debug.Log($"Picked up {itemName} in new spot {i}");
+                itemLineup[indexInItemLineup] = -1;
+                return;
+            }
+        }
+    }
+    public void switchItemToHotBar(int indexInInventory, int itemID)
+    {
+        for (int i = 0; i < itemLineup.Length; i++) 
+        {
+            if (itemLineup[i] == -1) {
+                itemLineup[i] = itemID;
+                inventoryStacks[indexInInventory] -= 1;
+                Debug.Log($"Picked up {itemName} in hot bar slot {i}");
+                inventory[indexInInventory] = -1;
+                return;
+            }
+        }
     }
 
     //This function is intended to work with the 2D collider that detects when an item is attempted to be picked up. If it can fit it in the inventory it will pick up the item, otherwise it will leave it on the ground.

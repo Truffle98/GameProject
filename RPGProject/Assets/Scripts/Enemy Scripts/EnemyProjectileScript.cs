@@ -26,7 +26,7 @@ public class EnemyProjectileScript : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         transform.Translate(shootDirection * speed * Time.deltaTime);
     }

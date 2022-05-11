@@ -127,31 +127,16 @@ public class Mage : BaseClass
                     itemType = item1Object.GetComponent<ItemType>().getItemType();
                     if (itemType==0)
                     {
+                        //sets the sprite of the sword in mage as visable when you attack. the change in scale is messed up when you face one side vs the other
                         shootDirection = Input.mousePosition;
                         shootDirection.z = 0.0f;
                         shootDirection = Camera.main.ScreenToWorldPoint(shootDirection);
                         shootDirection = shootDirection-transform.position;
-                        shootDirection.x *= 2.2f;
-                        shootDirection.y *= 2.2f;
                         shootDirection = shootDirection.normalized;
-                        angle = Mathf.Atan2(shootDirection.y, shootDirection.x) * Mathf.Rad2Deg;
+                        angle = Mathf.Atan2(shootDirection.y, shootDirection.x) ;
 
-                        if (Mathf.Abs(shootDirection.x) < 0.3) {
-                            shootDirection.x *= 2.5f;
-                        } else if (Mathf.Abs(shootDirection.x) < 0.5) {
-                            shootDirection.x *= 1.5f;
-                        }
-
-                        if (Mathf.Abs(shootDirection.y) < 0.3) {
-                            shootDirection.y *= 2.5f;
-                        } else if (Mathf.Abs(shootDirection.y) < 0.5) {
-                            shootDirection.y *= 1.5f;
-                        }
-
-                        newMelee = Instantiate(item1Object, (new Vector3(shootDirection.x, shootDirection.y, 0) + transform.position), Quaternion.Euler(0, 0, angle - 45));
+                        newMelee = Instantiate(item1Object, (new Vector3(Mathf.Cos(angle - 0.5f), Mathf.Sin(angle - 0.5f), 0) + transform.position), Quaternion.Euler(0, 0, Mathf.Rad2Deg * angle - 90));
                         newMelee.transform.parent = gameObject.transform;
-
-                        cooldown = itemsList.GetCooldown(item1);
                     }
                     else if (itemType==1)
                     {
@@ -160,7 +145,6 @@ public class Mage : BaseClass
                         shootDirection = Camera.main.ScreenToWorldPoint(shootDirection);
                         shootDirection = shootDirection-transform.position;
                         shootDirection = shootDirection.normalized;
-                        
                         Instantiate(item1Object, (new Vector3(shootDirection.x, shootDirection.y, 0) + transform.position), Quaternion.Euler(new Vector3(0,0,0)));
                     }
                     cooldown = itemsList.GetCooldown(item1);
@@ -179,6 +163,19 @@ public class Mage : BaseClass
                     itemType = item2Object.GetComponent<ItemType>().getItemType();
                     if (itemType==0)
                     {
+                        //sets the sprite of the sword in mage as visable when you attack. the change in scale is messed up when you face one side vs the other
+                        shootDirection = Input.mousePosition;
+                        shootDirection.z = 0.0f;
+                        shootDirection = Camera.main.ScreenToWorldPoint(shootDirection);
+                        shootDirection = shootDirection-transform.position;
+                        shootDirection = shootDirection.normalized;
+                        angle = Mathf.Atan2(shootDirection.y, shootDirection.x) ;
+
+                        newMelee = Instantiate(item2Object, (new Vector3(Mathf.Cos(angle - 0.5f), Mathf.Sin(angle - 0.5f), 0) + transform.position), Quaternion.Euler(0, 0, Mathf.Rad2Deg * angle - 90));
+                        newMelee.transform.parent = gameObject.transform;
+                    }
+                    else if (itemType==1)
+                    {
                         shootDirection = Input.mousePosition;
                         shootDirection.z = 0.0f;
                         shootDirection = Camera.main.ScreenToWorldPoint(shootDirection);
@@ -186,34 +183,6 @@ public class Mage : BaseClass
                         shootDirection = shootDirection.normalized;
                         
                         Instantiate(item2Object, (new Vector3(shootDirection.x, shootDirection.y, 0) + transform.position), Quaternion.Euler(new Vector3(0,0,0)));
-                        cooldown = itemsList.GetCooldown(item2);
-                    }
-                    else if (itemType==1)
-                    {
-                        //sets the sprite of the sword in mage as visable when you attack. the change in scale is messed up when you face one side vs the other
-                        shootDirection = Input.mousePosition;
-                        shootDirection.z = 0.0f;
-                        shootDirection = Camera.main.ScreenToWorldPoint(shootDirection);
-                        shootDirection = shootDirection-transform.position;
-                        shootDirection.x *= 2.2f;
-                        shootDirection.y *= 2.2f;
-                        shootDirection = shootDirection.normalized;
-                        angle = Mathf.Atan2(shootDirection.y, shootDirection.x) * Mathf.Rad2Deg;
-
-                        if (Mathf.Abs(shootDirection.x) < 0.3) {
-                            shootDirection.x *= 2.5f;
-                        } else if (Mathf.Abs(shootDirection.x) < 0.5) {
-                            shootDirection.x *= 1.5f;
-                        }
-
-                        if (Mathf.Abs(shootDirection.y) < 0.3) {
-                            shootDirection.y *= 2.5f;
-                        } else if (Mathf.Abs(shootDirection.y) < 0.5) {
-                            shootDirection.y *= 1.5f;
-                        }
-
-                        newMelee = Instantiate(item2Object, (new Vector3(shootDirection.x, shootDirection.y, 0) + transform.position), Quaternion.Euler(0, 0, angle - 45));
-                        newMelee.transform.parent = gameObject.transform;
                     }
                     //less cooldown than a spell
                     cooldown = itemsList.GetCooldown(item2);

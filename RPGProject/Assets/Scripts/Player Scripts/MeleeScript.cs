@@ -34,7 +34,7 @@ public class MeleeScript : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         //transform.Translate(shootDirection * 10 * Time.deltaTime);
         transform.RotateAround(player.transform.position, new Vector3(0, 0, 1), 500 * Time.deltaTime);

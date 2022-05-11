@@ -265,7 +265,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   newLocX: 0
   newLocY: 0
-  cameraSize: 3
+  cameraSize: 6
   scene: Room
 --- !u!114 &293922254 stripped
 MonoBehaviour:

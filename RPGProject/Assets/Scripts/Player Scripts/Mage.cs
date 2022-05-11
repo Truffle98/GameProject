@@ -176,7 +176,7 @@ public class Mage : BaseClass
             {
                 if(currentMana>itemsList.GetManaCost(playerStats.GetEquippedItem(1)))
                 {
-                    itemType = item1Object.GetComponent<ItemType>().getItemType();
+                    itemType = item2Object.GetComponent<ItemType>().getItemType();
                     if (itemType==0)
                     {
                         shootDirection = Input.mousePosition;

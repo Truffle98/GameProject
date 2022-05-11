@@ -738,26 +738,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 515296463042163576, guid: a9d666e75dc7d06408dda37a0cf159cc, type: 3}
-      propertyPath: healthBar
-      value: 
-      objectReference: {fileID: 1393076045}
-    - target: {fileID: 515296463042163576, guid: a9d666e75dc7d06408dda37a0cf159cc, type: 3}
-      propertyPath: cooldownMax
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 515296463042163576, guid: a9d666e75dc7d06408dda37a0cf159cc, type: 3}
-      propertyPath: shootDistance
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 515296463042163576, guid: a9d666e75dc7d06408dda37a0cf159cc, type: 3}
-      propertyPath: engageDistance
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 515296463042163576, guid: a9d666e75dc7d06408dda37a0cf159cc, type: 3}
-      propertyPath: enemyProjectile
-      value: 
-      objectReference: {fileID: 3246578418983402623, guid: 99755d472385ae442a71a0cf5adde0a2, type: 3}
     - target: {fileID: 6109957574712166607, guid: a9d666e75dc7d06408dda37a0cf159cc, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -1417,17 +1397,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a9d666e75dc7d06408dda37a0cf159cc, type: 3}
---- !u!114 &1393076045 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6109957575100580516, guid: a9d666e75dc7d06408dda37a0cf159cc, type: 3}
-  m_PrefabInstance: {fileID: 924064344}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6702d0c047c8db0428b96be240297fb3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1469875416
 PrefabInstance:
   m_ObjectHideFlags: 0

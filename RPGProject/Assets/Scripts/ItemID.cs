@@ -12,7 +12,7 @@ public class ItemID : MonoBehaviour
     }
 
     void Update() {
-        transform.RotateAround(transform.position, Vector3.up, 50 * Time.deltaTime);
+        transform.RotateAround(transform.position, Vector3.up, 100 * Time.deltaTime);
     }
     
 }

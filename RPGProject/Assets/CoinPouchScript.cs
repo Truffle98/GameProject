@@ -9,14 +9,14 @@ public class CoinPouchScript : MonoBehaviour
 
     void Start()
     {
-        isOpen = true;
+        isOpen = false;
         coinPouchParent = gameObject.transform.GetChild(0).gameObject;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.O)){
+        if (Input.GetKeyDown(KeyCode.I)){
             if (isOpen){
                 setActivation(false);
                 isOpen = false;

@@ -12,8 +12,17 @@ public class InventoryScript : MonoBehaviour
     private PlayerStats playerStats;
     private Items items;
     private string stackNum;
-    private int itemID;
+    private int itemID, count = 0;
     private Sprite itemSprite;
+
+    void Update()
+    {
+        if (count == 0)
+        {
+            gameObject.SetActive(false);
+            count++;
+        }
+    }
 
     public void UpdateInventory(){
         playerStats = GameObject.Find("Player Stats").GetComponent<PlayerStats>();

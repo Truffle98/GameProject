@@ -5,17 +5,24 @@ using UnityEngine;
 public class CoinPouchParent : MonoBehaviour
 {
     public GameObject[] coinStacks;
-    private SlotEditor slotEditor;
     private textEditorScript textEditor;
     private PlayerStats playerStats;
     private Items items;
-    private int coinStackNum, itemID;
+    private int coinStackNum, count = 0;
     private string coinStackString;
     private Sprite itemSprite;
 
+    void Update()
+    {
+        if (count == 0)
+        {
+            gameObject.SetActive(false);
+            count++;
+        }
+    }
+
     public void UpdateCoinPouch(){
         playerStats = GameObject.Find("Player Stats").GetComponent<PlayerStats>();
-        items = GameObject.Find("ItemObjectList").GetComponent<Items>();
         
         for (int coinPouchIndex = 0; coinPouchIndex < 3; coinPouchIndex++){
             coinStackNum = playerStats.GetCoinStack(coinPouchIndex);

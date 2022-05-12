@@ -6,8 +6,7 @@ using UnityEngine;
 
 public class Mage : BaseClass
 {
-    public float manaRegenerationSpeed;
-    private float horizontalInput, verticalInput, maxHealth = baseHealth * 2, currentHealth, enemyDamage, maxMana = baseMana * 2, currentMana, angle;
+    private float horizontalInput, verticalInput, maxHealth = baseHealth * 2, currentHealth, enemyDamage, maxMana = baseMana * 2, currentMana, angle, manaRegenerationSpeed;
     private Vector3 shootDirection;
     private int cooldown = 0, item1, item2, itemType;
     private Rigidbody2D body;
@@ -124,7 +123,7 @@ public class Mage : BaseClass
             {
                 if(currentMana>itemsList.GetManaCost(playerStats.GetEquippedItem(0)))
                 {
-                    itemType = itemsList.getItemType(playerStats.GetEquippedItem(0));
+                    itemType = itemsList.GetItemType(playerStats.GetEquippedItem(0));
                     if (itemType==0)
                     {
                         //sets the sprite of the sword in mage as visable when you attack. the change in scale is messed up when you face one side vs the other
@@ -160,7 +159,7 @@ public class Mage : BaseClass
             {
                 if(currentMana>itemsList.GetManaCost(playerStats.GetEquippedItem(1)))
                 {
-                    itemType = itemsList.getItemType(playerStats.GetEquippedItem(1));
+                    itemType = itemsList.GetItemType(playerStats.GetEquippedItem(1));
                     if (itemType==0)
                     {
                         //sets the sprite of the sword in mage as visable when you attack. the change in scale is messed up when you face one side vs the other

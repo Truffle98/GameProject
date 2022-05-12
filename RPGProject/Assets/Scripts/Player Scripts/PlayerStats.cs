@@ -25,12 +25,14 @@ public class PlayerStats : Items
 
     public int GetEquippedItem(int indexInItemLineup)
     {
-
         return itemLineup[indexInItemLineup];
-
     }
     public int GetItemInInventory(int indexInInventory){
         return inventory[indexInInventory];
+    }
+    public int GetCoinStack(int coinType)
+    {
+        return coinPurse[coinType];
     }
     public float GetDamage(int indexInItemLineup)
     {

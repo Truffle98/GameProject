@@ -2,18 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InventoryOpener : MonoBehaviour
+public class CoinPouchScript : MonoBehaviour
 {
-
     private bool isOpen;
-    private GameObject inventory;
+    private GameObject coinPouchParent;
 
-    void Start(){
+    void Start()
+    {
         isOpen = true;
-        inventory = gameObject.transform.GetChild(0).gameObject;
+        coinPouchParent = gameObject.transform.GetChild(0).gameObject;
     }
-    void Update(){
-        if (Input.GetKeyDown(KeyCode.I)){
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.O)){
             if (isOpen){
                 setActivation(false);
                 isOpen = false;
@@ -23,14 +26,15 @@ public class InventoryOpener : MonoBehaviour
                 isOpen = true;
             }
         }
-        inventory.GetComponent<InventoryScript>().UpdateInventory();
+        coinPouchParent.GetComponent<CoinPouchParent>().UpdateCoinPouch();
     }
+
     void setActivation(bool wantToBeActive){
         if(wantToBeActive){
-            inventory.SetActive(true);
+            coinPouchParent.SetActive(true);
         }
         else{
-            inventory.SetActive(false);
+            coinPouchParent.SetActive(false);
         }
     }
 }

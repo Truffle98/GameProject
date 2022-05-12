@@ -124,7 +124,7 @@ public class Mage : BaseClass
             {
                 if(currentMana>itemsList.GetManaCost(playerStats.GetEquippedItem(0)))
                 {
-                    itemType = item1Object.GetComponent<ItemType>().getItemType();
+                    itemType = itemsList.getItemType(playerStats.GetEquippedItem(0));
                     if (itemType==0)
                     {
                         //sets the sprite of the sword in mage as visable when you attack. the change in scale is messed up when you face one side vs the other
@@ -160,7 +160,7 @@ public class Mage : BaseClass
             {
                 if(currentMana>itemsList.GetManaCost(playerStats.GetEquippedItem(1)))
                 {
-                    itemType = item2Object.GetComponent<ItemType>().getItemType();
+                    itemType = itemsList.getItemType(playerStats.GetEquippedItem(1));
                     if (itemType==0)
                     {
                         //sets the sprite of the sword in mage as visable when you attack. the change in scale is messed up when you face one side vs the other

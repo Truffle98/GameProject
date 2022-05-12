@@ -9,7 +9,7 @@ public class EnemyScript : MonoBehaviour
     private GameObject player;
     public GameObject enemyProjectile;
     private float playerDamage, currentHealth, speed;
-    private int timer = 0, cooldown, findNewLocationTimer;
+    private int timer = 0, cooldown, findNewLocationTimer, AOECooldown = 0;
     private bool count = true, playerSpotted;
     public int itemDrop = -1, cooldownMax, maxHealth = 100, movementPattern;
     public float engageDistance, shootDistance, maxSpeed;
@@ -20,6 +20,7 @@ public class EnemyScript : MonoBehaviour
     private Rigidbody2D rb;
     private Vector2 movement;
     private NavMeshAgent agent;
+    private AOEScript AOEScript;
     //public bool shouldRotate = false;
 
     public HealthBar1 healthBar;
@@ -51,6 +52,10 @@ public class EnemyScript : MonoBehaviour
 
         if (cooldown > 0 && Time.timeScale == 1) {
             cooldown--;
+        }
+
+        if (AOECooldown > 0 && Time.timeScale == 1) {
+            AOECooldown--;
         }
 
         if (findNewLocationTimer > 0) {
@@ -103,8 +108,7 @@ public class EnemyScript : MonoBehaviour
             healthBar.SetHealth(currentHealth);
 
             if(currentHealth <= 0) {
-                Instantiate(itemsList.GetItemObject(itemDrop), transform.position, new Quaternion(0, 0, 0, 0));
-                Destroy(gameObject);
+                Die();
             }
         }
         else if (other.gameObject.CompareTag("Sword"))
@@ -115,8 +119,29 @@ public class EnemyScript : MonoBehaviour
             healthBar.SetHealth(currentHealth);
 
             if(currentHealth <= 0) {
-                Instantiate(itemsList.GetItemObject(itemDrop), transform.position, new Quaternion(0, 0, 0, 0));
-                Destroy(gameObject);
+                Die();
+            }
+        }
+    }
+
+    void OnTriggerStay2D(Collider2D other) {
+
+        if (other.gameObject.CompareTag("AOE")) {
+
+            Debug.Log("got here");
+
+            if (AOECooldown <= 0) {
+
+                AOEScript = other.GetComponent<AOEScript>();
+                currentHealth -= AOEScript.GetAOEDamage();
+                healthBar.SetHealth(currentHealth);
+
+                if(currentHealth <= 0) {
+                    Die();
+                }
+
+                AOECooldown = 250;
+
             }
         }
     }
@@ -157,5 +182,12 @@ public class EnemyScript : MonoBehaviour
         Instantiate(enemyProjectile, (new Vector3(shootDirection.x, shootDirection.y, 0) + transform.position), Quaternion.Euler(new Vector3(0,0,0)));
         cooldown = cooldownMax;
         return;
+    }
+
+    void Die () {
+
+        Instantiate(itemsList.GetItemObject(itemDrop), transform.position, new Quaternion(0, 0, 0, 0));
+        Destroy(gameObject);
+
     }
 }

@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class ProjectileScript : MonoBehaviour
 {
-    public float speed, lifespan;
+    public float speed, lifespan, angle, damage, multiplier = 1;
     public int itemID;
-    private float damage;
     private Vector3 shootDirection;
     private PlayerStats playerStats;
     
@@ -24,8 +23,10 @@ public class ProjectileScript : MonoBehaviour
         shootDirection = shootDirection-transform.position;
         shootDirection.z = 0.0f;
         shootDirection = shootDirection.normalized;
+        angle = Mathf.Atan2(shootDirection.y, shootDirection.x);
+        shootDirection = new Vector3 (Mathf.Cos(angle), Mathf.Sin(angle), 0);
         playerStats = GameObject.Find("Player Stats").GetComponent<PlayerStats>();
-        damage = playerStats.GetItemDamage(itemID);
+        damage = playerStats.GetItemDamage(itemID) * multiplier;
         Destroy(gameObject, lifespan);
     }
 

@@ -5,7 +5,7 @@ using UnityEngine;
 public class FireballScript : MonoBehaviour
 {
     public int lifespan;
-    private int variation = 0, itemID = 3, count = 0;
+    private int variation = 1, itemID = 3, count = 0;
     private PlayerStats playerStats;
     public GameObject pool;
     

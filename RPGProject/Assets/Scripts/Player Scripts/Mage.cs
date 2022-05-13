@@ -144,7 +144,7 @@ public class Mage : BaseClass
                         shootDirection = Camera.main.ScreenToWorldPoint(shootDirection);
                         shootDirection = shootDirection-transform.position;
                         shootDirection = shootDirection.normalized;
-                        Instantiate(item1Object, (new Vector3(shootDirection.x, shootDirection.y, 0) + transform.position), Quaternion.Euler(new Vector3(0,0,0)));
+                        Instantiate(item1Object, (new Vector3(shootDirection.x, shootDirection.y, 0) + transform.position), Quaternion.Euler(new Vector3(0, 0, angle)));
                     }
                     cooldown = itemsList.GetCooldown(item1);
                     currentMana -= itemsList.GetManaCost(item1);

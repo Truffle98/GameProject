@@ -24,6 +24,10 @@ public class FireballScript : MonoBehaviour
         }
         if (count >= lifespan) {
 
+            if (variation == 2 && count >= lifespan / 2) {
+                //Instantiate(pool, transform.position, new Quaternion(0, 0, 0, 0));
+            }
+
             if (variation == 1) {
                 Instantiate(pool, transform.position, new Quaternion(0, 0, 0, 0));
             }

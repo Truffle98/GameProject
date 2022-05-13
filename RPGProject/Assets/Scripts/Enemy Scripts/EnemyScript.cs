@@ -128,8 +128,6 @@ public class EnemyScript : MonoBehaviour
 
         if (other.gameObject.CompareTag("AOE")) {
 
-            Debug.Log("got here");
-
             if (AOECooldown <= 0) {
 
                 AOEScript = other.GetComponent<AOEScript>();
@@ -140,7 +138,7 @@ public class EnemyScript : MonoBehaviour
                     Die();
                 }
 
-                AOECooldown = 250;
+                AOECooldown = 175;
 
             }
         }

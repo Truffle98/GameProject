@@ -173,7 +173,7 @@ public class Mage : BaseClass
                         shootDirection = Camera.main.ScreenToWorldPoint(shootDirection);
                         shootDirection = shootDirection-transform.position;
                         shootDirection = shootDirection.normalized;
-                        angle = Mathf.Atan2(shootDirection.y, shootDirection.x) ;
+                        angle = Mathf.Atan2(shootDirection.y, shootDirection.x);
 
                         newMelee = Instantiate(item2Object, (new Vector3(Mathf.Cos(angle - 0.5f), Mathf.Sin(angle - 0.5f), 0) + transform.position), Quaternion.Euler(0, 0, Mathf.Rad2Deg * angle - 90));
                         newMelee.transform.parent = gameObject.transform;

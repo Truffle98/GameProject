@@ -137,6 +137,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07f6ee047ae46ab4eb660ea7bd302353, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  angle: 0
+  speed: 0
 --- !u!114 &4159914343649750525
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -150,5 +152,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0
-  lifespan: 50
+  lifespan: 0.25
+  angle: 0
+  damage: 0
+  multiplier: 0.5
   itemID: 3

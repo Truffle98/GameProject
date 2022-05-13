@@ -4,15 +4,17 @@ using UnityEngine;
 
 public class SplittingScript : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+    public float angle, speed;
+    private Vector3 shootDirection;
+
+    void Start() {
+        shootDirection = new Vector3 (Mathf.Cos(angle), Mathf.Sin(angle), 0);
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        
+        transform.Translate(shootDirection * speed * Time.deltaTime);
     }
+
 }

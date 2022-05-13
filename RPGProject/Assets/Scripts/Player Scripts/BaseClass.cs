@@ -10,6 +10,7 @@ public class BaseClass : MonoBehaviour
     protected static int baseSpeed = 6;
     protected static int baseHealth = 100;
     protected static int baseMana = 50;
+    protected static float baseArmorMultiplier = 1;
     public GameObject[] gameItems;
 
     public float GetBaseDamage()
@@ -25,6 +26,11 @@ public class BaseClass : MonoBehaviour
     public float GetBaseHealth()
     {
         return baseHealth;
+    }
+
+    public float GetBaseArmorMultiplier()
+    {
+        return baseArmorMultiplier;
     }
     
 }

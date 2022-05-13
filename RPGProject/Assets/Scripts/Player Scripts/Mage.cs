@@ -11,13 +11,13 @@ public class Mage : BaseClass
     private int cooldown = 0, item1, item2, itemType;
     private Rigidbody2D body;
     private Animator anim;
-    private bool movingUp;
-    private bool movingDown;
+    private bool movingUp, movingDown;
     private PlayerStats playerStats;
     private Items itemsList;
     private GameObject item1Object, item2Object, newMelee;
     public ManaBar manaBar;
     private EnemyProjectileScript enemyProjectileScript;
+    private float mageArmorMultiplier = baseArmorMultiplier + 0.5f;
 
     public HealthBar1 healthbar;
 
@@ -80,6 +80,11 @@ public class Mage : BaseClass
         }
 
         Attack();
+    }
+
+    public float GetArmorMultiplier()
+    {
+        return mageArmorMultiplier;
     }
 
     //Handles animation changes

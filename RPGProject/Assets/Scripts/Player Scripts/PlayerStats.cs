@@ -6,14 +6,14 @@ public class PlayerStats : Items
 {
     private ItemID itemIDClass;
     private MenuTest menuTest;
-    private float damage;
+    private float damage, armor = 0, mageArmorMultiplier = 1.5f;
     private int decision, itemID;
     private string itemName;
 
     //Lists for four usable items [id] in your 'item lineup,' items [id] in armor lineup, and all items [id] in inventory
     //Indexes 0 and 1 are reserved for 'on-hand' [left-click] and 'off-hand' [right-click] items. Index 0 is therefore 'fireball' on mage class
     public int[] itemLineup = { 3, 5, -1, -1};
-    private int[] armorLinup = { -1, -1, -1, -1 };
+    private int[] armorLineup = { -1, -1, -1, -1 };
     public int[] inventory = {-1, -1, -1, -1, -1,
                                -1, -1, -1, -1, -1,
                                -1, -1, -1, -1, -1};
@@ -70,6 +70,17 @@ public class PlayerStats : Items
                 return;
             }
         }
+    }
+    public float GetArmor()
+    {
+        for (int armorIndex = 0; armorIndex<armorLineup.Length; armorIndex++)
+        {
+            if (armorLineup[armorIndex] > 0)
+            {
+                armor += GetItemArmor(armorLineup[armorIndex]);
+            }
+        }
+        return (float)armor*mageArmorMultiplier;
     }
 
     //This function is intended to work with the 2D collider that detects when an item is attempted to be picked up. If it can fit it in the inventory it will pick up the item, otherwise it will leave it on the ground.

@@ -46,16 +46,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameItems: []
-  itemNames:
-  - Fireball
-  - Gold Coin
-  - Silver Coin
-  - Copper Coin
-  itemDamages:
-  - 1
-  - 0
-  - 0
-  - 0
+  itemLineup: 030000000500000006000000ffffffff
+  inventory: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+  inventoryStacks: 000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
 --- !u!61 &8037020697721803912
 BoxCollider2D:
   m_ObjectHideFlags: 0

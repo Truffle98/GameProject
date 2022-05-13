@@ -8,13 +8,13 @@ public class Mage : BaseClass
 {
     private float horizontalInput, verticalInput, maxHealth = baseHealth * 2, currentHealth, enemyDamage, maxMana = baseMana * 2, currentMana, angle, manaRegenerationSpeed;
     private Vector3 shootDirection;
-    private int cooldown = 0, item1, item2, itemType;
+    private int cooldown = 0, item1, item2, item3, itemType;
     private Rigidbody2D body;
     private Animator anim;
     private bool movingUp, movingDown;
     private PlayerStats playerStats;
     private Items itemsList;
-    private GameObject item1Object, item2Object, newMelee;
+    private GameObject item1Object, item2Object, item3Object, newMelee;
     public ManaBar manaBar;
     private EnemyProjectileScript enemyProjectileScript;
     private float mageArmorMultiplier = baseArmorMultiplier + 0.5f;
@@ -39,6 +39,8 @@ public class Mage : BaseClass
         item1Object = itemsList.GetItemObject(item1);
         item2 = playerStats.GetEquippedItem(1);
         item2Object = itemsList.GetItemObject(item2);
+        item3 = playerStats.GetEquippedItem(2);
+        item2Object = itemsList.GetItemObject(item3);
         //Right now we know that the second item is a melee item. However, in the future if we don't know what type an object is [melee, projectile, etc] we might need to
         //add another script to the item game object that returns the item type [GetItemTypeScript for example]
 
@@ -77,6 +79,12 @@ public class Mage : BaseClass
         if (item2>0)
         {
             item2Object = itemsList.GetItemObject(item2);
+        }
+
+        item3 = playerStats.GetEquippedItem(2);
+        if (item3>0)
+        {
+            item3Object = itemsList.GetItemObject(item3);
         }
 
         Attack();
@@ -126,34 +134,7 @@ public class Mage : BaseClass
         {
             if (playerStats.GetEquippedItem(0)>-1)
             {
-                if(currentMana>itemsList.GetManaCost(playerStats.GetEquippedItem(0)))
-                {
-                    itemType = itemsList.GetItemType(playerStats.GetEquippedItem(0));
-                    if (itemType==0)
-                    {
-                        //sets the sprite of the sword in mage as visable when you attack. the change in scale is messed up when you face one side vs the other
-                        shootDirection = Input.mousePosition;
-                        shootDirection.z = 0.0f;
-                        shootDirection = Camera.main.ScreenToWorldPoint(shootDirection);
-                        shootDirection = shootDirection-transform.position;
-                        shootDirection = shootDirection.normalized;
-                        angle = Mathf.Atan2(shootDirection.y, shootDirection.x) ;
-
-                        newMelee = Instantiate(item1Object, (new Vector3(Mathf.Cos(angle - 0.5f), Mathf.Sin(angle - 0.5f), 0) + transform.position), Quaternion.Euler(0, 0, Mathf.Rad2Deg * angle - 90));
-                        newMelee.transform.parent = gameObject.transform;
-                    }
-                    else if (itemType==1)
-                    {
-                        shootDirection = Input.mousePosition;
-                        shootDirection.z = 0.0f;
-                        shootDirection = Camera.main.ScreenToWorldPoint(shootDirection);
-                        shootDirection = shootDirection-transform.position;
-                        shootDirection = shootDirection.normalized;
-                        Instantiate(item1Object, (new Vector3(shootDirection.x, shootDirection.y, 0) + transform.position), Quaternion.Euler(new Vector3(0, 0, angle)));
-                    }
-                    cooldown = itemsList.GetCooldown(item1);
-                    currentMana -= itemsList.GetManaCost(item1);
-                }
+                UseItemInHotbar(0, item1, item1Object);
             }
         }
 
@@ -164,35 +145,21 @@ public class Mage : BaseClass
             {
                 if(currentMana>itemsList.GetManaCost(playerStats.GetEquippedItem(1)))
                 {
-                    itemType = itemsList.GetItemType(playerStats.GetEquippedItem(1));
-                    if (itemType==0)
-                    {
-                        //sets the sprite of the sword in mage as visable when you attack. the change in scale is messed up when you face one side vs the other
-                        shootDirection = Input.mousePosition;
-                        shootDirection.z = 0.0f;
-                        shootDirection = Camera.main.ScreenToWorldPoint(shootDirection);
-                        shootDirection = shootDirection-transform.position;
-                        shootDirection = shootDirection.normalized;
-                        angle = Mathf.Atan2(shootDirection.y, shootDirection.x);
-
-                        newMelee = Instantiate(item2Object, (new Vector3(Mathf.Cos(angle - 0.5f), Mathf.Sin(angle - 0.5f), 0) + transform.position), Quaternion.Euler(0, 0, Mathf.Rad2Deg * angle - 90));
-                        newMelee.transform.parent = gameObject.transform;
-                    }
-                    else if (itemType==1)
-                    {
-                        shootDirection = Input.mousePosition;
-                        shootDirection.z = 0.0f;
-                        shootDirection = Camera.main.ScreenToWorldPoint(shootDirection);
-                        shootDirection = shootDirection-transform.position;
-                        shootDirection = shootDirection.normalized;
-                        
-                        Instantiate(item2Object, (new Vector3(shootDirection.x, shootDirection.y, 0) + transform.position), Quaternion.Euler(new Vector3(0,0,0)));
-                    }
-                    //less cooldown than a spell
-                    cooldown = itemsList.GetCooldown(item2);
-                    currentMana -= itemsList.GetManaCost(item2);
+                    UseItemInHotbar(1, item2, item2Object);
                 }
             }
+        }
+
+        else if (Input.GetKeyDown(KeyCode.E) && cooldown == 0 && Time.timeScale == 1) {
+
+            if (playerStats.GetEquippedItem(2)>-1)
+            {
+                if(currentMana>itemsList.GetManaCost(playerStats.GetEquippedItem(2)))
+                {
+                    UseItemInHotbar(2, item3, item3Object);
+                }
+            }
+
         }
 
         if (currentMana<maxMana && Time.timeScale == 1) 
@@ -220,6 +187,34 @@ public class Mage : BaseClass
             if(currentHealth <= 0) {
                 Destroy(gameObject);
             }
+        }
+    }
+
+    void UseItemInHotbar(int itemSlot, int item, GameObject itemObject) {
+
+        if (currentMana > itemsList.GetManaCost(item)) {
+            itemType = itemsList.GetItemType(playerStats.GetEquippedItem(itemSlot));
+
+            shootDirection = Input.mousePosition;
+            shootDirection.z = 0.0f;
+            shootDirection = Camera.main.ScreenToWorldPoint(shootDirection);
+            shootDirection = shootDirection-transform.position;
+            shootDirection = shootDirection.normalized;
+            angle = Mathf.Atan2(shootDirection.y, shootDirection.x);
+
+            if (itemType == 0) {
+
+                newMelee = Instantiate(itemObject, (new Vector3(Mathf.Cos(angle - 0.5f), Mathf.Sin(angle - 0.5f), 0) + transform.position), Quaternion.Euler(0, 0, Mathf.Rad2Deg * angle - 90));
+                newMelee.transform.parent = gameObject.transform;
+
+            } else if (itemType == 1) {
+
+                Instantiate(itemObject, transform.position, Quaternion.Euler(0, 0, 0));
+
+            }
+
+            cooldown = itemsList.GetCooldown(item);
+            currentMana -= itemsList.GetManaCost(item);
         }
     }
 }

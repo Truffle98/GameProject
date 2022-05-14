@@ -88,12 +88,33 @@ public class PlayerStats : Items
         itemArmorType = GetItemArmorType(itemID);
         if (itemArmorType>=0)
         {
-            if (armorLineup[itemArmorType] == -1) {
-                armorLineup[itemArmorType] = itemID;
-                inventoryStacks[indexInInventory] -= 1;
-                Debug.Log($"Picked up {itemName} in armor slot {itemArmorType+1}");
-                inventory[indexInInventory] = -1;
-                return;
+            if (itemArmorType < 3)
+            {
+                if (armorLineup[itemArmorType] == -1) {
+                    armorLineup[itemArmorType] = itemID;
+                    inventoryStacks[indexInInventory] -= 1;
+                    Debug.Log($"Picked up {itemName} in armor slot {itemArmorType+1}");
+                    inventory[indexInInventory] = -1;
+                    return;
+                }
+            }
+            else
+            {
+                if (armorLineup[3] == -1) {
+                    armorLineup[3] = itemID;
+                    inventoryStacks[indexInInventory] -= 1;
+                    Debug.Log($"Picked up {itemName} in armor slot {itemArmorType+1}");
+                    inventory[indexInInventory] = -1;
+                    return;
+                }
+                else if (armorLineup[4] == -1)
+                {
+                    armorLineup[4] = itemID;
+                    inventoryStacks[indexInInventory] -= 1;
+                    Debug.Log($"Picked up {itemName} in armor slot {itemArmorType+1}");
+                    inventory[indexInInventory] = -1;
+                    return;
+                }
             }
         }
     }

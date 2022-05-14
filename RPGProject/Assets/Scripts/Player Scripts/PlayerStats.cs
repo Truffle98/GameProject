@@ -120,6 +120,7 @@ public class PlayerStats : Items
     }
     public float GetArmor()
     {
+        armor = 0;
         for (int armorIndex = 0; armorIndex<armorLineup.Length; armorIndex++)
         {
             if (armorLineup[armorIndex] > 0)
@@ -197,7 +198,7 @@ public class PlayerStats : Items
                     PutItemInInventory(itemID, other);
                     itemID = -1;
                 } else if (messageCooldown <= 0) {
-                    Debug.Log("inventory pickup failed, currently on cooldown");
+                    Debug.Log("Inventory pickup failed, currently on cooldown");
                     messageCooldown = 500;
                 }
             }

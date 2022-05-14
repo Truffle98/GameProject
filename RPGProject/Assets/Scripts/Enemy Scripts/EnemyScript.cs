@@ -9,9 +9,13 @@ public class EnemyScript : MonoBehaviour
     private GameObject player;
     public GameObject enemyProjectile;
     private float playerDamage, currentHealth, speed, AOEDamage;
-    private int timer = 0, cooldown, findNewLocationTimer, AOECooldown = 0;
+    private int timer = 0, cooldown, findNewLocationTimer, AOECooldown = 0, itemDrop = -1, itemDropChoice, itemBound = 0, startBound = 0;
+    private int[] scaledItemDropList = new int[100];
     private bool count = true, playerSpotted;
-    public int itemDrop = -1, cooldownMax, maxHealth = 100, movementPattern;
+    public int cooldownMax, maxHealth = 100, movementPattern;
+    //Drop list should contain item ids and item drop percentages list should contain the percentages in integer from (90 for 90% for example)
+    public int[] itemDropList;
+    public int[] itemDropPercentagesList;
     public float engageDistance, shootDistance, maxSpeed;
     private ProjectileScript projectileStats;
     private MeleeScript meleeWeaponStats;
@@ -168,7 +172,19 @@ public class EnemyScript : MonoBehaviour
         return;
     }
 
-    public void Die () {
+    public void Die ()
+    {
+        for (int index = 0; index < itemDropList.Length; index++)
+        {
+            itemBound = itemDropPercentagesList[index];
+            for (int index2 = startBound; index2 < itemBound+startBound; index2++)
+            {
+                scaledItemDropList[index2] = itemDropList[index];
+            }
+            startBound += itemBound;
+        }
+        itemDropChoice = Random.Range(0, 100);
+        itemDrop = scaledItemDropList[itemDropChoice];
 
         Instantiate(itemsList.GetItemObject(itemDrop), transform.position, new Quaternion(0, 0, 0, 0));
         Destroy(gameObject);
@@ -183,6 +199,5 @@ public class EnemyScript : MonoBehaviour
         if(currentHealth <= 0) {
             Die();
         }
-
     }
 }

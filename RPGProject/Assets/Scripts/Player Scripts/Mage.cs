@@ -195,6 +195,7 @@ public class Mage : BaseClass
         //On collision with something, it checks if its a projectile. If it is, then it gets the damage from the projectile's script
         if(other.gameObject.CompareTag("Enemy Projectile")) {
             enemyProjectileScript = other.GetComponent<EnemyProjectileScript>();
+
             enemyDamage = enemyProjectileScript.GetProjectileDamage() - playerStats.GetArmor();
             Destroy(other.gameObject);
             currentHealth -= enemyDamage;

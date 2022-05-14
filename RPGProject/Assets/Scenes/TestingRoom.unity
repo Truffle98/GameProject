@@ -404,6 +404,30 @@ PrefabInstance:
       propertyPath: healthBar
       value: 
       objectReference: {fileID: 224626985}
+    - target: {fileID: 515296463042163576, guid: a9d666e75dc7d06408dda37a0cf159cc, type: 3}
+      propertyPath: itemDropList.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 515296463042163576, guid: a9d666e75dc7d06408dda37a0cf159cc, type: 3}
+      propertyPath: itemDropList.Array.data[0]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 515296463042163576, guid: a9d666e75dc7d06408dda37a0cf159cc, type: 3}
+      propertyPath: itemDropList.Array.data[1]
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 515296463042163576, guid: a9d666e75dc7d06408dda37a0cf159cc, type: 3}
+      propertyPath: itemDropPercentagesList.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 515296463042163576, guid: a9d666e75dc7d06408dda37a0cf159cc, type: 3}
+      propertyPath: itemDropPercentagesList.Array.data[0]
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 515296463042163576, guid: a9d666e75dc7d06408dda37a0cf159cc, type: 3}
+      propertyPath: itemDropPercentagesList.Array.data[1]
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 515296463356888526, guid: a9d666e75dc7d06408dda37a0cf159cc, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -465,6 +489,7 @@ MonoBehaviour:
   - {fileID: 4677624160778609120, guid: 11508ab3e1b359a4cb7452f3dccaa6cf, type: 3}
   - {fileID: 6410972012924807927, guid: eb5d60e6bac349e4a8d7e5b46c9bbeb6, type: 3}
   - {fileID: 2361279735733584543, guid: bf764f1e8b0a1424fbf0effc0392de24, type: 3}
+  - {fileID: 1892823183401524243, guid: adf0530e40c6ad2419cbce9f9c4ad737, type: 3}
 --- !u!4 &682062857
 Transform:
   m_ObjectHideFlags: 0
@@ -746,6 +771,30 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 515296463042163576, guid: a9d666e75dc7d06408dda37a0cf159cc, type: 3}
+      propertyPath: itemDropList.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 515296463042163576, guid: a9d666e75dc7d06408dda37a0cf159cc, type: 3}
+      propertyPath: itemDropList.Array.data[0]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 515296463042163576, guid: a9d666e75dc7d06408dda37a0cf159cc, type: 3}
+      propertyPath: itemDropList.Array.data[1]
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 515296463042163576, guid: a9d666e75dc7d06408dda37a0cf159cc, type: 3}
+      propertyPath: itemDropPercentagesList.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 515296463042163576, guid: a9d666e75dc7d06408dda37a0cf159cc, type: 3}
+      propertyPath: itemDropPercentagesList.Array.data[0]
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 515296463042163576, guid: a9d666e75dc7d06408dda37a0cf159cc, type: 3}
+      propertyPath: itemDropPercentagesList.Array.data[1]
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 6109957574712166607, guid: a9d666e75dc7d06408dda37a0cf159cc, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -996,6 +1045,38 @@ PrefabInstance:
       propertyPath: healthBar
       value: 
       objectReference: {fileID: 1765317849}
+    - target: {fileID: 515296463042163576, guid: a9d666e75dc7d06408dda37a0cf159cc, type: 3}
+      propertyPath: itemDropList.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 515296463042163576, guid: a9d666e75dc7d06408dda37a0cf159cc, type: 3}
+      propertyPath: itemDropList.Array.data[0]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 515296463042163576, guid: a9d666e75dc7d06408dda37a0cf159cc, type: 3}
+      propertyPath: itemDropList.Array.data[1]
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 515296463042163576, guid: a9d666e75dc7d06408dda37a0cf159cc, type: 3}
+      propertyPath: itemDropList.Array.data[2]
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 515296463042163576, guid: a9d666e75dc7d06408dda37a0cf159cc, type: 3}
+      propertyPath: itemDropPercentagesList.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 515296463042163576, guid: a9d666e75dc7d06408dda37a0cf159cc, type: 3}
+      propertyPath: itemDropPercentagesList.Array.data[0]
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 515296463042163576, guid: a9d666e75dc7d06408dda37a0cf159cc, type: 3}
+      propertyPath: itemDropPercentagesList.Array.data[1]
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 515296463042163576, guid: a9d666e75dc7d06408dda37a0cf159cc, type: 3}
+      propertyPath: itemDropPercentagesList.Array.data[2]
+      value: 40
+      objectReference: {fileID: 0}
     - target: {fileID: 515296463356888526, guid: a9d666e75dc7d06408dda37a0cf159cc, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -1411,6 +1492,30 @@ PrefabInstance:
       propertyPath: healthBar
       value: 
       objectReference: {fileID: 293922254}
+    - target: {fileID: 515296463042163576, guid: a9d666e75dc7d06408dda37a0cf159cc, type: 3}
+      propertyPath: itemDropList.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 515296463042163576, guid: a9d666e75dc7d06408dda37a0cf159cc, type: 3}
+      propertyPath: itemDropList.Array.data[0]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 515296463042163576, guid: a9d666e75dc7d06408dda37a0cf159cc, type: 3}
+      propertyPath: itemDropList.Array.data[1]
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 515296463042163576, guid: a9d666e75dc7d06408dda37a0cf159cc, type: 3}
+      propertyPath: itemDropPercentagesList.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 515296463042163576, guid: a9d666e75dc7d06408dda37a0cf159cc, type: 3}
+      propertyPath: itemDropPercentagesList.Array.data[0]
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 515296463042163576, guid: a9d666e75dc7d06408dda37a0cf159cc, type: 3}
+      propertyPath: itemDropPercentagesList.Array.data[1]
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 515296463356888526, guid: a9d666e75dc7d06408dda37a0cf159cc, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -2147,6 +2252,30 @@ PrefabInstance:
       propertyPath: healthBar
       value: 
       objectReference: {fileID: 2055119066}
+    - target: {fileID: 515296463042163576, guid: a9d666e75dc7d06408dda37a0cf159cc, type: 3}
+      propertyPath: itemDropList.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 515296463042163576, guid: a9d666e75dc7d06408dda37a0cf159cc, type: 3}
+      propertyPath: itemDropList.Array.data[0]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 515296463042163576, guid: a9d666e75dc7d06408dda37a0cf159cc, type: 3}
+      propertyPath: itemDropList.Array.data[1]
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 515296463042163576, guid: a9d666e75dc7d06408dda37a0cf159cc, type: 3}
+      propertyPath: itemDropPercentagesList.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 515296463042163576, guid: a9d666e75dc7d06408dda37a0cf159cc, type: 3}
+      propertyPath: itemDropPercentagesList.Array.data[0]
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 515296463042163576, guid: a9d666e75dc7d06408dda37a0cf159cc, type: 3}
+      propertyPath: itemDropPercentagesList.Array.data[1]
+      value: 90
+      objectReference: {fileID: 0}
     - target: {fileID: 515296463356888526, guid: a9d666e75dc7d06408dda37a0cf159cc, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0

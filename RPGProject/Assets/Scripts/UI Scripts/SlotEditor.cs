@@ -9,8 +9,8 @@ public class SlotEditor : MonoBehaviour
     public Button botton;
     public Sprite spotHolder;
     public int inventoryIndex;
-    private int cooldown = 0, itemID;
-    private float damage;
+    private int cooldown = 0, itemID, armorType;
+    private float damage, armor;
     private string stackNum;
     private Image img;
     private PlayerStats playerStats;
@@ -23,6 +23,8 @@ public class SlotEditor : MonoBehaviour
         img.sprite = itemSprite;
         itemID = ID;
         damage = items.GetItemDamage(itemID);
+        armor = items.GetItemArmor(itemID);
+        armorType = items.GetItemArmorType(itemID);
     }
 
     void Start()
@@ -41,6 +43,16 @@ public class SlotEditor : MonoBehaviour
                 playerStats.switchItemToHotBar(inventoryIndex, itemID);
                 cooldown = 50;
 
+                stackNum = playerStats.GetItemStack(inventoryIndex).ToString();
+                textEditor = textMeshPro.GetComponent<textEditorScript>();
+                textEditor.ChangeStackNumber(null);
+            }
+
+            else if (img.enabled == true && cooldown==0 && damage<=0 && armor>0){
+                img.enabled = false;
+                playerStats.SwitchItemToArmorEquip(inventoryIndex, itemID);
+                cooldown = 50;
+                
                 stackNum = playerStats.GetItemStack(inventoryIndex).ToString();
                 textEditor = textMeshPro.GetComponent<textEditorScript>();
                 textEditor.ChangeStackNumber(null);

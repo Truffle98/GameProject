@@ -7,13 +7,13 @@ public class PlayerStats : Items
     private ItemID itemIDClass;
     private MenuTest menuTest;
     private float damage, armor = 0, mageArmorMultiplier = 1.5f;
-    private int decision, itemID;
+    private int decision, itemID, itemArmorType;
     private string itemName;
 
     //Lists for four usable items [id] in your 'item lineup,' items [id] in armor lineup, and all items [id] in inventory
     //Indexes 0 and 1 are reserved for 'on-hand' [left-click] and 'off-hand' [right-click] items. Index 0 is therefore 'fireball' on mage class
     public int[] itemLineup = { 3, 5, 6, -1};
-    private int[] armorLineup = { -1, -1, -1, -1 };
+    public int[] armorLineup = { -1, -1, -1, -1, -1 };
     public int[] inventory = {-1, -1, -1, -1, -1,
                                -1, -1, -1, -1, -1,
                                -1, -1, -1, -1, -1};
@@ -30,6 +30,10 @@ public class PlayerStats : Items
     public int GetItemInInventory(int indexInInventory){
         return inventory[indexInInventory];
     }
+    public int GetItemInArmorLineup(int indexInArmorLineup)
+    {
+        return armorLineup[indexInArmorLineup];
+    }
     public int GetCoinStack(int coinType)
     {
         return coinPurse[coinType];
@@ -43,7 +47,7 @@ public class PlayerStats : Items
     {
         return inventoryStacks[indexInInventory];
     }
-    public void switchItemToInventory(int indexInItemLineup, int itemID)
+    public void switchItemToInventory(int index, int itemID, string fromWhere)
     {
         itemName = itemNames[itemID];
         for (int i = 0; i < inventory.Length; i++) 
@@ -52,7 +56,14 @@ public class PlayerStats : Items
                 inventory[i] = itemID;
                 inventoryStacks[i] = 1;
                 Debug.Log($"Picked up {itemName} in new spot {i+1}");
-                itemLineup[indexInItemLineup] = -1;
+                if (fromWhere == "hot bar")
+                {
+                    itemLineup[index] = -1;
+                }
+                else if (fromWhere == "armor")
+                {
+                    armorLineup[index] = -1;
+                }
                 return;
             }
         }
@@ -66,6 +77,21 @@ public class PlayerStats : Items
                 itemLineup[i] = itemID;
                 inventoryStacks[indexInInventory] -= 1;
                 Debug.Log($"Picked up {itemName} in hot bar slot {i+1}");
+                inventory[indexInInventory] = -1;
+                return;
+            }
+        }
+    }
+    public void SwitchItemToArmorEquip(int indexInInventory, int itemID)
+    {
+        itemName = itemNames[itemID];
+        itemArmorType = GetItemArmorType(itemID);
+        if (itemArmorType>=0)
+        {
+            if (armorLineup[itemArmorType] == -1) {
+                armorLineup[itemArmorType] = itemID;
+                inventoryStacks[indexInInventory] -= 1;
+                Debug.Log($"Picked up {itemName} in armor slot {itemArmorType+1}");
                 inventory[indexInInventory] = -1;
                 return;
             }

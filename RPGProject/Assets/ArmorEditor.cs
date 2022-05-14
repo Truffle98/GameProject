@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HotBarEditor : MonoBehaviour
+public class ArmorEditor : MonoBehaviour
 {
     public Button button;
     public Sprite spotHolder;
-    public int hotBarSlot;
+    public int armorEquipSlot;
     private int itemID, cooldown = 0;
     private PlayerStats playerStats;
     private Image img;
@@ -15,10 +15,6 @@ public class HotBarEditor : MonoBehaviour
     public void SetSprite(Sprite itemSprite, int ID){
         img.sprite = itemSprite;
         itemID = ID;
-    }
-
-    public string getHotBarSprite() {
-        return img.sprite.name;
     }
 
     void Start()
@@ -34,7 +30,7 @@ public class HotBarEditor : MonoBehaviour
         {
             if (img.sprite.name != spotHolder.name && cooldown==0){
                 img.sprite = spotHolder;
-                playerStats.switchItemToInventory(hotBarSlot, itemID, "hot bar");
+                playerStats.switchItemToInventory(armorEquipSlot, itemID, "armor");
                 cooldown = 50;
             }
         });
@@ -44,5 +40,4 @@ public class HotBarEditor : MonoBehaviour
             cooldown--;
         }
     }
-
 }

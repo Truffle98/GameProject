@@ -8,7 +8,7 @@ public class Mage : BaseClass
 {
     private float horizontalInput, verticalInput, maxHealth = baseHealth * 2, currentHealth, enemyDamage, maxMana = baseMana * 2, currentMana, angle, manaRegenerationSpeed;
     private Vector3 shootDirection;
-    private int cooldown = 0, item1, item2, item3, itemType;
+    private int cooldown = 0, item1, item2, item3, item4, itemType;
     private Rigidbody2D body;
     private Animator anim;
     private bool movingUp, movingDown, inventoryOrArmorEquipOpen;
@@ -16,7 +16,7 @@ public class Mage : BaseClass
     private InventoryOpener inventoryOpener;
     private ArmorEquipOpener armorEquipOpener;
     private Items itemsList;
-    private GameObject item1Object, item2Object, item3Object, newMelee;
+    private GameObject item1Object, item2Object, item3Object, item4Object, newMelee, newProjectile;
     public ManaBar manaBar;
     private EnemyProjectileScript enemyProjectileScript;
     private float mageArmorMultiplier = baseArmorMultiplier + 0.5f;
@@ -53,6 +53,8 @@ public class Mage : BaseClass
         item2Object = itemsList.GetItemObject(item2);
         item3 = playerStats.GetEquippedItem(2);
         item2Object = itemsList.GetItemObject(item3);
+        item3 = playerStats.GetEquippedItem(3);
+        item2Object = itemsList.GetItemObject(item4);
         //Right now we know that the second item is a melee item. However, in the future if we don't know what type an object is [melee, projectile, etc] we might need to
         //add another script to the item game object that returns the item type [GetItemTypeScript for example]
 
@@ -99,6 +101,12 @@ public class Mage : BaseClass
         if (item3>0)
         {
             item3Object = itemsList.GetItemObject(item3);
+        }
+
+        item4 = playerStats.GetEquippedItem(3);
+        if (item4>0)
+        {
+            item4Object = itemsList.GetItemObject(item4);
         }
 
         if (!inventoryOrArmorEquipOpen)
@@ -167,13 +175,25 @@ public class Mage : BaseClass
             }
         }
 
-        else if (Input.GetKeyDown(KeyCode.E) && cooldown == 0 && Time.timeScale == 1) {
+        else if (Input.GetKeyDown(KeyCode.Q) && cooldown == 0 && Time.timeScale == 1) {
 
             if (playerStats.GetEquippedItem(2)>-1)
             {
                 if(currentMana>itemsList.GetManaCost(playerStats.GetEquippedItem(2)))
                 {
                     UseItemInHotbar(2, item3, item3Object);
+                }
+            }
+
+        }
+
+        else if (Input.GetKeyDown(KeyCode.E) && cooldown == 0 && Time.timeScale == 1) {
+
+            if (playerStats.GetEquippedItem(3)>-1)
+            {
+                if(currentMana>itemsList.GetManaCost(playerStats.GetEquippedItem(3)))
+                {
+                    UseItemInHotbar(3, item4, item4Object);
                 }
             }
 
@@ -227,7 +247,8 @@ public class Mage : BaseClass
 
             } else if (itemType == 1) {
 
-                Instantiate(itemObject, transform.position, Quaternion.Euler(0, 0, 0));
+                newProjectile = Instantiate(itemObject, (new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0) + transform.position), Quaternion.Euler(0, 0, 0));
+                newProjectile.GetComponent<ProjectileScript>().angle = angle;
 
             }
 

@@ -124,10 +124,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyProjectile: {fileID: 3246578418983402623, guid: 99755d472385ae442a71a0cf5adde0a2, type: 3}
-  itemDrop: 0
   cooldownMax: 500
   maxHealth: 200
   movementPattern: 0
+  itemDropList: 
+  itemDropPercentagesList: 
   engageDistance: 8
   shootDistance: 4
   maxSpeed: 2

@@ -23,6 +23,14 @@ public class Mage : BaseClass
 
     public HealthBar1 healthbar;
 
+    public void Heal (float healthHealed) {
+        currentHealth += healthHealed;
+        if (currentHealth > maxHealth) {
+            currentHealth = maxHealth;
+        }
+        healthbar.SetHealth(currentHealth);
+    }
+
     public float GetMaxMana()
     {
         return maxMana;

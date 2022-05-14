@@ -58,14 +58,14 @@ public class FireballScript : MonoBehaviour
 
     void CreateFragments() {
 
-        newFragment = Instantiate(fragment, transform.position, Quaternion.Euler(0, 0, angle));
+        newFragment = Instantiate(fragment, transform.position, Quaternion.Euler(0, 0, 0));
         newFragment.GetComponent<SplittingScript>().angle = angle;
         newFragment.GetComponent<SplittingScript>().speed = speed;
         //newFragment.GetComponent<Rigidbody2D>().velocity = new Vector3 (Mathf.Cos(angle), Mathf.Sin(angle), 0) * speed;
-        newFragment = Instantiate(fragment, transform.position, Quaternion.Euler(0, 0, angle));
+        newFragment = Instantiate(fragment, transform.position, Quaternion.Euler(0, 0, 0));
         newFragment.GetComponent<SplittingScript>().angle = angle - 0.5f;
         newFragment.GetComponent<SplittingScript>().speed = speed;
-        newFragment = Instantiate(fragment, transform.position, Quaternion.Euler(0, 0, angle));
+        newFragment = Instantiate(fragment, transform.position, Quaternion.Euler(0, 0, 0));
         newFragment.GetComponent<SplittingScript>().angle = angle + 0.5f;
         newFragment.GetComponent<SplittingScript>().speed = speed;
 

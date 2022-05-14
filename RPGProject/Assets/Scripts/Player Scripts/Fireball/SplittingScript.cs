@@ -6,17 +6,21 @@ public class SplittingScript : MonoBehaviour
 {
     public float angle, speed;
     private Vector3 shootDirection;
-
-    void Start() {
-        shootDirection = new Vector3 (Mathf.Cos(angle), Mathf.Sin(angle), 0);
-        //transform.rotation = Quaternion.Euler(0, 0, angle * Mathf.Rad2Deg - 90);
-        //gameObject.GetComponent<Rigidbody2D>().velocity = shootDirection * speed * Time.deltaTime;
+    private bool moving = false;
+    void Update() {
+        if (moving == false) {
+            shootDirection = new Vector3 (Mathf.Cos(angle), Mathf.Sin(angle), 0);
+            transform.rotation = Quaternion.Euler(0, 0, angle * Mathf.Rad2Deg - 90);
+            GetComponent<Rigidbody2D>().velocity = shootDirection * speed;
+            moving = true;
+        }
+        
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    /*void FixedUpdate()
     {
-        transform.Translate(shootDirection * speed * Time.deltaTime);
-    }
+        //transform.Translate(shootDirection * speed * Time.deltaTime);
+    }*/
 
 }

@@ -142,6 +142,7 @@ MonoBehaviour:
   lifespan: 120
   pool: {fileID: 1469419879682237118, guid: d2be5c24072bea74891a8655b3c2f829, type: 3}
   fragment: {fileID: 9148316516442614957, guid: c7a5cbac7bacce449b5e7ab5960080c0, type: 3}
+  fire: {fileID: 3406261853151207625, guid: e0a1535ca7a1df4429ef9680445d6247, type: 3}
 --- !u!58 &5080568149793036269
 CircleCollider2D:
   m_ObjectHideFlags: 0

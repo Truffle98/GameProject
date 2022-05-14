@@ -6,10 +6,10 @@ public class FireballScript : MonoBehaviour
 {
     public int lifespan;
     private float angle, speed;
-    private int variation = 2, itemID = 3, count = 0;
+    private int variation = 0, itemID = 3, count = 0;
     //private PlayerStats playerStats;
-    public GameObject pool, fragment;
-    private GameObject newFragment;
+    public GameObject pool, fragment, fire;
+    private GameObject newFragment, newFire;
     
     // Start is called before the first frame update
     void Start()
@@ -28,11 +28,17 @@ public class FireballScript : MonoBehaviour
         }
         if (count >= lifespan) {
 
-            if (variation == 2 && count >= lifespan / 2) {
+            if (variation == 0)
+            {
+                newFire = Instantiate(fire.transform.GetChild(0).gameObject, transform.position, new Quaternion(0, 0, 0, 0));
+                Destroy(newFire, 10);
+            }
+
+            else if (variation == 2 && count >= lifespan / 2) {
                 CreateFragments();
             }
 
-            if (variation == 1) {
+            else if (variation == 1) {
                 Instantiate(pool, transform.position, new Quaternion(0, 0, 0, 0));
             }
             
@@ -44,7 +50,12 @@ public class FireballScript : MonoBehaviour
 
         if(other.gameObject.CompareTag("Wall") || other.gameObject.CompareTag("Enemy") ) {
             
-            if (variation == 1) {
+            if (variation == 0)
+            {
+                newFire = Instantiate(fire.transform.GetChild(0).gameObject, transform.position, new Quaternion(0, 0, 0, 0));
+                Destroy(newFire, 10);
+            }
+            else if (variation == 1) {
                 Instantiate(pool, transform.position, new Quaternion(0, 0, 0, 0));
             }
             if (other.gameObject.CompareTag("Wall")) {

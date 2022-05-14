@@ -312,7 +312,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: be13312a52d2f1248b602ab17464f85d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5a96fa8feb4566d45b36801b857d683e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -900,7 +900,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 34fee932bb3815646b1ed0891993bdfc, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f188ede98262665499be19d0528a53d6, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1644,8 +1644,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   coinStacks:
   - {fileID: 3536769795581475697}
-  - {fileID: 4181748949443767523}
   - {fileID: 2538522999147717273}
+  - {fileID: 4181748949443767523}
 --- !u!1 &5299319294921610895
 GameObject:
   m_ObjectHideFlags: 0
@@ -1878,7 +1878,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: d6992817042f30443a19523109eaa03c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f71bbd70e00fe1e4997fc886ee410eb0, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2602,6 +2602,32 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1898754722440032962, guid: 0a651968f6cb6da4db9415bc5d305698, type: 3}
   m_PrefabInstance: {fileID: 79969720788562120}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &5898553331507094425 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5820835488387224401, guid: 0a651968f6cb6da4db9415bc5d305698, type: 3}
+  m_PrefabInstance: {fileID: 79969720788562120}
+  m_PrefabAsset: {fileID: 0}
+--- !u!50 &5589800547990861488
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5898553331507094425}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1001 &850790659897125524
 PrefabInstance:
   m_ObjectHideFlags: 0

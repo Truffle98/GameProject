@@ -9,7 +9,7 @@ public class Items : BaseClass
     //Indices inside the imbeded array represent (-1 value = nothing): 0:damage, 1:stack max, 2:mana, 3:cooldown, 4:item type (-1 = not weapon, 0 = melee, 1 = ranged), 5: special effects (for abilities),
     //7: armor type, 6: armor value
     protected int[,] itemStats = new int[7, 8] { {0,0,0,0,-1,0,-1,0}, {0,100,0,0,-1,0,-1,0}, {0,100,0,0,-1,0, -1,0}, {10,1,20,100,1,0,-1,0}, {0,10,0,0,-1,0,-1,0}, 
-                                                {5,1,0,50,0,0,-1,0}, {8,1,0,75,1,0,-1,0}};
+                                                {5,1,0,50,0,0,-1,0}, {5,1,25,125,1,0,-1,0}};
 
     public float GetItemDamage(int itemID)
     {

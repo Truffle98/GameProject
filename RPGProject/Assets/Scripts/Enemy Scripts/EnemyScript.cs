@@ -8,7 +8,7 @@ public class EnemyScript : MonoBehaviour
     private PlayerStats playerStats;
     private GameObject player;
     public GameObject enemyProjectile;
-    private float playerDamage, currentHealth, speed;
+    private float playerDamage, currentHealth, speed, AOEDamage;
     private int timer = 0, cooldown, findNewLocationTimer, AOECooldown = 0;
     private bool count = true, playerSpotted;
     public int itemDrop = -1, cooldownMax, maxHealth = 100, movementPattern;
@@ -104,23 +104,14 @@ public class EnemyScript : MonoBehaviour
             projectileStats = other.GetComponent<ProjectileScript>();
             playerDamage = projectileStats.GetProjectileDamage();
             Destroy(other.gameObject);
-            currentHealth -= playerDamage;
-            healthBar.SetHealth(currentHealth);
-
-            if(currentHealth <= 0) {
-                Die();
-            }
+            TakeDamage(playerDamage);
         }
         else if (other.gameObject.CompareTag("Sword"))
         {
             meleeWeaponStats = other.GetComponent<MeleeScript>();
             playerDamage = meleeWeaponStats.GetDamage();
-            currentHealth -= playerDamage;
-            healthBar.SetHealth(currentHealth);
-
-            if(currentHealth <= 0) {
-                Die();
-            }
+            Destroy(other.gameObject);
+            TakeDamage(playerDamage);
         }
     }
 
@@ -131,20 +122,15 @@ public class EnemyScript : MonoBehaviour
             if (AOECooldown <= 0) {
 
                 AOEScript = other.GetComponent<AOEScript>();
-                currentHealth -= AOEScript.GetAOEDamage();
-                healthBar.SetHealth(currentHealth);
-
-                if(currentHealth <= 0) {
-                    Die();
-                }
-
+                AOEDamage = AOEScript.GetAOEDamage();
+                TakeDamage(AOEDamage);
                 AOECooldown = 175;
 
             }
         }
     }
 
-    void MovementDirection(bool spotted) {
+    private void MovementDirection(bool spotted) {
         
         if (spotted == true) {
             direction = player.transform.position - transform.position;
@@ -164,14 +150,14 @@ public class EnemyScript : MonoBehaviour
 
     }
 
-    void MoveCharacter (Vector2 direction) {
+    private void MoveCharacter (Vector2 direction) {
 
         rb.MovePosition((Vector2)transform.position + (direction * maxSpeed * Time.deltaTime));
         return;
 
     }
 
-    void ShootPlayer () {
+    private void ShootPlayer () {
         shootDirection = player.transform.position;
         shootDirection.z = 0.0f;
         shootDirection = shootDirection-transform.position;
@@ -182,10 +168,21 @@ public class EnemyScript : MonoBehaviour
         return;
     }
 
-    void Die () {
+    public void Die () {
 
         Instantiate(itemsList.GetItemObject(itemDrop), transform.position, new Quaternion(0, 0, 0, 0));
         Destroy(gameObject);
+
+    }
+
+    public void TakeDamage(float damageTaken) {
+
+        currentHealth -= playerDamage;
+        healthBar.SetHealth(currentHealth);
+
+        if(currentHealth <= 0) {
+            Die();
+        }
 
     }
 }

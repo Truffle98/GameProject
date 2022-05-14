@@ -28,7 +28,8 @@ public class ArmorEditor : MonoBehaviour
     {
         gameObject.GetComponent<Button>().onClick.AddListener( () => 
         {
-            if (img.sprite.name != spotHolder.name && cooldown==0){
+            if (img.sprite.name != spotHolder.name && cooldown==0)
+            {
                 img.sprite = spotHolder;
                 playerStats.switchItemToInventory(armorEquipSlot, itemID, "armor");
                 cooldown = 50;

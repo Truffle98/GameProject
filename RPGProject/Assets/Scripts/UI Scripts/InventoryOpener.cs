@@ -33,4 +33,8 @@ public class InventoryOpener : MonoBehaviour
             inventory.SetActive(false);
         }
     }
+    public bool InventoryOpenState()
+    {
+        return isOpen;
+    }
 }

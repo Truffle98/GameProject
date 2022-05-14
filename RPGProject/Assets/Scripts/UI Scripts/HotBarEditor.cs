@@ -10,7 +10,9 @@ public class HotBarEditor : MonoBehaviour
     public int hotBarSlot;
     private int itemID, cooldown = 0;
     private PlayerStats playerStats;
+    private InventoryOpener inventoryOpener;
     private Image img;
+    private bool inventoryIsOpen = false;
 
     public void SetSprite(Sprite itemSprite, int ID){
         img.sprite = itemSprite;
@@ -26,13 +28,15 @@ public class HotBarEditor : MonoBehaviour
         img = gameObject.GetComponent<Image>();
         img.enabled = true;
         playerStats = GameObject.Find("Player Stats").GetComponent<PlayerStats>();
+        inventoryOpener = GameObject.Find("InventoryOpener").GetComponent<InventoryOpener>();
     }
 
     void Update()
     {
+        inventoryIsOpen = inventoryOpener.InventoryOpenState();
         gameObject.GetComponent<Button>().onClick.AddListener( () => 
         {
-            if (img.sprite.name != spotHolder.name && cooldown==0){
+            if (img.sprite.name != spotHolder.name && cooldown==0 && inventoryIsOpen){
                 img.sprite = spotHolder;
                 playerStats.switchItemToInventory(hotBarSlot, itemID, "hot bar");
                 cooldown = 50;

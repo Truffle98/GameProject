@@ -11,8 +11,10 @@ public class Mage : BaseClass
     private int cooldown = 0, item1, item2, item3, itemType;
     private Rigidbody2D body;
     private Animator anim;
-    private bool movingUp, movingDown;
+    private bool movingUp, movingDown, inventoryOrArmorEquipOpen;
     private PlayerStats playerStats;
+    private InventoryOpener inventoryOpener;
+    private ArmorEquipOpener armorEquipOpener;
     private Items itemsList;
     private GameObject item1Object, item2Object, item3Object, newMelee;
     public ManaBar manaBar;
@@ -34,6 +36,8 @@ public class Mage : BaseClass
 
         playerStats = GameObject.Find("Player Stats").GetComponent<PlayerStats>();
         itemsList = GameObject.Find("ItemObjectList").GetComponent<Items>();
+        inventoryOpener = GameObject.Find("InventoryOpener").GetComponent<InventoryOpener>();
+        armorEquipOpener = GameObject.Find("Armor Equip Opener").GetComponent<ArmorEquipOpener>();
 
         item1 = playerStats.GetEquippedItem(0);
         item1Object = itemsList.GetItemObject(item1);
@@ -55,6 +59,8 @@ public class Mage : BaseClass
     //Runs every frame
     private void Update()
     {
+        inventoryOrArmorEquipOpen = inventoryOpener.InventoryOpenState() || armorEquipOpener.ArmorEquipOpenState();
+
         horizontalInput = Input.GetAxis("Horizontal");
         verticalInput = Input.GetAxis("Vertical");
 
@@ -87,7 +93,10 @@ public class Mage : BaseClass
             item3Object = itemsList.GetItemObject(item3);
         }
 
-        Attack();
+        if (!inventoryOrArmorEquipOpen)
+        {
+            Attack();
+        }
     }
 
     public float GetArmorMultiplier()

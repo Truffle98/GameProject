@@ -37,4 +37,9 @@ public class ArmorEquipOpener : MonoBehaviour
             armorParent.SetActive(false);
         }
     }
+
+    public bool ArmorEquipOpenState()
+    {
+        return isOpen;
+    }
 }

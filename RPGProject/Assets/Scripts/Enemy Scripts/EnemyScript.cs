@@ -99,6 +99,8 @@ public class EnemyScript : MonoBehaviour
         } else if (Time.timeScale == 1) {
             MoveCharacter(movement);
         }
+
+        transform.position = new Vector3 (transform.position.x, transform.position.y, 0);
     }
 
     void OnTriggerEnter2D(Collider2D other) {
@@ -142,7 +144,7 @@ public class EnemyScript : MonoBehaviour
         } else if (findNewLocationTimer <= 0) {
             direction = new Vector3(Random.Range(-10.0f, 10.0f), Random.Range(-10.0f, 10.0f), 0);
             speed = maxSpeed/2;
-            findNewLocationTimer = 500;
+            findNewLocationTimer = 100;
         }
         /*if (shouldRotate = true) {
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;

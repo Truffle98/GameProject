@@ -17,14 +17,6 @@ public class ProjectileScript : MonoBehaviour
     {
         //Determines direction of fireball and sets lifespan
 
-        shootDirection = Input.mousePosition;
-        shootDirection.z = 0.0f;
-        shootDirection = Camera.main.ScreenToWorldPoint(shootDirection);
-        shootDirection = shootDirection-transform.position;
-        shootDirection.z = 0.0f;
-        shootDirection = shootDirection.normalized;
-        angle = Mathf.Atan2(shootDirection.y, shootDirection.x);
-
         transform.rotation = Quaternion.Euler(0, 0, angle * Mathf.Rad2Deg - 90);
         shootDirection = new Vector3 (Mathf.Cos(angle), Mathf.Sin(angle), 0);
         GetComponent<Rigidbody2D>().velocity = shootDirection * speed;

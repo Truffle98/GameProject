@@ -9,7 +9,7 @@ public class Mage : BaseClass
     private float horizontalInput, verticalInput, maxHealth = baseHealth * 2, currentHealth, enemyDamage, maxMana = baseMana * 2, currentMana, angle, manaRegenerationSpeed;
     private Vector3 shootDirection;
     private int cooldown = 0, item1, item2, item3, item4, itemType;
-    private Rigidbody2D body;
+    public Rigidbody2D body;
     private Animator anim;
     private bool movingUp, movingDown, inventoryOrArmorEquipOpen;
     private PlayerStats playerStats;
@@ -18,6 +18,7 @@ public class Mage : BaseClass
     private Items itemsList;
     private GameObject item1Object, item2Object, item3Object, item4Object, newMelee, newProjectile;
     public ManaBar manaBar;
+    public bool dashing = false;
     private EnemyProjectileScript enemyProjectileScript;
     private float mageArmorMultiplier = baseArmorMultiplier + 0.5f;
 
@@ -71,19 +72,21 @@ public class Mage : BaseClass
     {
         inventoryOrArmorEquipOpen = inventoryOpener.InventoryOpenState() || armorEquipOpener.ArmorEquipOpenState();
 
-        horizontalInput = Input.GetAxis("Horizontal");
-        verticalInput = Input.GetAxis("Vertical");
+        if (!dashing) {
+            horizontalInput = Input.GetAxis("Horizontal");
+            verticalInput = Input.GetAxis("Vertical");
 
-        //Sets character velocity
-        body.velocity = new Vector2(horizontalInput * baseSpeed, verticalInput * baseSpeed);
+            //Sets character velocity
+            body.velocity = new Vector2(horizontalInput * baseSpeed, verticalInput * baseSpeed);
 
-        //Flips sprites and helps facilitate sprite transitions
-        changeSprite(horizontalInput, verticalInput);
+            //Flips sprites and helps facilitate sprite transitions
+            changeSprite(horizontalInput, verticalInput);
 
-        //Set animator parameters
-        anim.SetBool("Running", horizontalInput != 0);
-        anim.SetBool("UpRunning", movingUp);
-        anim.SetBool("DownRunning", movingDown);
+            //Set animator parameters
+            anim.SetBool("Running", horizontalInput != 0);
+            anim.SetBool("UpRunning", movingUp);
+            anim.SetBool("DownRunning", movingDown);
+        }
 
         item1 = playerStats.GetEquippedItem(0);
         if (item1>0)
@@ -213,7 +216,7 @@ public class Mage : BaseClass
 
     void OnTriggerEnter2D(Collider2D other) {
         //On collision with something, it checks if its a projectile. If it is, then it gets the damage from the projectile's script
-        if(other.gameObject.CompareTag("Enemy Projectile")) {
+        if(other.gameObject.CompareTag("Enemy Projectile") && !dashing) {
             enemyProjectileScript = other.GetComponent<EnemyProjectileScript>();
 
             enemyDamage = enemyProjectileScript.GetProjectileDamage() - playerStats.GetArmor();
@@ -225,6 +228,13 @@ public class Mage : BaseClass
             if(currentHealth <= 0) {
                 Destroy(gameObject);
             }
+        }
+    }
+
+    void OnTriggerStay2D(Collider2D other) {
+        if (other.gameObject.CompareTag("Wall") && dashing) {
+            Debug.Log("hit wall lol");
+            dashing = false;
         }
     }
 

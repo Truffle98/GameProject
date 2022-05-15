@@ -12,9 +12,9 @@ public class PlayerStats : Items
 
     //Lists for four usable items [id] in your 'item lineup,' items [id] in armor lineup, and all items [id] in inventory
     //Indexes 0 and 1 are reserved for 'on-hand' [left-click] and 'off-hand' [right-click] items. Index 0 is therefore 'fireball' on mage class
-    public int[] itemLineup = { 3, 5, 6, 8};
+    public int[] itemLineup = { 3, 5, 6, 9};
     public int[] armorLineup = { -1, -1, -1, -1, -1 };
-    public int[] inventory = {-1, -1, -1, -1, -1,
+    public int[] inventory = {8, -1, -1, -1, -1,
                                -1, -1, -1, -1, -1,
                                -1, -1, -1, -1, -1};
     public int[] inventoryStacks = {0, 0, 0, 0, 0,

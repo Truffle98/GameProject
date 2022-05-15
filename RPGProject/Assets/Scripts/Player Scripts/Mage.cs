@@ -233,7 +233,6 @@ public class Mage : BaseClass
 
     void OnTriggerStay2D(Collider2D other) {
         if (other.gameObject.CompareTag("Wall") && dashing) {
-            Debug.Log("hit wall lol");
             dashing = false;
         }
     }

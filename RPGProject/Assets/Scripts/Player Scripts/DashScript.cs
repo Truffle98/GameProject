@@ -21,6 +21,7 @@ public class DashScript : MonoBehaviour
         angle = Mathf.Atan2(shootDirection.y, shootDirection.x);
 
         player = GameObject.Find("Mage(Clone)");
+        player.GetComponent<SpriteRenderer>().enabled = false;
         mageScript = player.GetComponent<Mage>();
         mageScript.dashing = true;
         mageScript.body.velocity = new Vector2(0, 0);
@@ -31,6 +32,7 @@ public class DashScript : MonoBehaviour
     {
         if (mageScript.dashing == false || dashCount == 24) {
             mageScript.dashing = false;
+            player.GetComponent<SpriteRenderer>().enabled = true;
             Destroy(gameObject);
         }
         if (dashCooldown <= 0) {

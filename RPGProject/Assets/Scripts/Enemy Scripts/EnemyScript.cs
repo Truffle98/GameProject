@@ -119,6 +119,11 @@ public class EnemyScript : MonoBehaviour
             Destroy(other.gameObject);
             TakeDamage(playerDamage);
         }
+        /*if(other.gameObject.CompareTag("Wave")) {
+
+            rb.isKinematic = false;
+
+        }*/
     }
 
     void OnTriggerStay2D(Collider2D other) {
@@ -135,6 +140,16 @@ public class EnemyScript : MonoBehaviour
             }
         }
     }
+
+    /*void OnTriggerExit2D(Collider2D other) {
+
+        if(other.gameObject.CompareTag("Wave")) {
+
+            rb.isKinematic = true;
+
+        }
+
+    }*/
 
     private void MovementDirection(bool spotted) {
         

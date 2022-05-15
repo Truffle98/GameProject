@@ -100,7 +100,7 @@ public class EnemyScript : MonoBehaviour
             MoveCharacter(movement);
         }
 
-        transform.position = new Vector3 (transform.position.x, transform.position.y, 0);
+        //transform.position = new Vector3 (transform.position.x, transform.position.y, 0);
     }
 
     void OnTriggerEnter2D(Collider2D other) {

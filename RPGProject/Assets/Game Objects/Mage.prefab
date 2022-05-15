@@ -2138,6 +2138,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameItems: []
   manaBar: {fileID: 4948500146462377690}
+  dashing: 0
   healthbar: {fileID: 1268773126745769410}
 --- !u!50 &6015606291606298043
 Rigidbody2D:
@@ -2547,10 +2548,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6015606291606298045}
     m_Modifications:
-    - target: {fileID: -143864795023892166, guid: 0a651968f6cb6da4db9415bc5d305698, type: 3}
-      propertyPath: itemLineup.Array.data[3]
-      value: 8
-      objectReference: {fileID: 0}
     - target: {fileID: 1898754722440032962, guid: 0a651968f6cb6da4db9415bc5d305698, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -2606,32 +2603,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1898754722440032962, guid: 0a651968f6cb6da4db9415bc5d305698, type: 3}
   m_PrefabInstance: {fileID: 79969720788562120}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &5898553331507094425 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5820835488387224401, guid: 0a651968f6cb6da4db9415bc5d305698, type: 3}
-  m_PrefabInstance: {fileID: 79969720788562120}
-  m_PrefabAsset: {fileID: 0}
---- !u!50 &5589800547990861488
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5898553331507094425}
-  m_BodyType: 1
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!1001 &850790659897125524
 PrefabInstance:
   m_ObjectHideFlags: 0

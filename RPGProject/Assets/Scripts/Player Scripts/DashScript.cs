@@ -29,14 +29,14 @@ public class DashScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (mageScript.dashing == false || dashCount == 12) {
+        if (mageScript.dashing == false || dashCount == 24) {
             mageScript.dashing = false;
             Destroy(gameObject);
         }
         if (dashCooldown <= 0) {
-            player.transform.position = new Vector3 (Mathf.Cos(angle) * 0.4f, Mathf.Sin(angle) * 0.4f, 0) + player.transform.position;
+            player.transform.position = new Vector3 (Mathf.Cos(angle) * 0.2f, Mathf.Sin(angle) * 0.2f, 0) + player.transform.position;
             dashCount++;
-            dashCooldown = 6;
+            dashCooldown = 3;
         }
 
         dashCooldown--;

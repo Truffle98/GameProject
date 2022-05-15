@@ -195,7 +195,7 @@ public class EnemyScript : MonoBehaviour
 
     public void TakeDamage(float damageTaken) {
 
-        currentHealth -= playerDamage;
+        currentHealth -= damageTaken;
         healthBar.SetHealth(currentHealth);
 
         if(currentHealth <= 0) {

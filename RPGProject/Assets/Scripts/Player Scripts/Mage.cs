@@ -8,7 +8,7 @@ public class Mage : BaseClass
 {
     private float horizontalInput, verticalInput, maxHealth = baseHealth * 2, currentHealth, enemyDamage, maxMana = baseMana * 2, currentMana, angle, manaRegenerationSpeed;
     private Vector3 shootDirection;
-    private int cooldown = 0, item1, item2, item3, item4, itemType;
+    private int cooldown1 = 0, cooldown2 = 0, cooldown3 = 0, cooldown4 = 0, item1, item2, item3, item4, itemType;
     public Rigidbody2D body;
     private Animator anim;
     private bool movingUp, movingDown, inventoryOrArmorEquipOpen;
@@ -16,6 +16,8 @@ public class Mage : BaseClass
     private InventoryOpener inventoryOpener;
     private ArmorEquipOpener armorEquipOpener;
     private Items itemsList;
+    public GameObject[] itemCooldowns;
+    private CooldownUI cooldownUI;
     private GameObject item1Object, item2Object, item3Object, item4Object, newMelee, newProjectile;
     public ManaBar manaBar;
     public bool dashing = false;
@@ -65,11 +67,18 @@ public class Mage : BaseClass
         currentHealth = maxHealth;
         manaBar.SetMaxMana(maxMana);
         currentMana = maxMana;
+        
+        for (int index = 0; index < itemCooldowns.Length; index++)
+        {
+            itemCooldowns[index].SetActive(false);
+        }
+        
     }
 
     //Runs every frame
     private void Update()
     {
+
         inventoryOrArmorEquipOpen = inventoryOpener.InventoryOpenState() || armorEquipOpener.ArmorEquipOpenState();
 
         if (!dashing) {
@@ -116,6 +125,7 @@ public class Mage : BaseClass
         {
             Attack();
         }
+
     }
 
     public float GetArmorMultiplier()
@@ -158,7 +168,7 @@ public class Mage : BaseClass
 
     private void Attack()
     {
-        if (Input.GetMouseButtonDown(0) && cooldown == 0 && Time.timeScale == 1) 
+        if (Input.GetMouseButtonDown(0) && cooldown1 == 0 && Time.timeScale == 1) 
         {
             if (playerStats.GetEquippedItem(0)>-1)
             {
@@ -167,7 +177,7 @@ public class Mage : BaseClass
         }
 
         //Accesses second item in hotbar
-        else if (Input.GetMouseButtonDown(1) && cooldown == 0 && Time.timeScale == 1)
+        else if (Input.GetMouseButtonDown(1) && cooldown2 == 0 && Time.timeScale == 1)
         {
             if (playerStats.GetEquippedItem(1)>-1)
             {
@@ -178,7 +188,7 @@ public class Mage : BaseClass
             }
         }
 
-        else if (Input.GetKeyDown(KeyCode.Q) && cooldown == 0 && Time.timeScale == 1) {
+        else if (Input.GetKeyDown(KeyCode.Q) && cooldown3 == 0 && Time.timeScale == 1) {
 
             if (playerStats.GetEquippedItem(2)>-1)
             {
@@ -190,7 +200,7 @@ public class Mage : BaseClass
 
         }
 
-        else if (Input.GetKeyDown(KeyCode.E) && cooldown == 0 && Time.timeScale == 1) {
+        else if (Input.GetKeyDown(KeyCode.E) && cooldown4 == 0 && Time.timeScale == 1) {
 
             if (playerStats.GetEquippedItem(3)>-1)
             {
@@ -207,8 +217,25 @@ public class Mage : BaseClass
             currentMana += manaRegenerationSpeed;
         }
 
-        if (cooldown > 0 && Time.timeScale == 1) {
-            cooldown--;
+        if (cooldown1 > 0 && Time.timeScale == 1) {
+            cooldown1--;
+            cooldownUI = itemCooldowns[0].GetComponent<CooldownUI>();
+            cooldownUI.SetCooldown(cooldown1);
+        }
+        if (cooldown2 > 0 && Time.timeScale == 1) {
+            cooldown2--;
+            cooldownUI = itemCooldowns[1].GetComponent<CooldownUI>();
+            cooldownUI.SetCooldown(cooldown2);
+        }
+        if (cooldown3 > 0 && Time.timeScale == 1) {
+            cooldown3--;
+            cooldownUI = itemCooldowns[2].GetComponent<CooldownUI>();
+            cooldownUI.SetCooldown(cooldown3);
+        }
+        if (cooldown4 > 0 && Time.timeScale == 1) {
+            cooldown4--;
+            cooldownUI = itemCooldowns[3].GetComponent<CooldownUI>();
+            cooldownUI.SetCooldown(cooldown4);
         }
 
         manaBar.SetMana(currentMana);
@@ -260,8 +287,14 @@ public class Mage : BaseClass
                 newProjectile.GetComponent<ProjectileScript>().angle = angle;
 
             }
-
-            cooldown = itemsList.GetCooldown(item);
+            
+            switch(itemSlot)
+            {
+                case 0: cooldown1 = itemsList.GetCooldown(item); itemCooldowns[0].SetActive(true); itemCooldowns[0].GetComponent<CooldownUI>().SetMaxCooldown(cooldown1); break;
+                case 1: cooldown2 = itemsList.GetCooldown(item); itemCooldowns[1].SetActive(true); itemCooldowns[1].GetComponent<CooldownUI>().SetMaxCooldown(cooldown2); break;
+                case 2: cooldown3 = itemsList.GetCooldown(item); itemCooldowns[2].SetActive(true); itemCooldowns[2].GetComponent<CooldownUI>().SetMaxCooldown(cooldown3); break;
+                case 3: cooldown4 = itemsList.GetCooldown(item); itemCooldowns[3].SetActive(true); itemCooldowns[3].GetComponent<CooldownUI>().SetMaxCooldown(cooldown4); break;
+            }
             currentMana -= itemsList.GetManaCost(item);
         }
     }

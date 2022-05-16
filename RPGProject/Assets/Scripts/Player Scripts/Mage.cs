@@ -8,7 +8,8 @@ public class Mage : BaseClass
 {
     private float horizontalInput, verticalInput, maxHealth = baseHealth * 2, currentHealth, enemyDamage, maxMana = baseMana * 2, currentMana, angle, manaRegenerationSpeed;
     private Vector3 shootDirection;
-    private int cooldown1 = 0, cooldown2 = 0, cooldown3 = 0, cooldown4 = 0, item1, item2, item3, item4, itemType;
+    private int item1, item2, item3, item4, itemType;
+    public int cooldown1 = 0, cooldown2 = 0, cooldown3 = 0, cooldown4 = 0;
     public Rigidbody2D body;
     private Animator anim;
     private bool movingUp, movingDown, inventoryOrArmorEquipOpen;

@@ -2137,6 +2137,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameItems: []
+  cooldown1: 0
+  cooldown2: 0
+  cooldown3: 0
+  cooldown4: 0
   body: {fileID: 0}
   itemCooldowns:
   - {fileID: 6576625720555180778}

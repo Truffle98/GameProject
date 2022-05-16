@@ -6,12 +6,12 @@ using UnityEngine.AI;
 public class EnemyScript : MonoBehaviour
 {
     private PlayerStats playerStats;
-    private GameObject player;
+    private GameObject player, newObject, target;
     public GameObject enemyProjectile;
-    private float playerDamage, currentHealth, speed, AOEDamage;
+    private float playerDamage, currentHealth, speed, AOEDamage, angle;
     private int timer = 0, cooldown, findNewLocationTimer, AOECooldown = 0, itemDrop = -1, itemDropChoice, itemBound = 0, startBound = 0;
     private int[] scaledItemDropList = new int[100];
-    private bool count = true, playerSpotted;
+    private bool count = true, targetSpotted;
     public int cooldownMax, maxHealth = 100, movementPattern;
     //Drop list should contain item ids and item drop percentages list should contain the percentages in integer from (90 for 90% for example)
     public int[] itemDropList;
@@ -52,6 +52,7 @@ public class EnemyScript : MonoBehaviour
             itemsList = GameObject.Find("ItemObjectList").GetComponent<Items>();
             player = GameObject.FindWithTag("Character");
             count = false;
+            target = player;
         }
 
         if (cooldown > 0 && Time.timeScale == 1) {
@@ -68,19 +69,19 @@ public class EnemyScript : MonoBehaviour
 
         if (!count) {
             
-            if (Vector3.Distance(player.transform.position, transform.position) < engageDistance && Time.timeScale == 1) {
-                playerSpotted = true;
+            if (Vector3.Distance(target.transform.position, transform.position) < engageDistance && Time.timeScale == 1) {
+                targetSpotted = true;
             } else {
-                playerSpotted = false;
+                targetSpotted = false;
             }
-            MovementDirection(playerSpotted);
+            MovementDirection(targetSpotted);
         }
 
-        if (playerSpotted) {
+        if (targetSpotted) {
             
-            if (Vector3.Distance(player.transform.position, transform.position) < shootDistance && Time.timeScale == 1) {
+            if (Vector3.Distance(target.transform.position, transform.position) < shootDistance && Time.timeScale == 1) {
                 if (cooldown <= 0) {
-                    ShootPlayer();
+                    ShootTarget();
                 }
             }
             
@@ -89,9 +90,9 @@ public class EnemyScript : MonoBehaviour
 
     void FixedUpdate() {
 
-        if (playerSpotted) {
+        if (targetSpotted) {
             if (movementPattern == 0) {
-                agent.SetDestination(player.transform.position);
+                agent.SetDestination(target.transform.position);
                 //MoveCharacter(movement);
             } else if (movementPattern == 1) {
                 MoveCharacter(-movement);
@@ -154,7 +155,7 @@ public class EnemyScript : MonoBehaviour
     private void MovementDirection(bool spotted) {
         
         if (spotted == true) {
-            direction = player.transform.position - transform.position;
+            direction = target.transform.position - transform.position;
             speed = maxSpeed;
         } else if (findNewLocationTimer <= 0) {
             direction = new Vector3(Random.Range(-10.0f, 10.0f), Random.Range(-10.0f, 10.0f), 0);
@@ -178,13 +179,15 @@ public class EnemyScript : MonoBehaviour
 
     }
 
-    private void ShootPlayer () {
-        shootDirection = player.transform.position;
+    private void ShootTarget () {
+        shootDirection = target.transform.position;
         shootDirection.z = 0.0f;
         shootDirection = shootDirection-transform.position;
         shootDirection = shootDirection.normalized;
+        angle = Mathf.Atan2(shootDirection.y, shootDirection.x);
 
-        Instantiate(enemyProjectile, (new Vector3(shootDirection.x, shootDirection.y, 0) + transform.position), Quaternion.Euler(new Vector3(0,0,0)));
+        newObject = Instantiate(enemyProjectile, (new Vector3(shootDirection.x, shootDirection.y, 0) + transform.position), Quaternion.Euler(new Vector3(0,0,0)));
+        newObject.GetComponent<EnemyProjectileScript>().angle = angle;
         cooldown = cooldownMax;
         return;
     }

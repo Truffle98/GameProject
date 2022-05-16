@@ -5,6 +5,7 @@ using UnityEngine;
 public class AOEScript : MonoBehaviour
 {
     public int itemID;
+    public float lifespan;
     private PlayerStats playerStats;
     private float damage;
     
@@ -17,7 +18,7 @@ public class AOEScript : MonoBehaviour
     {
         playerStats = GameObject.Find("Player Stats").GetComponent<PlayerStats>();
         damage = playerStats.GetItemDamage(itemID) * 0.2f;
-        Destroy(gameObject, 2);
+        Destroy(gameObject, lifespan);
     }
 
 }

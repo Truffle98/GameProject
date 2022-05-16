@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8523587673292537255}
   - component: {fileID: 5203955171858034725}
   - component: {fileID: 5933769775955990394}
+  - component: {fileID: 8653088614846742813}
   m_Layer: 0
   m_Name: Thorn Wheel
   m_TagString: AOE
@@ -113,6 +114,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a36803267f7d5654391f5b59e0c2927c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationSpeed: 0.1
 --- !u!58 &5933769775955990394
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -129,3 +131,24 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 2
+--- !u!50 &8653088614846742813
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7693573132972300104}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0

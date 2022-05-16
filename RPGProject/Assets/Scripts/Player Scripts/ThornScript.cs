@@ -6,6 +6,7 @@ public class ThornScript : MonoBehaviour
 {
     private GameObject player;
     private int timePassed = 0;
+    public float rotationSpeed;
 
     // Start is called before the first frame update
     void Start()
@@ -18,7 +19,7 @@ public class ThornScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.rotation = Quaternion.Euler(0,0,0.1f * timePassed);
+        transform.rotation = Quaternion.Euler(0,0,rotationSpeed * timePassed);
         timePassed++;
     }
 }

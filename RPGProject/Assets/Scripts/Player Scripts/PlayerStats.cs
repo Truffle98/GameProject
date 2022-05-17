@@ -7,17 +7,17 @@ public class PlayerStats : Items
     private ItemID itemIDClass;
     private MenuTest menuTest;
     private float damage, armor = 0, mageArmorMultiplier = 1.5f;
-    private int decision, itemID, itemArmorType;
+    private int decision, itemID, itemArmorType, experienceTotal;
     private string itemName;
 
     //Lists for four usable items [id] in your 'item lineup,' items [id] in armor lineup, and all items [id] in inventory
     //Indexes 0 and 1 are reserved for 'on-hand' [left-click] and 'off-hand' [right-click] items. Index 0 is therefore 'fireball' on mage class
     public int[] itemLineup = { 3, 5, 6, 9, -1, -1, -1, -1};
     public int[] armorLineup = { -1, -1, -1, -1, -1 };
-    public int[] inventory = {8, 10, -1, -1, -1,
+    public int[] inventory = {8, 10, 11, -1, -1,
                                -1, -1, -1, -1, -1,
                                -1, -1, -1, -1, -1};
-    public int[] inventoryStacks = {1, 1, 0, 0, 0,
+    public int[] inventoryStacks = {1, 1, 1, 0, 0,
                                      0, 0, 0, 0, 0,
                                      0, 0, 0, 0, 0};
     private int[] coinPurse = {0, 0, 0};
@@ -46,6 +46,9 @@ public class PlayerStats : Items
     public int GetItemStack(int indexInInventory)
     {
         return inventoryStacks[indexInInventory];
+    }
+    public void GetExperience(int experience) {
+        experienceTotal += experience;
     }
     public void switchItemToInventory(int index, int itemID, string fromWhere)
     {

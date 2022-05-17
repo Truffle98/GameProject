@@ -17,6 +17,7 @@ TagManager:
   - AOE
   - Undefined
   - Wave
+  - Turned Enemy Projectile
   layers:
   - Default
   - TransparentFX

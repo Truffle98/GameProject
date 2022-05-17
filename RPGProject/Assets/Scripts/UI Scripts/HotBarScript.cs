@@ -22,7 +22,7 @@ public class HotBarScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        for (int hotBarIndex = 0; hotBarIndex<4; hotBarIndex++){
+        for (int hotBarIndex = 0; hotBarIndex<slots.Length; hotBarIndex++){
             itemID = playerStats.GetEquippedItem(hotBarIndex);
             if (itemID > 0){
                 itemSprite = items.GetItemObject(itemID).GetComponent<SpriteRenderer>().sprite;

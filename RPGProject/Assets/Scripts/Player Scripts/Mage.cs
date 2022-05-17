@@ -8,8 +8,8 @@ public class Mage : BaseClass
 {
     private float horizontalInput, verticalInput, maxHealth = baseHealth * 2, currentHealth, enemyDamage, maxMana = baseMana * 2, currentMana, angle, manaRegenerationSpeed;
     private Vector3 shootDirection;
-    private int item1, item2, item3, item4, itemType;
-    public int cooldown1 = 0, cooldown2 = 0, cooldown3 = 0, cooldown4 = 0;
+    private int item1, item2, item3, item4, item5, item6, item7, item8, itemType;
+    public int cooldown1 = 0, cooldown2 = 0, cooldown3 = 0, cooldown4 = 0, cooldown5 = 0, cooldown6 = 0, cooldown7 = 0, cooldown8 = 0;
     public Rigidbody2D body;
     private Animator anim;
     private bool movingUp, movingDown, inventoryOrArmorEquipOpen;
@@ -19,7 +19,7 @@ public class Mage : BaseClass
     private Items itemsList;
     public GameObject[] itemCooldowns;
     private CooldownUI cooldownUI;
-    private GameObject item1Object, item2Object, item3Object, item4Object, newMelee, newProjectile;
+    private GameObject item1Object, item2Object, item3Object, item4Object, item5Object, item6Object, item7Object, item8Object, newMelee, newProjectile;
     public ManaBar manaBar;
     public bool dashing = false;
     private EnemyProjectileScript enemyProjectileScript;
@@ -52,16 +52,52 @@ public class Mage : BaseClass
         armorEquipOpener = GameObject.Find("Armor Equip Opener").GetComponent<ArmorEquipOpener>();
 
         item1 = playerStats.GetEquippedItem(0);
-        item1Object = itemsList.GetItemObject(item1);
+        if (item1>0)
+        {
+            item1Object = itemsList.GetItemObject(item1);
+        }
+        
         item2 = playerStats.GetEquippedItem(1);
-        item2Object = itemsList.GetItemObject(item2);
-        item3 = playerStats.GetEquippedItem(2);
-        item2Object = itemsList.GetItemObject(item3);
-        item3 = playerStats.GetEquippedItem(3);
-        item2Object = itemsList.GetItemObject(item4);
-        //Right now we know that the second item is a melee item. However, in the future if we don't know what type an object is [melee, projectile, etc] we might need to
-        //add another script to the item game object that returns the item type [GetItemTypeScript for example]
+        if (item2>0)
+        {
+            item2Object = itemsList.GetItemObject(item2);
+        }
 
+        item3 = playerStats.GetEquippedItem(2);
+        if (item3>0)
+        {
+            item3Object = itemsList.GetItemObject(item3);
+        }
+
+        item4 = playerStats.GetEquippedItem(3);
+        if (item4>0)
+        {
+            item4Object = itemsList.GetItemObject(item4);
+        }
+        item5 = playerStats.GetEquippedItem(4);
+        if (item5>0)
+        {
+            item5Object = itemsList.GetItemObject(item5);
+        }
+        
+        item6 = playerStats.GetEquippedItem(5);
+        if (item6>0)
+        {
+            item6Object = itemsList.GetItemObject(item6);
+        }
+
+        item7 = playerStats.GetEquippedItem(6);
+        if (item7>0)
+        {
+            item7Object = itemsList.GetItemObject(item7);
+        }
+
+        item8 = playerStats.GetEquippedItem(7);
+        if (item8>0)
+        {
+            item8Object = itemsList.GetItemObject(item8);
+        }
+       
         manaRegenerationSpeed = .02f;
 
         healthbar.SetMaxHealth(maxHealth);
@@ -120,6 +156,29 @@ public class Mage : BaseClass
         if (item4>0)
         {
             item4Object = itemsList.GetItemObject(item4);
+        }
+        item5 = playerStats.GetEquippedItem(4);
+        if (item5>0)
+        {
+            item5Object = itemsList.GetItemObject(item5);
+        }
+        
+        item6 = playerStats.GetEquippedItem(5);
+        if (item6>0)
+        {
+            item6Object = itemsList.GetItemObject(item6);
+        }
+
+        item7 = playerStats.GetEquippedItem(6);
+        if (item7>0)
+        {
+            item7Object = itemsList.GetItemObject(item7);
+        }
+
+        item8 = playerStats.GetEquippedItem(7);
+        if (item8>0)
+        {
+            item8Object = itemsList.GetItemObject(item8);
         }
 
         if (!inventoryOrArmorEquipOpen)
@@ -213,6 +272,50 @@ public class Mage : BaseClass
 
         }
 
+        else if (Input.GetKeyDown(KeyCode.Alpha1) && cooldown5 == 0 && Time.timeScale == 1) 
+        {
+            if (playerStats.GetEquippedItem(4)>-1)
+            {
+                UseItemInHotbar(4, item5, item5Object);
+            }
+        }
+
+        //Accesses second item in hotbar
+        else if (Input.GetKeyDown(KeyCode.Alpha2) && cooldown6 == 0 && Time.timeScale == 1)
+        {
+            if (playerStats.GetEquippedItem(5)>-1)
+            {
+                if(currentMana>itemsList.GetManaCost(playerStats.GetEquippedItem(5)))
+                {
+                    UseItemInHotbar(5, item6, item6Object);
+                }
+            }
+        }
+
+        else if (Input.GetKeyDown(KeyCode.Alpha3) && cooldown7 == 0 && Time.timeScale == 1) {
+
+            if (playerStats.GetEquippedItem(6)>-1)
+            {
+                if(currentMana>itemsList.GetManaCost(playerStats.GetEquippedItem(6)))
+                {
+                    UseItemInHotbar(6, item7, item7Object);
+                }
+            }
+
+        }
+
+        else if (Input.GetKeyDown(KeyCode.Alpha4) && cooldown8 == 0 && Time.timeScale == 1) {
+
+            if (playerStats.GetEquippedItem(7)>-1)
+            {
+                if(currentMana>itemsList.GetManaCost(playerStats.GetEquippedItem(7)))
+                {
+                    UseItemInHotbar(7, item8, item8Object);
+                }
+            }
+
+        }
+
         if (currentMana<maxMana && Time.timeScale == 1) 
         {
             currentMana += manaRegenerationSpeed;
@@ -237,6 +340,26 @@ public class Mage : BaseClass
             cooldown4--;
             cooldownUI = itemCooldowns[3].GetComponent<CooldownUI>();
             cooldownUI.SetCooldown(cooldown4);
+        }
+        if (cooldown5 > 0 && Time.timeScale == 1) {
+            cooldown5--;
+            cooldownUI = itemCooldowns[4].GetComponent<CooldownUI>();
+            cooldownUI.SetCooldown(cooldown5);
+        }
+        if (cooldown6 > 0 && Time.timeScale == 1) {
+            cooldown6--;
+            cooldownUI = itemCooldowns[5].GetComponent<CooldownUI>();
+            cooldownUI.SetCooldown(cooldown6);
+        }
+        if (cooldown7 > 0 && Time.timeScale == 1) {
+            cooldown7--;
+            cooldownUI = itemCooldowns[6].GetComponent<CooldownUI>();
+            cooldownUI.SetCooldown(cooldown7);
+        }
+        if (cooldown8 > 0 && Time.timeScale == 1) {
+            cooldown8--;
+            cooldownUI = itemCooldowns[7].GetComponent<CooldownUI>();
+            cooldownUI.SetCooldown(cooldown8);
         }
 
         manaBar.SetMana(currentMana);
@@ -295,6 +418,10 @@ public class Mage : BaseClass
                 case 1: cooldown2 = itemsList.GetCooldown(item); itemCooldowns[1].SetActive(true); itemCooldowns[1].GetComponent<CooldownUI>().SetMaxCooldown(cooldown2); break;
                 case 2: cooldown3 = itemsList.GetCooldown(item); itemCooldowns[2].SetActive(true); itemCooldowns[2].GetComponent<CooldownUI>().SetMaxCooldown(cooldown3); break;
                 case 3: cooldown4 = itemsList.GetCooldown(item); itemCooldowns[3].SetActive(true); itemCooldowns[3].GetComponent<CooldownUI>().SetMaxCooldown(cooldown4); break;
+                case 5: cooldown5 = itemsList.GetCooldown(item); itemCooldowns[4].SetActive(true); itemCooldowns[4].GetComponent<CooldownUI>().SetMaxCooldown(cooldown5); break;
+                case 6: cooldown6 = itemsList.GetCooldown(item); itemCooldowns[5].SetActive(true); itemCooldowns[5].GetComponent<CooldownUI>().SetMaxCooldown(cooldown6); break;
+                case 7: cooldown7 = itemsList.GetCooldown(item); itemCooldowns[6].SetActive(true); itemCooldowns[6].GetComponent<CooldownUI>().SetMaxCooldown(cooldown7); break;
+                case 8: cooldown8 = itemsList.GetCooldown(item); itemCooldowns[7].SetActive(true); itemCooldowns[7].GetComponent<CooldownUI>().SetMaxCooldown(cooldown8); break;
             }
             currentMana -= itemsList.GetManaCost(item);
         }

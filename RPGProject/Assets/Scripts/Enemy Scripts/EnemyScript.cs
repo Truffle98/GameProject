@@ -8,15 +8,15 @@ public class EnemyScript : MonoBehaviour
     private PlayerStats playerStats;
     private GameObject player, newObject, target;
     public GameObject enemyProjectile;
-    private float playerDamage, currentHealth, speed, AOEDamage, angle;
-    private int timer = 0, cooldown, findNewLocationTimer, AOECooldown = 0, itemDrop = -1, itemDropChoice, itemBound = 0, startBound = 0;
+    private float currentHealth, speed, AOEDamage, angle, distanceToTarget;
+    private int timer = 0, cooldown, findNewLocationTimer, AOECooldown = 0, itemDrop = -1, itemDropChoice, itemBound = 0, startBound = 0, turnedDuration = 0, lastSeenTarget = 0;
     private int[] scaledItemDropList = new int[100];
-    private bool count = true, targetSpotted;
-    public int cooldownMax, maxHealth = 100, movementPattern;
+    private bool count = true, targetSpotted, turned = false;
+    public int cooldownMax, maxHealth = 100, experience;
     //Drop list should contain item ids and item drop percentages list should contain the percentages in integer from (90 for 90% for example)
     public int[] itemDropList;
     public int[] itemDropPercentagesList;
-    public float engageDistance, shootDistance, maxSpeed;
+    public float engageDistance, shootDistance, maxSpeed, fleeDistance;
     private ProjectileScript projectileStats;
     private MeleeScript meleeWeaponStats;
     private Vector3 shootDirection, direction;
@@ -24,6 +24,7 @@ public class EnemyScript : MonoBehaviour
     private Rigidbody2D rb;
     private Vector2 movement;
     private NavMeshAgent agent;
+    private NavMeshHit hit;
     private AOEScript AOEScript;
     //public bool shouldRotate = false;
 
@@ -38,6 +39,10 @@ public class EnemyScript : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         agent.updateRotation = false;
         agent.updateUpAxis = false;
+        playerStats = GameObject.Find("Player Stats").GetComponent<PlayerStats>();
+        itemsList = GameObject.Find("ItemObjectList").GetComponent<Items>();
+        player = GameObject.FindWithTag("Character");
+        target = player;
     }
 
     // Update is called once per frame
@@ -45,14 +50,6 @@ public class EnemyScript : MonoBehaviour
     {
         if (count) {
             timer++;
-        }
-
-        if (timer > 100) {
-            playerStats = GameObject.Find("Player Stats").GetComponent<PlayerStats>();
-            itemsList = GameObject.Find("ItemObjectList").GetComponent<Items>();
-            player = GameObject.FindWithTag("Character");
-            count = false;
-            target = player;
         }
 
         if (cooldown > 0 && Time.timeScale == 1) {
@@ -67,36 +64,53 @@ public class EnemyScript : MonoBehaviour
             findNewLocationTimer--;
         }
 
-        if (!count) {
-            
-            if (Vector3.Distance(target.transform.position, transform.position) < engageDistance && Time.timeScale == 1) {
-                targetSpotted = true;
-            } else {
-                targetSpotted = false;
-            }
-            MovementDirection(targetSpotted);
+        if (!agent.Raycast(target.transform.position, out hit)) {
+            lastSeenTarget = 1250;
+        } else {
+            lastSeenTarget--;
         }
+
+        distanceToTarget = Vector3.Distance(target.transform.position, transform.position);
+        
+        if (distanceToTarget < engageDistance && Time.timeScale == 1 && lastSeenTarget > 0) {
+            targetSpotted = true;
+        } else {
+            targetSpotted = false;
+        }
+        MovementDirection(targetSpotted);
 
         if (targetSpotted) {
             
-            if (Vector3.Distance(target.transform.position, transform.position) < shootDistance && Time.timeScale == 1) {
-                if (cooldown <= 0) {
+            if (distanceToTarget < shootDistance && Time.timeScale == 1) {
+                if (cooldown <= 0 && !agent.Raycast(target.transform.position, out hit)) {
                     ShootTarget();
                 }
             }
             
+        }
+
+        if (turned) {
+            if (turnedDuration > 0) {
+                turnedDuration--;
+            } else {
+                target = player;
+                turned = false;
+            }
         }
     }
 
     void FixedUpdate() {
 
         if (targetSpotted) {
-            if (movementPattern == 0) {
+            if (distanceToTarget > shootDistance - 1) {
                 agent.SetDestination(target.transform.position);
                 //MoveCharacter(movement);
-            } else if (movementPattern == 1) {
-                MoveCharacter(-movement);
+            } else if (distanceToTarget < fleeDistance) {
+                agent.SetDestination(transform.position - target.transform.position);
+            } else if (distanceToTarget < shootDistance - 1 && !agent.Raycast(target.transform.position, out hit)) {
+                agent.ResetPath();
             }
+               
         } else if (Time.timeScale == 1) {
             MoveCharacter(movement);
         }
@@ -108,17 +122,18 @@ public class EnemyScript : MonoBehaviour
 
         //On collision with something, it checks if its a projectile. If it is, then it gets the damage from the projectile's script
         if(other.gameObject.CompareTag("Projectile")) {
-            projectileStats = other.GetComponent<ProjectileScript>();
-            playerDamage = projectileStats.GetProjectileDamage();
+            TakeDamage(other.GetComponent<ProjectileScript>().GetProjectileDamage());
             Destroy(other.gameObject);
-            TakeDamage(playerDamage);
         }
         else if (other.gameObject.CompareTag("Sword"))
         {
-            meleeWeaponStats = other.GetComponent<MeleeScript>();
-            playerDamage = meleeWeaponStats.GetDamage();
+            TakeDamage(other.GetComponent<MeleeScript>().GetDamage());
             Destroy(other.gameObject);
-            TakeDamage(playerDamage);
+        }
+        else if (other.gameObject.CompareTag("Turned Enemy Projectile")) 
+        {
+            TakeDamage(other.GetComponent<EnemyProjectileScript>().GetProjectileDamage());
+            Destroy(other.gameObject);
         }
         /*if(other.gameObject.CompareTag("Wave")) {
 
@@ -188,6 +203,9 @@ public class EnemyScript : MonoBehaviour
 
         newObject = Instantiate(enemyProjectile, (new Vector3(shootDirection.x, shootDirection.y, 0) + transform.position), Quaternion.Euler(new Vector3(0,0,0)));
         newObject.GetComponent<EnemyProjectileScript>().angle = angle;
+        if (turned) {
+            newObject.tag = "Turned Enemy Projectile";
+        }
         cooldown = cooldownMax;
         return;
     }
@@ -207,6 +225,7 @@ public class EnemyScript : MonoBehaviour
         itemDrop = scaledItemDropList[itemDropChoice];
 
         Instantiate(itemsList.GetItemObject(itemDrop), transform.position, new Quaternion(0, 0, 0, 0));
+        playerStats.GetExperience(experience);
         Destroy(gameObject);
 
     }
@@ -219,5 +238,23 @@ public class EnemyScript : MonoBehaviour
         if(currentHealth <= 0) {
             Die();
         }
+    }
+
+    public void ChangeSides() {
+
+        turned = true;
+        turnedDuration = 1000;
+        float lowestDistance = Mathf.Infinity;
+        GameObject potentialTarget = null;
+        GameObject[] potentialTargets = GameObject.FindGameObjectsWithTag("Enemy");
+        if (potentialTargets.Length > 0) {
+            for (int i = 0; i < potentialTargets.Length; i++) {
+                if (Vector3.Distance(transform.position, potentialTargets[i].transform.position) < lowestDistance) {
+                    potentialTarget = potentialTargets[i];
+                }
+            }
+            target = potentialTarget;
+        }
+        Debug.Log("yes");
     }
 }

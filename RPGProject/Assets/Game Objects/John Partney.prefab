@@ -126,12 +126,12 @@ MonoBehaviour:
   enemyProjectile: {fileID: 3246578418983402623, guid: 99755d472385ae442a71a0cf5adde0a2, type: 3}
   cooldownMax: 500
   maxHealth: 200
-  movementPattern: 0
   itemDropList: 
   itemDropPercentagesList: 
   engageDistance: 8
   shootDistance: 4
   maxSpeed: 2
+  fleeDistance: 2
   healthBar: {fileID: 4252532295865217900}
 --- !u!58 &2351591672552922381
 CircleCollider2D:

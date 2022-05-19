@@ -3850,12 +3850,12 @@ GameObject:
   - component: {fileID: 6015606291606298045}
   - component: {fileID: 6015606291606298046}
   - component: {fileID: 6015606291606298042}
-  - component: {fileID: 2023114099248456654}
   - component: {fileID: 6015606291606298043}
   - component: {fileID: 6015606291606298041}
   - component: {fileID: -1849567793799400223}
+  - component: {fileID: 3963040493994752426}
   m_Layer: 0
-  m_Name: Mage
+  m_Name: Assassin
   m_TagString: Character
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3957,40 +3957,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.1063689, y: 0.13456638}
   m_EdgeRadius: 0
---- !u!114 &2023114099248456654
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6015606291606298047}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e6c58983bba8f6b4ab5923b257c8925f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameItems: []
-  cooldown1: 0
-  cooldown2: 0
-  cooldown3: 0
-  cooldown4: 0
-  cooldown5: 0
-  cooldown6: 0
-  cooldown7: 0
-  cooldown8: 0
-  body: {fileID: 0}
-  itemCooldowns:
-  - {fileID: 6576625720555180778}
-  - {fileID: 5557800387131384793}
-  - {fileID: 7444277578832829312}
-  - {fileID: 8161546704837444337}
-  - {fileID: 4600050213162798427}
-  - {fileID: 5888687495993274746}
-  - {fileID: 4175960262138413383}
-  - {fileID: 1347195514046852246}
-  manaBar: {fileID: 4948500146462377690}
-  dashing: 0
-  healthbar: {fileID: 1268773126745769410}
 --- !u!50 &6015606291606298043
 Rigidbody2D:
   serializedVersion: 4
@@ -4044,6 +4010,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7cdb8845804cfc46b6dcd51ed7218b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3963040493994752426
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6015606291606298047}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb1ca5916a7144a66bfb0dae6ec475e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameItems: []
+  assassinAbilityObjects:
+  - {fileID: 5187128529769039974, guid: e4fded95bdce3cd46a36701bdabe8a24, type: 3}
+  - {fileID: 7693573132972300104, guid: 8b4c62abbafc8794794cd6774ec612ec, type: 3}
+  body: {fileID: 0}
+  itemCooldowns:
+  - {fileID: 6576625720555180778}
+  - {fileID: 5557800387131384793}
+  - {fileID: 7444277578832829312}
+  - {fileID: 8161546704837444337}
+  - {fileID: 4600050213162798427}
+  - {fileID: 5888687495993274746}
+  - {fileID: 4175960262138413383}
+  - {fileID: 1347195514046852246}
+  manaBar: {fileID: 0}
+  dashing: 0
 --- !u!1 &6056236604663018275
 GameObject:
   m_ObjectHideFlags: 0

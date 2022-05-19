@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5519177248640510797}
   - component: {fileID: 6946911834469100866}
   - component: {fileID: -2525863581184928160}
+  - component: {fileID: 227879077907500673}
   m_Layer: 0
   m_Name: Wave
   m_TagString: Wave
@@ -104,7 +105,8 @@ MonoBehaviour:
   angle: 0
   damage: 0
   multiplier: 1
-  itemID: 8
+  itemID: 2
+  abilityClass: 0
 --- !u!50 &6946911834469100866
 Rigidbody2D:
   serializedVersion: 4
@@ -159,3 +161,18 @@ PolygonCollider2D:
       - {x: 0.3988011, y: -0.059250355}
       - {x: 0.51149964, y: 0.13175154}
       - {x: 0.27935076, y: 0.3359003}
+--- !u!114 &227879077907500673
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1747979757602291651}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45b999dcf9aeb704b96da7ed4d6ae759, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemID: 3
+  itemType: 2
+  abilityType: 0

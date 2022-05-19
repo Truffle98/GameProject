@@ -9,8 +9,10 @@ public class HotBarScript : MonoBehaviour
     private HotBarEditor hotBarEditor;
     private PlayerStats playerStats;
     private Items items;
-    private int itemID;
+    private int itemID, itemClass;
     private Sprite itemSprite;
+    public Mage mage;
+    public Assassin assassin;
 
     // Start is called before the first frame update
     void Start()
@@ -24,10 +26,24 @@ public class HotBarScript : MonoBehaviour
     {
         for (int hotBarIndex = 0; hotBarIndex<slots.Length; hotBarIndex++){
             itemID = playerStats.GetEquippedItem(hotBarIndex);
-            if (itemID > 0){
-                itemSprite = items.GetItemObject(itemID).GetComponent<SpriteRenderer>().sprite;
+            itemClass = playerStats.GetEquippedItemClass(hotBarIndex);
+            if (itemID >= 0){
+                if (itemClass == 0)
+                {
+                    itemSprite = mage.GetAbilityObject(itemID).GetComponent<SpriteRenderer>().sprite;
+
+                }
+                else if (itemClass == 1)
+                {
+                    assassin = GameObject.Find("Assassin").GetComponent<Assassin>();
+                    itemSprite = assassin.GetAbilityObject(itemID).GetComponent<SpriteRenderer>().sprite;
+                }
+                else
+                {
+                    itemSprite = items.GetItemObject(itemID).GetComponent<SpriteRenderer>().sprite;
+                }
                 hotBarEditor = slots[hotBarIndex].GetComponent<HotBarEditor>();
-                hotBarEditor.SetSprite(itemSprite, itemID);
+                hotBarEditor.SetSprite(itemSprite, itemID, itemClass);
             }
         }
     }

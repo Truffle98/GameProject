@@ -9,7 +9,7 @@ public class SlotEditor : MonoBehaviour
     public Button botton;
     public Sprite spotHolder;
     public int inventoryIndex;
-    private int cooldown = 0, itemID, armorType;
+    private int cooldown = 0, itemID, armorType, itemClass, itemType;
     private float damage, armor;
     private string stackNum;
     private Image img;
@@ -17,7 +17,7 @@ public class SlotEditor : MonoBehaviour
     [SerializeField] private Items items;
     private textEditorScript textEditor;
 
-    public void SetSprite(Sprite itemSprite, int ID)
+    public void SetSprite(Sprite itemSprite, int ID, int iClass)
     {
         img.enabled = true;
         img.sprite = itemSprite;
@@ -25,6 +25,7 @@ public class SlotEditor : MonoBehaviour
         damage = items.GetItemDamage(itemID);
         armor = items.GetItemArmor(itemID);
         armorType = items.GetItemArmorType(itemID);
+        itemClass = iClass;
     }
 
     void Start()
@@ -38,9 +39,9 @@ public class SlotEditor : MonoBehaviour
     {
         gameObject.GetComponent<Button>().onClick.AddListener( () => 
         {
-            if (img.enabled == true && cooldown==0 && damage>0){
+            if (img.enabled == true && cooldown==0 && playerStats.isWeapon(itemID, itemClass)){
                 img.enabled = false;
-                playerStats.switchItemToHotBar(inventoryIndex, itemID);
+                playerStats.switchItemToHotBar(inventoryIndex, itemID, itemClass);
                 cooldown = 50;
 
                 stackNum = playerStats.GetItemStack(inventoryIndex).ToString();
@@ -48,9 +49,9 @@ public class SlotEditor : MonoBehaviour
                 textEditor.ChangeStackNumber(null);
             }
 
-            else if (img.enabled == true && cooldown==0 && damage<=0 && armor>0){
+            else if (img.enabled == true && cooldown==0 && playerStats.isArmor(itemID, itemClass)){
                 img.enabled = false;
-                playerStats.SwitchItemToArmorEquip(inventoryIndex, itemID);
+                playerStats.SwitchItemToArmorEquip(inventoryIndex, itemID, itemClass);
                 cooldown = 50;
                 
                 stackNum = playerStats.GetItemStack(inventoryIndex).ToString();

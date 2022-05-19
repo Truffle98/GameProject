@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 5066516551894460595}
   - component: {fileID: -6556665358738991564}
   - component: {fileID: -6731628785722057302}
+  - component: {fileID: -1803892716427188166}
   m_Layer: 0
   m_Name: Brain Controller
   m_TagString: Projectile
@@ -105,7 +106,8 @@ MonoBehaviour:
   angle: 0
   damage: 0
   multiplier: 1
-  itemID: 11
+  itemID: 3
+  abilityClass: 0
 --- !u!58 &5066516551894460595
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -155,3 +157,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e9d6581a22be61409cb722163c26e53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-1803892716427188166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3795094427925300730}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45b999dcf9aeb704b96da7ed4d6ae759, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemID: 3
+  itemType: 2
+  abilityType: 0

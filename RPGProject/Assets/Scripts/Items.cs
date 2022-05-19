@@ -5,12 +5,11 @@ using UnityEngine;
 
 public class Items : BaseClass
 {
-    protected string[] itemNames = new string[] { "Gold Coin", "Silver Coin", "Copper Coin", "Fireball", "Stick", "Long Sword", "Vampiric Bolt", "Boots of Swiftness", "Wave", "Dash", "Thorn Wheel", "Mind Controller" };
+    protected string[] itemNames = new string[] { "Gold Coin", "Silver Coin", "Copper Coin", "Stick", "Boots of Swiftness", "Long Sword" };
     //Indices inside the imbeded array represent (-1 value = nothing): 0:damage, 1:stack max, 2:mana, 3:cooldown, 4:item type (-1 = not weapon, 0 = melee, 1 = ranged),
-    //5: special effects (for abilities), 6: armor type (-1 = not armor, 0 = head, 1 = chest, 2 = boots/legs, 3 = ring one, 4 = ring two), 7: armor value
-    protected int[,] itemStats = new int[12, 8] { {0,0,0,0,-1,0,-1,0}, {0,100,0,0,-1,0,-1,0}, {0,100,0,0,-1,0,-1,0}, {10,1,20,100,1,0,-1,0}, {0,10,0,0,-1,0,-1,0}, 
-                                                {5,1,0,50,0,0,-1,0}, {10,1,25,125,1,0,-1,0}, {0,1,0,0,-1,0,2,2}, {8,1,15,120,1,0,-1,0}, {1,1,20,200,0,0,-1,0},
-                                                {15,1,60,2500,0,0,-1,0}, {1,1,50,2000,1,0,-1,0}};
+    //5: armor type (-1 = not armor, 0 = head, 1 = chest, 2 = boots/legs, 3 = ring one, 4 = ring two), 6: armor value
+    protected int[,] itemStats = new int[6, 7] { {0,0,0,0,-1,-1,0}, {0,100,0,0,-1,-1,0}, {0,100,0,0,-1,-1,0}, {0,10,0,0,-1,-1,0}, 
+                                                 {0,1,0,0,-1,2,2}, {5,1,0,50,0,-1,0} };
 
     public float GetItemDamage(int itemID)
     {
@@ -18,7 +17,7 @@ public class Items : BaseClass
     }
     public float GetItemArmor(int itemID)
     {
-        return (float)itemStats[itemID, 7];
+        return (float)itemStats[itemID, 6];
     }
     public float GetManaCost(int itemID)
     {
@@ -35,11 +34,8 @@ public class Items : BaseClass
     {
         return itemStats[itemID, 4];
     }
-    public int GetSpecialEffects(int itemID) {
-        return itemStats[itemID, 5];
-    }
     public int GetItemArmorType(int itemID)
     {
-        return itemStats[itemID, 6];
+        return itemStats[itemID, 5];
     }
 }

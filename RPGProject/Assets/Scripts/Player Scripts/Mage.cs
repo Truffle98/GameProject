@@ -411,6 +411,10 @@ public class Mage : BaseClass
                 newProjectile.GetComponent<ProjectileScript>().angle = angle;
 
             }
+
+            else {
+                
+            }
             
             switch(itemSlot)
             {

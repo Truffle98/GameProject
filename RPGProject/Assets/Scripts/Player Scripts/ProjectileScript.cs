@@ -6,8 +6,12 @@ public class ProjectileScript : MonoBehaviour
 {
     public float speed, lifespan, angle, damage, multiplier = 1;
     public int itemID;
+    public int abilityClass; //-1: classless projectile item, 0: mage, 1: assassin
+    private int itemType;
     private Vector3 shootDirection;
     private PlayerStats playerStats;
+    private Mage mage;
+    private Assassin assassin;
     
     public float GetProjectileDamage() {
         return damage;
@@ -21,7 +25,21 @@ public class ProjectileScript : MonoBehaviour
         shootDirection = new Vector3 (Mathf.Cos(angle), Mathf.Sin(angle), 0);
         GetComponent<Rigidbody2D>().velocity = shootDirection * speed;
         playerStats = GameObject.Find("Player Stats").GetComponent<PlayerStats>();
-        damage = playerStats.GetItemDamage(itemID) * multiplier;
+        mage = GameObject.Find("MageClass(Clone)").GetComponent<Mage>();
+        //assassin = GameObject.Find("Assassin(Clone)").GetComponent<Assassin>();
+
+        if (abilityClass == 0)
+        {
+            damage = mage.GetAbilityDamage(itemID) * multiplier;
+        }
+        else if (abilityClass == 1)
+        {
+            damage = assassin.GetAbilityDamage(itemID) * multiplier;
+        }
+        else 
+        {
+            damage = playerStats.GetItemDamage(itemID) * multiplier;
+        }
         Destroy(gameObject, lifespan);
     }
 

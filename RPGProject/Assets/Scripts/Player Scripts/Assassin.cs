@@ -2,14 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
-
-public class Mage : BaseClass
+public class Assassin : BaseClass
 {
     private float horizontalInput, verticalInput, maxHealth = baseHealth * 2, currentHealth, enemyDamage, maxMana = baseMana * 2, currentMana, angle, manaRegenerationSpeed;
     private Vector3 shootDirection;
     private int item1, item2, item3, item4, item5, item6, item7, item8, item1Type, item2Type, item3Type, item4Type, item5Type, item6Type, item7Type, item8Type;
-    public int cooldown1 = 0, cooldown2 = 0, cooldown3 = 0, cooldown4 = 0, cooldown5 = 0, cooldown6 = 0, cooldown7 = 0, cooldown8 = 0;
+    private int cooldown1 = 0, cooldown2 = 0, cooldown3 = 0, cooldown4 = 0, cooldown5 = 0, cooldown6 = 0, cooldown7 = 0, cooldown8 = 0;
     public Rigidbody2D body;
     private Animator anim;
     private bool movingUp, movingDown, inventoryOrArmorEquipOpen;
@@ -21,24 +19,15 @@ public class Mage : BaseClass
     private CooldownUI cooldownUI;
     private GameObject item1Object, item2Object, item3Object, item4Object, item5Object, item6Object, item7Object, item8Object, newMelee, newProjectile;
     public ManaBar manaBar;
+    public HealthBar1 healthbar;
     public bool dashing = false;
     private EnemyProjectileScript enemyProjectileScript;
     private float mageArmorMultiplier = baseArmorMultiplier + 0.5f;
 
-    //Nested array: 0: damage, 1: mana cost, 2: cooldown, 3: ability variation
-    public GameObject[] mageAbilityObjects;
-    protected string[] mageAbilityNames = {"Fireball", "Vampiric Bolt", "Wave", "Mind Control"};
-    protected int[,] mageAbilityStats = new int[4, 5] { {10, 20, 100, 0, 1}, {10, 25, 125, 0, 1}, {8, 15, 120,0, 1}, {0, 50, 2000, 0, 1} };
-
-    public HealthBar1 healthbar;
-
-    public void Heal (float healthHealed) {
-        currentHealth += healthHealed;
-        if (currentHealth > maxHealth) {
-            currentHealth = maxHealth;
-        }
-        healthbar.SetHealth(currentHealth);
-    }
+    //Nested array: 0: damage, 1: mana cost, 2: cooldown, 3: ability variation, 4: item type
+    protected string[] assassinAbilityNames = {"Dash", "Thorn"};
+    protected int[,] assassinAbilityStats = new int[2, 5] { {0, 20, 200, 0, 0}, {15, 50, 2500, 0, 0} };
+    public GameObject[] assassinAbilityObjects;
 
     public float GetMaxMana()
     {
@@ -94,11 +83,11 @@ public class Mage : BaseClass
 
         item1Type = playerStats.GetEquippedItemClass(0);
         item1 = playerStats.GetEquippedItem(0);
-        if (item1>=0)
+        if (item1>0)
         {
-            if (item1Type == 0)
+            if (item1Type == 1)
             {
-                item1Object = mageAbilityObjects[item1];
+                item1Object = assassinAbilityObjects[item1];
             }
             else 
             {
@@ -108,11 +97,11 @@ public class Mage : BaseClass
         
         item2Type = playerStats.GetEquippedItemClass(1);
         item2 = playerStats.GetEquippedItem(1);
-        if (item2>=0)
+        if (item2>0)
         {
-            if (item2Type == 0)
+            if (item2Type == 1)
             {
-                item2Object = mageAbilityObjects[item2];
+                item2Object = assassinAbilityObjects[item2];
             }
             else 
             {
@@ -122,11 +111,11 @@ public class Mage : BaseClass
 
         item3Type = playerStats.GetEquippedItemClass(2);
         item3 = playerStats.GetEquippedItem(2);
-        if (item3>=0)
+        if (item3>0)
         {
-            if (item3Type == 0)
+            if (item3Type == 1)
             {
-                item3Object = mageAbilityObjects[item3];
+                item3Object = assassinAbilityObjects[item3];
             }
             else 
             {
@@ -136,11 +125,11 @@ public class Mage : BaseClass
 
         item4Type = playerStats.GetEquippedItemClass(3);
         item4 = playerStats.GetEquippedItem(3);
-        if (item4>=0)
+        if (item4>0)
         {
-            if (item4Type == 0)
+            if (item4Type == 1)
             {
-                item4Object = mageAbilityObjects[item4];
+                item4Object = assassinAbilityObjects[item4];
             }
             else 
             {
@@ -150,11 +139,11 @@ public class Mage : BaseClass
 
         item5Type = playerStats.GetEquippedItemClass(4);
         item5 = playerStats.GetEquippedItem(4);
-        if (item5>=0)
+        if (item5>0)
         {
-            if (item5Type == 0)
+            if (item5Type == 1)
             {
-                item5Object = mageAbilityObjects[item5];
+                item5Object = assassinAbilityObjects[item5];
             }
             else 
             {
@@ -164,11 +153,11 @@ public class Mage : BaseClass
         
         item6Type = playerStats.GetEquippedItemClass(5);
         item6 = playerStats.GetEquippedItem(5);
-        if (item6>=0)
+        if (item6>0)
         {
-            if (item6Type == 0)
+            if (item6Type == 1)
             {
-                item6Object = mageAbilityObjects[item6];
+                item6Object = assassinAbilityObjects[item6];
             }
             else 
             {
@@ -178,11 +167,11 @@ public class Mage : BaseClass
 
         item7Type = playerStats.GetEquippedItemClass(6);
         item7 = playerStats.GetEquippedItem(6);
-        if (item7>=0)
+        if (item7>0)
         {
-            if (item7Type == 0)
+            if (item7Type == 1)
             {
-                item7Object = mageAbilityObjects[item7];
+                item7Object = assassinAbilityObjects[item7];
             }
             else 
             {
@@ -192,11 +181,11 @@ public class Mage : BaseClass
 
         item8Type = playerStats.GetEquippedItemClass(7);
         item8 = playerStats.GetEquippedItem(7);
-        if (item8>=0)
+        if (item8>0)
         {
-            if (item8Type == 0)
+            if (item8Type == 1)
             {
-                item8Object = mageAbilityObjects[item8];
+                item8Object = assassinAbilityObjects[item8];
             }
             else 
             {
@@ -253,7 +242,7 @@ public class Mage : BaseClass
     {
         if (Input.GetMouseButtonDown(0) && cooldown1 == 0 && Time.timeScale == 1) 
         {
-            if (playerStats.GetEquippedItem(0)>-1)
+            if (item1>-1)
             {
                 UseItemInHotbar(0, item1Type, item1, item1Object);
             }
@@ -262,7 +251,7 @@ public class Mage : BaseClass
         //Accesses second item in hotbar
         else if (Input.GetMouseButtonDown(1) && cooldown2 == 0 && Time.timeScale == 1)
         {
-            if (playerStats.GetEquippedItem(1)>-1)
+            if (item2>-1)
             {
                 if(currentMana>itemsList.GetManaCost(playerStats.GetEquippedItem(1)))
                 {
@@ -273,7 +262,7 @@ public class Mage : BaseClass
 
         else if (Input.GetKeyDown(KeyCode.Q) && cooldown3 == 0 && Time.timeScale == 1) {
 
-            if (playerStats.GetEquippedItem(2)>-1)
+            if (item3>-1)
             {
                 if(currentMana>itemsList.GetManaCost(playerStats.GetEquippedItem(2)))
                 {
@@ -285,7 +274,7 @@ public class Mage : BaseClass
 
         else if (Input.GetKeyDown(KeyCode.E) && cooldown4 == 0 && Time.timeScale == 1) {
 
-            if (playerStats.GetEquippedItem(3)>-1)
+            if (item4>-1)
             {
                 if(currentMana>itemsList.GetManaCost(playerStats.GetEquippedItem(3)))
                 {
@@ -297,7 +286,7 @@ public class Mage : BaseClass
 
         else if (Input.GetKeyDown(KeyCode.Alpha1) && cooldown5 == 0 && Time.timeScale == 1) 
         {
-            if (playerStats.GetEquippedItem(4)>-1)
+            if (item5>-1)
             {
                 UseItemInHotbar(4, item5Type, item5, item5Object);
             }
@@ -306,7 +295,7 @@ public class Mage : BaseClass
         //Accesses second item in hotbar
         else if (Input.GetKeyDown(KeyCode.Alpha2) && cooldown6 == 0 && Time.timeScale == 1)
         {
-            if (playerStats.GetEquippedItem(5)>-1)
+            if (item6>-1)
             {
                 if(currentMana>itemsList.GetManaCost(playerStats.GetEquippedItem(5)))
                 {
@@ -317,7 +306,7 @@ public class Mage : BaseClass
 
         else if (Input.GetKeyDown(KeyCode.Alpha3) && cooldown7 == 0 && Time.timeScale == 1) {
 
-            if (playerStats.GetEquippedItem(6)>-1)
+            if (item7>-1)
             {
                 if(currentMana>itemsList.GetManaCost(playerStats.GetEquippedItem(6)))
                 {
@@ -329,7 +318,7 @@ public class Mage : BaseClass
 
         else if (Input.GetKeyDown(KeyCode.Alpha4) && cooldown8 == 0 && Time.timeScale == 1) {
 
-            if (playerStats.GetEquippedItem(7)>-1)
+            if (item8>-1)
             {
                 if(currentMana>itemsList.GetManaCost(playerStats.GetEquippedItem(7)))
                 {
@@ -411,6 +400,7 @@ public class Mage : BaseClass
         }
     }
 
+    //item class = item ability class type (0 = mage, 1 = assassin, -1 = classless item)
     void UseItemInHotbar(int itemSlot, int itemClass, int item, GameObject itemObject) {
 
         if (currentMana > itemsList.GetManaCost(item)) {
@@ -422,9 +412,9 @@ public class Mage : BaseClass
             shootDirection = shootDirection.normalized;
             angle = Mathf.Atan2(shootDirection.y, shootDirection.x);
 
-            if (itemClass==0)
+            if (itemClass<0)
             {
-                if (mageAbilityStats[item, 4] == 0) 
+                if (assassinAbilityStats[item, 4] == 0) 
                 {
 
                     newMelee = Instantiate(itemObject, (new Vector3(Mathf.Cos(angle - 0.5f), Mathf.Sin(angle - 0.5f), 0) + transform.position), Quaternion.Euler(0, 0, Mathf.Rad2Deg * angle - 90));
@@ -452,80 +442,76 @@ public class Mage : BaseClass
                     newProjectile.GetComponent<ProjectileScript>().angle = angle;
                 }
             }
-
-            else {
-                
-            }
             
             switch(itemSlot)
             {
                 case 0:
-                    if (item1Type == 0)
+                    if (item1Type == 1)
                     {
-                        cooldown1 = mageAbilityStats[item, 2];
+                        cooldown1 = assassinAbilityStats[item, 2];
                     }
                     else
                     {
                         cooldown1 = itemsList.GetCooldown(item);
                     }; itemCooldowns[0].SetActive(true); itemCooldowns[0].GetComponent<CooldownUI>().SetMaxCooldown(cooldown1); break;
                 case 1: 
-                    if (item2Type == 0)
+                    if (item2Type == 1)
                     {
-                        cooldown2 = mageAbilityStats[item, 2];
+                        cooldown2 = assassinAbilityStats[item, 2];
                     }
                     else
                     {
                         cooldown2 = itemsList.GetCooldown(item);
                     }; itemCooldowns[1].SetActive(true); itemCooldowns[1].GetComponent<CooldownUI>().SetMaxCooldown(cooldown2); break;
                 case 2: 
-                    if (item3Type == 0)
+                    if (item3Type == 1)
                     {
-                        cooldown3 = mageAbilityStats[item, 2];
+                        cooldown3 = assassinAbilityStats[item, 2];
                     }
                     else
                     {
                         cooldown3 = itemsList.GetCooldown(item);
                     }; itemCooldowns[2].SetActive(true); itemCooldowns[2].GetComponent<CooldownUI>().SetMaxCooldown(cooldown3); break;
                 case 3: 
-                    if (item4Type == 0)
+                    if (item4Type == 1)
                     {
-                        cooldown4 = mageAbilityStats[item, 2];
+                        cooldown4 = assassinAbilityStats[item, 2];
                     }
                     else
                     {
                         cooldown4 = itemsList.GetCooldown(item);
                     }; itemCooldowns[3].SetActive(true); itemCooldowns[3].GetComponent<CooldownUI>().SetMaxCooldown(cooldown4); break;
                 case 5: 
-                    if (item5Type == 0)
+                    if (item5Type == 1)
                     {
-                        cooldown5 = mageAbilityStats[item, 2];
+                        cooldown5 = assassinAbilityStats[item, 2];
                     }
                     else
                     {
                         cooldown5 = itemsList.GetCooldown(item);
                     }; itemCooldowns[4].SetActive(true); itemCooldowns[4].GetComponent<CooldownUI>().SetMaxCooldown(cooldown5); break;
                 case 6: 
-                    if (item6Type == 0)
+                    if (item6Type == 1)
                     {
-                        cooldown6 = mageAbilityStats[item, 2];
+                        cooldown6 = assassinAbilityStats[item, 2];
                     }
                     else
                     {
                         cooldown6 = itemsList.GetCooldown(item);
                     }; itemCooldowns[5].SetActive(true); itemCooldowns[5].GetComponent<CooldownUI>().SetMaxCooldown(cooldown6); break;
                 case 7: 
-                    if (item7Type == 0)
+                    if (item7Type == 1)
                     {
-                        cooldown7 = mageAbilityStats[item, 2];
+                        cooldown7 = assassinAbilityStats[item, 2];
                     }
                     else
                     {
                         cooldown7 = itemsList.GetCooldown(item);
                     }; itemCooldowns[6].SetActive(true); itemCooldowns[6].GetComponent<CooldownUI>().SetMaxCooldown(cooldown7); break;
                 case 8: 
-                    if (item8Type == 0)
+                    if (item8Type == 1)
                     {
-                        cooldown8 = mageAbilityStats[item, 2];
+                        cooldown8 = assassinAbilityStats[item, 2];
                     }
                     else
                     {
@@ -538,16 +524,16 @@ public class Mage : BaseClass
 
     public int GetAbilityDamage(int index)
     {
-        return mageAbilityStats[index, 0];
+        return assassinAbilityStats[index, 0];
     }
 
     public GameObject GetAbilityObject(int index)
     {
-        return mageAbilityObjects[index];
+        return assassinAbilityObjects[index];
     }
 
     public string GetAbilityName(int index)
     {
-        return mageAbilityNames[index];
+        return assassinAbilityNames[index];
     }
 }

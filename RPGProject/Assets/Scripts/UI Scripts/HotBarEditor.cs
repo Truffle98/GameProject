@@ -8,15 +8,16 @@ public class HotBarEditor : MonoBehaviour
     public Button button;
     public Sprite spotHolder;
     public int hotBarSlot;
-    private int itemID, cooldown = 0;
+    private int itemID, itemClass, cooldown = 0;
     private PlayerStats playerStats;
     private InventoryOpener inventoryOpener;
     private Image img;
     private bool inventoryIsOpen = false;
 
-    public void SetSprite(Sprite itemSprite, int ID){
+    public void SetSprite(Sprite itemSprite, int ID, int iClass){
         img.sprite = itemSprite;
         itemID = ID;
+        itemClass = iClass;
     }
 
     public string getHotBarSprite() {
@@ -38,7 +39,7 @@ public class HotBarEditor : MonoBehaviour
         {
             if (img.sprite.name != spotHolder.name && cooldown==0 && inventoryIsOpen){
                 img.sprite = spotHolder;
-                playerStats.switchItemToInventory(hotBarSlot, itemID, "hot bar");
+                playerStats.switchItemToInventory(hotBarSlot, itemID, itemClass, "hot bar");
                 cooldown = 50;
             }
         });

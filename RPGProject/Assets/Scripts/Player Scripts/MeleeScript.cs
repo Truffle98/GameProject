@@ -5,10 +5,13 @@ using UnityEngine;
 public class MeleeScript : MonoBehaviour
 {
     public int itemID;
+    public int abilityClass; //-1: classless projectile item, 0: mage, 1: assassin
     private float damage;
     private Vector3 shootDirection, startingPosition;
     private PlayerStats playerStats;
     private GameObject player;
+    private Mage mage;
+    private Assassin assassin;
 
     public float GetDamage()
     {
@@ -20,7 +23,21 @@ public class MeleeScript : MonoBehaviour
     {
         player = GameObject.FindWithTag("Character");
         playerStats = GameObject.Find("Player Stats").GetComponent<PlayerStats>();
-        damage = playerStats.GetItemDamage(itemID);
+        mage = GameObject.Find("MageClass(Clone)").GetComponent<Mage>();
+        //assassin = GameObject.Find("Assassin").GetComponent<AssassinScript>();
+
+        if (abilityClass == 0)
+        {
+            damage = mage.GetAbilityDamage(itemID);
+        }
+        else if (abilityClass == 1)
+        {
+            damage = assassin.GetAbilityDamage(itemID);
+        }
+        else 
+        {
+            damage = playerStats.GetItemDamage(itemID);
+        }
 
         /*shootDirection = Input.mousePosition;
         shootDirection.z = 0.0f;

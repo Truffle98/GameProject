@@ -23,10 +23,11 @@ public class Assassin : BaseClass
     public bool dashing = false;
     private EnemyProjectileScript enemyProjectileScript;
     private float assassinArmorMultiplier = baseArmorMultiplier + 0.25f;
+    private GameObject characterParent;
 
     //Nested array: 0: damage, 1: mana cost, 2: cooldown, 3: ability variation, 4: item type
-    protected string[] assassinAbilityNames = {"Dash", "Thorn", "Shadow Clone", "Caltrops"};
-    protected int[,] assassinAbilityStats = new int[4, 5] { {0, 20, 100, 0, 2}, {15, 50, 2500, 0, 2}, {0, 30, 1250, 0, 2}, {5, 30, 500, 0, 2} };
+    protected string[] assassinAbilityNames = {"Dash", "Thorn", "Shadow Clone", "Caltrops", "Thousand Cuts"};
+    protected int[,] assassinAbilityStats = new int[5, 5] { {0, 20, 100, 0, 2}, {15, 50, 2500, 0, 2}, {0, 30, 1250, 0, 2}, {5, 30, 500, 0, 2}, {5, 20, 750, 0, 2} };
     public GameObject[] assassinAbilityObjects;
 
     public float GetMaxMana()
@@ -44,6 +45,7 @@ public class Assassin : BaseClass
         itemsList = GameObject.Find("ItemObjectList").GetComponent<Items>();
         inventoryOpener = GameObject.Find("InventoryOpener").GetComponent<InventoryOpener>();
         armorEquipOpener = GameObject.Find("Armor Equip Opener").GetComponent<ArmorEquipOpener>();
+        characterParent = GameObject.Find("CharacterParent");
        
         manaRegenerationSpeed = .02f;
 
@@ -70,7 +72,8 @@ public class Assassin : BaseClass
             verticalInput = Input.GetAxis("Vertical");
 
             //Sets character velocity
-            body.velocity = new Vector2(horizontalInput * baseSpeed, verticalInput * baseSpeed);
+            characterParent.GetComponent<Rigidbody2D>().velocity = new Vector2(horizontalInput * baseSpeed, verticalInput * baseSpeed);
+            transform.position = characterParent.transform.position;
 
             //Flips sprites and helps facilitate sprite transitions
             changeSprite(horizontalInput, verticalInput);
@@ -425,7 +428,7 @@ public class Assassin : BaseClass
                 if (assassinAbilityStats[item, 4] == 0) 
                 {
                     newMelee = Instantiate(itemObject, (new Vector3(Mathf.Cos(angle - 0.5f), Mathf.Sin(angle - 0.5f), 0) + transform.position), Quaternion.Euler(0, 0, Mathf.Rad2Deg * angle - 90));
-                    newMelee.transform.parent = gameObject.transform;
+                    newMelee.transform.parent = characterParent.transform;
                 }
                 else if (assassinAbilityStats[item, 4] == 1) 
                 {
@@ -439,7 +442,7 @@ public class Assassin : BaseClass
                 else if (item == 1) 
                 {
                     newMelee = Instantiate(itemObject, transform.position, Quaternion.Euler(0,0,0));
-                    newMelee.transform.parent = gameObject.transform;
+                    newMelee.transform.parent = characterParent.transform;
                 }
                 else if (item == 2)
                 {
@@ -448,8 +451,15 @@ public class Assassin : BaseClass
                 else if (item == 3)
                 {
                     newMelee = Instantiate(itemObject, transform.position, Quaternion.Euler(0,0,0));
-                    newMelee.transform.parent = gameObject.transform;
+                    newMelee.transform.parent = characterParent.transform;
                     newMelee.GetComponent<CaltropParent>().damage = assassinAbilityStats[3, 0];
+                }
+                else if (item == 4) 
+                {
+                    newMelee = Instantiate(itemObject, transform.position, Quaternion.Euler(0, 0, 0));
+                    newMelee.transform.parent = characterParent.transform;
+                    newMelee.GetComponent<ThousandCutsParent>().angle = angle;
+                    newMelee.GetComponent<ThousandCutsParent>().damage = assassinAbilityStats[4, 0];
                 }
             }
             else 
@@ -457,7 +467,7 @@ public class Assassin : BaseClass
                 if (itemsList.GetItemType(item) == 0)
                 {
                     newMelee = Instantiate(itemObject, (new Vector3(Mathf.Cos(angle - 0.5f), Mathf.Sin(angle - 0.5f), 0) + transform.position), Quaternion.Euler(0, 0, Mathf.Rad2Deg * angle - 90));
-                    newMelee.transform.parent = gameObject.transform;
+                    newMelee.transform.parent = characterParent.transform;
                     newMelee.GetComponent<MeleeScript>().damage = playerStats.GetItemDamage(item);
                 }
                 else 
@@ -506,7 +516,7 @@ public class Assassin : BaseClass
                     {
                         cooldown4 = itemsList.GetCooldown(item);
                     }; itemCooldowns[3].SetActive(true); itemCooldowns[3].GetComponent<CooldownUI>().SetMaxCooldown(cooldown4); break;
-                case 5: 
+                case 4: 
                     if (item5Type == 1)
                     {
                         cooldown5 = assassinAbilityStats[item, 2];
@@ -515,7 +525,7 @@ public class Assassin : BaseClass
                     {
                         cooldown5 = itemsList.GetCooldown(item);
                     }; itemCooldowns[4].SetActive(true); itemCooldowns[4].GetComponent<CooldownUI>().SetMaxCooldown(cooldown5); break;
-                case 6: 
+                case 5: 
                     if (item6Type == 1)
                     {
                         cooldown6 = assassinAbilityStats[item, 2];
@@ -524,7 +534,7 @@ public class Assassin : BaseClass
                     {
                         cooldown6 = itemsList.GetCooldown(item);
                     }; itemCooldowns[5].SetActive(true); itemCooldowns[5].GetComponent<CooldownUI>().SetMaxCooldown(cooldown6); break;
-                case 7: 
+                case 6: 
                     if (item7Type == 1)
                     {
                         cooldown7 = assassinAbilityStats[item, 2];
@@ -533,7 +543,7 @@ public class Assassin : BaseClass
                     {
                         cooldown7 = itemsList.GetCooldown(item);
                     }; itemCooldowns[6].SetActive(true); itemCooldowns[6].GetComponent<CooldownUI>().SetMaxCooldown(cooldown7); break;
-                case 8: 
+                case 7: 
                     if (item8Type == 1)
                     {
                         cooldown8 = assassinAbilityStats[item, 2];

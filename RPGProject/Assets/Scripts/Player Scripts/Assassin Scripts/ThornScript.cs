@@ -16,7 +16,7 @@ public class ThornScript : MonoBehaviour
         transform.position = player.transform.position;
         transform.rotation = Quaternion.Euler(0,0,0);*/
         if (gameObject.CompareTag("AOE")) {
-            wheel2 = Instantiate(wheel2Object, new Vector3 (0,0,0), Quaternion.Euler(0,0,0));
+            wheel2 = Instantiate(wheel2Object, transform.position, Quaternion.Euler(0,0,0));
             wheel2.transform.parent = transform.parent;
         }
     }

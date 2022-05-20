@@ -126,3 +126,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemID: 1
   itemType: -1
+  abilityType: -1

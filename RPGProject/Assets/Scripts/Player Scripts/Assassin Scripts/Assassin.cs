@@ -25,8 +25,8 @@ public class Assassin : BaseClass
     private float assassinArmorMultiplier = baseArmorMultiplier + 0.25f;
 
     //Nested array: 0: damage, 1: mana cost, 2: cooldown, 3: ability variation, 4: item type
-    protected string[] assassinAbilityNames = {"Dash", "Thorn", "Shadow Clone"};
-    protected int[,] assassinAbilityStats = new int[3, 5] { {0, 20, 100, 0, 2}, {15, 50, 2500, 0, 2}, {0, 30, 1250, 0, 2} };
+    protected string[] assassinAbilityNames = {"Dash", "Thorn", "Shadow Clone", "Caltrops"};
+    protected int[,] assassinAbilityStats = new int[4, 5] { {0, 20, 100, 0, 2}, {15, 50, 2500, 0, 2}, {0, 30, 1250, 0, 2}, {5, 30, 500, 0, 2} };
     public GameObject[] assassinAbilityObjects;
 
     public float GetMaxMana()
@@ -440,6 +440,16 @@ public class Assassin : BaseClass
                 {
                     newMelee = Instantiate(itemObject, transform.position, Quaternion.Euler(0,0,0));
                     newMelee.transform.parent = gameObject.transform;
+                }
+                else if (item == 2)
+                {
+
+                }
+                else if (item == 3)
+                {
+                    newMelee = Instantiate(itemObject, transform.position, Quaternion.Euler(0,0,0));
+                    newMelee.transform.parent = gameObject.transform;
+                    newMelee.GetComponent<CaltropParent>().damage = assassinAbilityStats[3, 0];
                 }
             }
             else 

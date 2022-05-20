@@ -14,12 +14,12 @@ public class PlayerStats : Items
 
 
     //FIRST NUMBER IN NESTED ARRAY IS THE ITEM/ABILITY CLASS [-1: CLASSLESS, 0: MAGE, 1: ASSASSIN], SECOND NUMBER IS THE ITEM/ABILITY LOCAL INDEX. FIREBALL FOR EXAMPLE IS {0, 0}
-    public int[,] itemLineup = new int[8,2]{ {-1, 5}, {1, 0}, {1, 1}, {-1, -1}, {-1, -1}, {-1, -1}, {-1, -1}, {-1, -1} };
+    public int[,] itemLineup = new int[8,2]{ {-1, 5}, {1, 0}, {1, 1}, {1, 3}, {-1, -1}, {-1, -1}, {-1, -1}, {-1, -1} };
     public int[,] armorLineup = new int[5,2] { {-1, -1}, {-1, -1}, {-1, -1}, {-1, -1}, {-1, -1} };
     public int[,] inventory = new int[15, 2] { {-1, -1}, {-1, -1}, {-1, -1}, {-1, -1}, {-1, -1},
                                {-1, -1}, {-1, -1}, {-1, -1}, {-1, -1}, {-1, -1},
                                {-1, -1}, {-1, -1}, {-1, -1}, {-1, -1}, {-1, -1} };
-    public int[] inventoryStacks = {1, 1, 1, 0, 0,
+    public int[] inventoryStacks = {0, 0, 0, 0, 0,
                                      0, 0, 0, 0, 0,
                                      0, 0, 0, 0, 0};
     private int[] coinPurse = {0, 0, 0};

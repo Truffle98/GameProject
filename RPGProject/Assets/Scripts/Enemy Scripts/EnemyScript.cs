@@ -214,6 +214,8 @@ public class EnemyScript : MonoBehaviour
     {
         for (int index = 0; index < itemDropList.Length; index++)
         {
+            Debug.Log(index);
+            Debug.Log(itemDropList.Length);
             itemBound = itemDropPercentagesList[index];
             for (int index2 = startBound; index2 < itemBound+startBound; index2++)
             {

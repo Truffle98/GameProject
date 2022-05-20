@@ -28,7 +28,7 @@ public class VampiricScript : MonoBehaviour
             }
             if (other.gameObject.CompareTag("Enemy")) {
                 if (variation == 0) {
-                    GameObject.Find("Mage(Clone)").GetComponent<Mage>().Heal(damage * 0.125f);
+                    GameObject.Find("MageClass(Clone)").GetComponent<Mage>().Heal(damage * 0.125f);
                 } else if (variation == 1) {
                     newLeecher = Instantiate(leecher, other.gameObject.transform.position + new Vector3 (0, 2, 0), Quaternion.Euler(0, 0, 0));
                     newLeecher.transform.parent = other.gameObject.transform;

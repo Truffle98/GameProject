@@ -5,7 +5,7 @@ using UnityEngine;
 public class MeleeScript : MonoBehaviour
 {
     public int itemID;
-    public int abilityClass; //-1: classless projectile item, 0: mage, 1: assassin
+    public int abilityClass; //-1: classless melee item, 0: mage, 1: assassin
     private float damage;
     private Vector3 shootDirection, startingPosition;
     private PlayerStats playerStats;

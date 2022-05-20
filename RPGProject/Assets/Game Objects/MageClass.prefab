@@ -3857,7 +3857,6 @@ GameObject:
   - component: {fileID: 6015606291606298043}
   - component: {fileID: 6015606291606298041}
   - component: {fileID: -1849567793799400223}
-  - component: {fileID: 6279365859939549498}
   m_Layer: 0
   m_Name: MageClass
   m_TagString: Character
@@ -4053,45 +4052,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7cdb8845804cfc46b6dcd51ed7218b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &6279365859939549498
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6015606291606298047}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e6c58983bba8f6b4ab5923b257c8925f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameItems: []
-  cooldown1: 0
-  cooldown2: 0
-  cooldown3: 0
-  cooldown4: 0
-  cooldown5: 0
-  cooldown6: 0
-  cooldown7: 0
-  cooldown8: 0
-  body: {fileID: 0}
-  itemCooldowns:
-  - {fileID: 6576625720555180778}
-  - {fileID: 5557800387131384793}
-  - {fileID: 7444277578832829312}
-  - {fileID: 8161546704837444337}
-  - {fileID: 4600050213162798427}
-  - {fileID: 5888687495993274746}
-  - {fileID: 4175960262138413383}
-  - {fileID: 1347195514046852246}
-  manaBar: {fileID: 4948500146462377690}
-  dashing: 0
-  mageAbilityObjects:
-  - {fileID: 8413102441884550948, guid: 65c1838bbf3af424988fa910f0aefc25, type: 3}
-  - {fileID: 2361279735733584543, guid: bf764f1e8b0a1424fbf0effc0392de24, type: 3}
-  - {fileID: 1747979757602291651, guid: 0cbef485de2ced94a9e42bc9cc219604, type: 3}
-  - {fileID: 3795094427925300730, guid: 804363d7ef24b844aafff7318e198b51, type: 3}
-  healthbar: {fileID: 1268773126745769410}
 --- !u!1 &6056236604663018275
 GameObject:
   m_ObjectHideFlags: 0

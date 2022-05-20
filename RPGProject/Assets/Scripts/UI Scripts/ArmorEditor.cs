@@ -8,14 +8,13 @@ public class ArmorEditor : MonoBehaviour
     public Button button;
     public Sprite spotHolder;
     public int armorEquipSlot;
-    private int itemID, cooldown = 0, itemType;
+    private int itemID, cooldown = 0;
     private PlayerStats playerStats;
     private Image img;
 
-    public void SetSprite(Sprite itemSprite, int ID, int type){
+    public void SetSprite(Sprite itemSprite, int ID){
         img.sprite = itemSprite;
         itemID = ID;
-        itemType = type;
     }
 
     void Start()
@@ -32,7 +31,7 @@ public class ArmorEditor : MonoBehaviour
             if (img.sprite.name != spotHolder.name && cooldown==0)
             {
                 img.sprite = spotHolder;
-                playerStats.switchItemToInventory(armorEquipSlot, -1, itemID, "armor");
+                playerStats.switchItemToInventory(armorEquipSlot, itemID, -1, "armor");
                 cooldown = 50;
             }
         });

@@ -25,10 +25,10 @@ public class Mage : BaseClass
     private EnemyProjectileScript enemyProjectileScript;
     private float mageArmorMultiplier = baseArmorMultiplier + 0.5f;
 
-    //Nested array: 0: damage, 1: mana cost, 2: cooldown, 3: ability variation
+    //Nested array: 0: damage, 1: mana cost, 2: cooldown, 3: ability variation, 4: ability type (melee or ranged)
     public GameObject[] mageAbilityObjects;
     protected string[] mageAbilityNames = {"Fireball", "Vampiric Bolt", "Wave", "Mind Control"};
-    protected int[,] mageAbilityStats = new int[4, 5] { {10, 20, 100, 0, 1}, {10, 25, 125, 0, 1}, {8, 15, 120,0, 1}, {0, 50, 2000, 0, 1} };
+    protected int[,] mageAbilityStats = new int[4, 5] { {10, 20, 100, 0, 1}, {10, 25, 125, 0, 1}, {8, 15, 120, 0, 1}, {0, 50, 2000, 0, 1} };
 
     public HealthBar1 healthbar;
 
@@ -392,7 +392,6 @@ public class Mage : BaseClass
         //On collision with something, it checks if its a projectile. If it is, then it gets the damage from the projectile's script
         if(other.gameObject.CompareTag("Enemy Projectile") && !dashing) {
             enemyProjectileScript = other.GetComponent<EnemyProjectileScript>();
-
             enemyDamage = enemyProjectileScript.GetProjectileDamage() - playerStats.GetArmor();
             Destroy(other.gameObject);
             currentHealth -= enemyDamage;
@@ -430,16 +429,15 @@ public class Mage : BaseClass
                     newMelee = Instantiate(itemObject, (new Vector3(Mathf.Cos(angle - 0.5f), Mathf.Sin(angle - 0.5f), 0) + transform.position), Quaternion.Euler(0, 0, Mathf.Rad2Deg * angle - 90));
                     newMelee.transform.parent = gameObject.transform;
 
-                } 
-                else 
+                }
+                else
                 {
-
                     newProjectile = Instantiate(itemObject, (new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0) + transform.position), Quaternion.Euler(0, 0, 0));
                     newProjectile.GetComponent<ProjectileScript>().angle = angle;
 
                 }
             }
-            else 
+            else
             {
                 if (itemsList.GetItemType(item) == 0)
                 {
@@ -452,11 +450,12 @@ public class Mage : BaseClass
                     newProjectile.GetComponent<ProjectileScript>().angle = angle;
                 }
             }
-
-            else {
+            /*
+            else 
+            {
                 
             }
-            
+            */
             switch(itemSlot)
             {
                 case 0:
@@ -532,13 +531,20 @@ public class Mage : BaseClass
                         cooldown8 = itemsList.GetCooldown(item);
                     }; itemCooldowns[7].SetActive(true); itemCooldowns[7].GetComponent<CooldownUI>().SetMaxCooldown(cooldown8); break;
             }
-            currentMana -= itemsList.GetManaCost(item);
+            if (itemClass==0)
+            {
+                currentMana -= mageAbilityStats[item, 1];
+            }
+            else
+            {
+                currentMana -= itemsList.GetManaCost(item);
+            }
         }
     }
 
     public int GetAbilityDamage(int index)
     {
-        return mageAbilityStats[index, 0];
+        return mageAbilityStats[index, 0] * baseDamage;
     }
 
     public GameObject GetAbilityObject(int index)

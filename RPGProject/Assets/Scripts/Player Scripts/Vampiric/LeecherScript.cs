@@ -15,7 +15,7 @@ public class LeecherScript : MonoBehaviour
     void Start()
     {
         lineRenderer = GetComponent<LineRenderer>();
-        player = GameObject.Find("Mage(Clone)");
+        player = GameObject.Find("MageClass(Clone)");
         mageScript = player.GetComponent<Mage>();
         enemyScript = target.GetComponent<EnemyScript>();
 

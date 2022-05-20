@@ -38,7 +38,7 @@ public class PlayerStats : Items
         {
             return true;
         }
-        else 
+        else
         {
             return false;
         }
@@ -202,9 +202,9 @@ public class PlayerStats : Items
     public float GetArmor()
     {
         armor = 0;
-        for (int armorIndex = 0; armorIndex<armorLineup.Length; armorIndex++)
+        for (int armorIndex = 0; armorIndex<5; armorIndex++)
         {
-            if (armorLineup[armorIndex, 1] > 0)
+            if (armorLineup[armorIndex, 1] != -1)
             {
                 armor += GetItemArmor(armorLineup[armorIndex, 1]);
             }

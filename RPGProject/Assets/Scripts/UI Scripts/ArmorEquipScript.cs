@@ -11,7 +11,7 @@ public class ArmorEquipScript : MonoBehaviour
     private Mage mage;
     private Assassin assassin;
     private Items items;
-    private int itemID, itemType, count=0;
+    private int itemID, count=0;
     private Sprite itemSprite;
 
     void Update()
@@ -29,11 +29,10 @@ public class ArmorEquipScript : MonoBehaviour
         
         for (int armorEquipIndex = 0; armorEquipIndex < 5; armorEquipIndex++){
             itemID = playerStats.GetItemInArmorLineup(armorEquipIndex);
-            itemType = playerStats.GetArmorItemClass(armorEquipIndex);
             if (itemID>0){
                 itemSprite = items.GetItemObject(itemID).GetComponent<SpriteRenderer>().sprite;
                 armorEditor = armorSlots[armorEquipIndex].GetComponent<ArmorEditor>();
-                armorEditor.SetSprite(itemSprite, itemID, itemType);
+                armorEditor.SetSprite(itemSprite, itemID);
             }
         }
     }

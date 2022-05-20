@@ -634,6 +634,8 @@ MonoBehaviour:
   - {fileID: 1116493200391650402}
   - {fileID: 7066629533997915002}
   - {fileID: 4133187305542739185}
+  mage: {fileID: 0}
+  assassin: {fileID: 0}
 --- !u!1 &861684314639309569
 GameObject:
   m_ObjectHideFlags: 0
@@ -2901,6 +2903,7 @@ MonoBehaviour:
   - {fileID: 876592878088761308}
   - {fileID: 1752559301240340700}
   - {fileID: 2939038154041554733}
+  mage: {fileID: 0}
 --- !u!114 &8225019707412952928
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4023,10 +4026,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameItems: []
-  assassinAbilityObjects:
-  - {fileID: 5187128529769039974, guid: e4fded95bdce3cd46a36701bdabe8a24, type: 3}
-  - {fileID: 7693573132972300104, guid: 8b4c62abbafc8794794cd6774ec612ec, type: 3}
-  body: {fileID: 0}
+  body: {fileID: 6015606291606298043}
   itemCooldowns:
   - {fileID: 6576625720555180778}
   - {fileID: 5557800387131384793}
@@ -4036,8 +4036,12 @@ MonoBehaviour:
   - {fileID: 5888687495993274746}
   - {fileID: 4175960262138413383}
   - {fileID: 1347195514046852246}
-  manaBar: {fileID: 0}
+  manaBar: {fileID: 4948500146462377690}
+  healthbar: {fileID: 1268773126745769410}
   dashing: 0
+  assassinAbilityObjects:
+  - {fileID: 5187128529769039974, guid: e4fded95bdce3cd46a36701bdabe8a24, type: 3}
+  - {fileID: 7693573132972300104, guid: 8b4c62abbafc8794794cd6774ec612ec, type: 3}
 --- !u!1 &6056236604663018275
 GameObject:
   m_ObjectHideFlags: 0

@@ -7,14 +7,16 @@ public class PlayerStats : Items
     private ItemID itemIDClass;
     private MenuTest menuTest;
     private float damage, armor = 0, mageArmorMultiplier = 1.5f;
-    private int decision, itemID, itemArmorType, experienceTotal, IAClass;
+    private int classDecision = 1, itemID, itemArmorType, experienceTotal, IAClass;
     private string itemName;
     private Mage mage;
-    //private Assassin assassin;
+    private Assassin assassin;
 
-    public int[,] itemLineup = new int[8,2]{ {0, 0}, {-1, 5}, {0, 1}, {-1, -1}, {-1, -1}, {-1, -1}, {-1, -1}, {-1, -1} };
+
+    //FIRST NUMBER IN NESTED ARRAY IS THE ITEM/ABILITY CLASS [-1: CLASSLESS, 0: MAGE, 1: ASSASSIN], SECOND NUMBER IS THE ITEM/ABILITY LOCAL INDEX. FIREBALL FOR EXAMPLE IS {0, 0}
+    public int[,] itemLineup = new int[8,2]{ {-1, 5}, {1, 0}, {1, 1}, {-1, -1}, {-1, -1}, {-1, -1}, {-1, -1}, {-1, -1} };
     public int[,] armorLineup = new int[5,2] { {-1, -1}, {-1, -1}, {-1, -1}, {-1, -1}, {-1, -1} };
-    public int[,] inventory = new int[15, 2] { {0, 2}, {0, 3}, {-1, -1}, {-1, -1}, {-1, -1},
+    public int[,] inventory = new int[15, 2] { {-1, -1}, {-1, -1}, {-1, -1}, {-1, -1}, {-1, -1},
                                {-1, -1}, {-1, -1}, {-1, -1}, {-1, -1}, {-1, -1},
                                {-1, -1}, {-1, -1}, {-1, -1}, {-1, -1}, {-1, -1} };
     public int[] inventoryStacks = {1, 1, 1, 0, 0,
@@ -23,9 +25,25 @@ public class PlayerStats : Items
     private int[] coinPurse = {0, 0, 0};
     private int inventoryFailedPickupCooldown = 0, messageCooldown = 0;
 
+    public bool isItemInSlot(int index)
+    {
+        if (itemLineup[index, 0] == -1 && itemLineup[index, 1] == -1)
+        {
+            return false;
+        }
+        return true;
+    }
+
     void Start()
     {
-        mage = GameObject.Find("MageClass(Clone)").GetComponent<Mage>();
+        if (classDecision == 0)
+        {
+            mage = GameObject.Find("MageClass(Clone)").GetComponent<Mage>();
+        }
+        else if (classDecision == 1)
+        {
+            assassin = GameObject.Find("Assassin(Clone)").GetComponent<Assassin>();
+        }
     }
 
     public bool isWeapon(int index, int itemClass)
@@ -131,7 +149,7 @@ public class PlayerStats : Items
         }
         else if (IAClass == 1)
         {
-            //itemName =
+            itemName = assassin.GetAbilityName(itemID);
         }
         for (int i = 0; i < itemLineup.Length; i++) 
         {
@@ -148,18 +166,8 @@ public class PlayerStats : Items
     }
     public void SwitchItemToArmorEquip(int indexInInventory, int itemID, int IACLass)
     {
-        if (IAClass<0)
-        {
-            itemName = itemNames[itemID];
-        }
-        else if (IAClass == 0)
-        {
-            itemName = mage.GetAbilityName(itemID);
-        }
-        else if (IAClass == 1)
-        {
-            //itemName =
-        }
+
+        itemName = itemNames[itemID];
         itemArmorType = GetItemArmorType(itemID);
         if (IAClass == -1)
         {
@@ -214,18 +222,9 @@ public class PlayerStats : Items
 
     //This function is intended to work with the 2D collider that detects when an item is attempted to be picked up. If it can fit it in the inventory it will pick up the item, otherwise it will leave it on the ground.
     public void PutItemInInventory(int newItemID, int IAClass, Collider2D other) {
-        if (IAClass<0)
-        {
-            itemName = itemNames[itemID];
-        }
-        else if (IAClass == 0)
-        {
-            itemName = mage.GetAbilityName(itemID);
-        }
-        else if (IAClass == 1)
-        {
-            //itemName =
-        }
+
+        itemName = itemNames[itemID];
+        
         //If items ID is 0, 1, or 2, it adds to the coin purse because it is a coin
         if (newItemID >= 0 && newItemID <= 2) {
             switch(newItemID) {

@@ -35,7 +35,7 @@ public class HotBarScript : MonoBehaviour
                 }
                 else if (itemClass == 1)
                 {
-                    assassin = GameObject.Find("Assassin").GetComponent<Assassin>();
+                    assassin = GameObject.Find("Assassin(Clone)").GetComponent<Assassin>();
                     itemSprite = assassin.GetAbilityObject(itemID).GetComponent<SpriteRenderer>().sprite;
                 }
                 else

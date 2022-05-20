@@ -185,7 +185,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f58be04c57b2b8408623bba931febcc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemID: 10
+  itemID: 1
   lifespan: 6
 --- !u!114 &5203955171858034725
 MonoBehaviour:
@@ -199,6 +199,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a36803267f7d5654391f5b59e0c2927c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wheel2Object: {fileID: 0}
   rotationSpeed: 0.1
 --- !u!58 &5933769775955990394
 CircleCollider2D:

@@ -7,6 +7,7 @@ public class MeleeScript : MonoBehaviour
     public int itemID;
     public int abilityClass; //-1: classless melee item, 0: mage, 1: assassin
     private float damage;
+    private int classDecision;
     private Vector3 shootDirection, startingPosition;
     private PlayerStats playerStats;
     private GameObject player;
@@ -23,8 +24,15 @@ public class MeleeScript : MonoBehaviour
     {
         player = GameObject.FindWithTag("Character");
         playerStats = GameObject.Find("Player Stats").GetComponent<PlayerStats>();
-        mage = GameObject.Find("MageClass(Clone)").GetComponent<Mage>();
-        //assassin = GameObject.Find("Assassin").GetComponent<AssassinScript>();
+        classDecision = 1;
+        if (classDecision == 0)
+        {
+            mage = GameObject.Find("MageClass(Clone)").GetComponent<Mage>();
+        }
+        else if (classDecision == 1)
+        {
+            assassin = GameObject.Find("Assassin(Clone)").GetComponent<Assassin>();
+        }
 
         if (abilityClass == 0)
         {

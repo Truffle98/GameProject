@@ -997,6 +997,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mage: {fileID: 6015606291606298047, guid: aa95e6bf0a7540e4da564cc7afb57915, type: 3}
+  assassin: {fileID: 6015606291606298047, guid: bca4a1014c10044f7af4646e3de7e02f, type: 3}
 --- !u!4 &1222444574
 Transform:
   m_ObjectHideFlags: 0

@@ -253,7 +253,7 @@ public class Mage : BaseClass
     {
         if (Input.GetMouseButtonDown(0) && cooldown1 == 0 && Time.timeScale == 1) 
         {
-            if (playerStats.GetEquippedItem(0)>-1)
+            if (item1>-1)
             {
                 UseItemInHotbar(0, item1Type, item1, item1Object);
             }
@@ -262,7 +262,7 @@ public class Mage : BaseClass
         //Accesses second item in hotbar
         else if (Input.GetMouseButtonDown(1) && cooldown2 == 0 && Time.timeScale == 1)
         {
-            if (playerStats.GetEquippedItem(1)>-1)
+            if (item2>-1)
             {
                 if(currentMana>itemsList.GetManaCost(playerStats.GetEquippedItem(1)))
                 {
@@ -273,7 +273,7 @@ public class Mage : BaseClass
 
         else if (Input.GetKeyDown(KeyCode.Q) && cooldown3 == 0 && Time.timeScale == 1) {
 
-            if (playerStats.GetEquippedItem(2)>-1)
+            if (item3>-1)
             {
                 if(currentMana>itemsList.GetManaCost(playerStats.GetEquippedItem(2)))
                 {
@@ -285,7 +285,7 @@ public class Mage : BaseClass
 
         else if (Input.GetKeyDown(KeyCode.E) && cooldown4 == 0 && Time.timeScale == 1) {
 
-            if (playerStats.GetEquippedItem(3)>-1)
+            if (item4>-1)
             {
                 if(currentMana>itemsList.GetManaCost(playerStats.GetEquippedItem(3)))
                 {
@@ -297,7 +297,7 @@ public class Mage : BaseClass
 
         else if (Input.GetKeyDown(KeyCode.Alpha1) && cooldown5 == 0 && Time.timeScale == 1) 
         {
-            if (playerStats.GetEquippedItem(4)>-1)
+            if (item5>-1)
             {
                 UseItemInHotbar(4, item5Type, item5, item5Object);
             }
@@ -306,7 +306,7 @@ public class Mage : BaseClass
         //Accesses second item in hotbar
         else if (Input.GetKeyDown(KeyCode.Alpha2) && cooldown6 == 0 && Time.timeScale == 1)
         {
-            if (playerStats.GetEquippedItem(5)>-1)
+            if (item6>-1)
             {
                 if(currentMana>itemsList.GetManaCost(playerStats.GetEquippedItem(5)))
                 {
@@ -317,7 +317,7 @@ public class Mage : BaseClass
 
         else if (Input.GetKeyDown(KeyCode.Alpha3) && cooldown7 == 0 && Time.timeScale == 1) {
 
-            if (playerStats.GetEquippedItem(6)>-1)
+            if (item7>-1)
             {
                 if(currentMana>itemsList.GetManaCost(playerStats.GetEquippedItem(6)))
                 {
@@ -329,7 +329,7 @@ public class Mage : BaseClass
 
         else if (Input.GetKeyDown(KeyCode.Alpha4) && cooldown8 == 0 && Time.timeScale == 1) {
 
-            if (playerStats.GetEquippedItem(7)>-1)
+            if (item8>-1)
             {
                 if(currentMana>itemsList.GetManaCost(playerStats.GetEquippedItem(7)))
                 {
@@ -411,8 +411,17 @@ public class Mage : BaseClass
     }
 
     void UseItemInHotbar(int itemSlot, int itemClass, int item, GameObject itemObject) {
+        float manaCost = 0;
+        if (itemClass == 1)
+        {
+            manaCost = mageAbilityStats[item, 1];
+        }
+        else
+        {
+            manaCost = itemsList.GetManaCost(item);
+        }
 
-        if (currentMana > itemsList.GetManaCost(item)) {
+        if (currentMana > manaCost) {
 
             shootDirection = Input.mousePosition;
             shootDirection.z = 0.0f;
@@ -425,16 +434,13 @@ public class Mage : BaseClass
             {
                 if (mageAbilityStats[item, 4] == 0) 
                 {
-
                     newMelee = Instantiate(itemObject, (new Vector3(Mathf.Cos(angle - 0.5f), Mathf.Sin(angle - 0.5f), 0) + transform.position), Quaternion.Euler(0, 0, Mathf.Rad2Deg * angle - 90));
                     newMelee.transform.parent = gameObject.transform;
-
                 }
                 else
                 {
                     newProjectile = Instantiate(itemObject, (new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0) + transform.position), Quaternion.Euler(0, 0, 0));
                     newProjectile.GetComponent<ProjectileScript>().angle = angle;
-
                 }
             }
             else
@@ -450,12 +456,7 @@ public class Mage : BaseClass
                     newProjectile.GetComponent<ProjectileScript>().angle = angle;
                 }
             }
-            /*
-            else 
-            {
-                
-            }
-            */
+
             switch(itemSlot)
             {
                 case 0:

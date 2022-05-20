@@ -7,7 +7,7 @@ public class Assassin : BaseClass
     private float horizontalInput, verticalInput, maxHealth = baseHealth * 2, currentHealth, enemyDamage, maxMana = baseMana * 2, currentMana, angle, manaRegenerationSpeed;
     private Vector3 shootDirection;
     private int item1, item2, item3, item4, item5, item6, item7, item8, item1Type, item2Type, item3Type, item4Type, item5Type, item6Type, item7Type, item8Type;
-    private int cooldown1 = 0, cooldown2 = 0, cooldown3 = 0, cooldown4 = 0, cooldown5 = 0, cooldown6 = 0, cooldown7 = 0, cooldown8 = 0;
+    public int cooldown1 = 0, cooldown2 = 0, cooldown3 = 0, cooldown4 = 0, cooldown5 = 0, cooldown6 = 0, cooldown7 = 0, cooldown8 = 0;
     public Rigidbody2D body;
     private Animator anim;
     private bool movingUp, movingDown, inventoryOrArmorEquipOpen;
@@ -22,11 +22,11 @@ public class Assassin : BaseClass
     public HealthBar1 healthbar;
     public bool dashing = false;
     private EnemyProjectileScript enemyProjectileScript;
-    private float mageArmorMultiplier = baseArmorMultiplier + 0.5f;
+    private float assassinArmorMultiplier = baseArmorMultiplier + 0.25f;
 
     //Nested array: 0: damage, 1: mana cost, 2: cooldown, 3: ability variation, 4: item type
     protected string[] assassinAbilityNames = {"Dash", "Thorn"};
-    protected int[,] assassinAbilityStats = new int[2, 5] { {0, 20, 200, 0, 0}, {15, 50, 2500, 0, 0} };
+    protected int[,] assassinAbilityStats = new int[2, 5] { {0, 20, 100, 0, 0}, {15, 50, 2500, 0, 0} };
     public GameObject[] assassinAbilityObjects;
 
     public float GetMaxMana()
@@ -83,7 +83,7 @@ public class Assassin : BaseClass
 
         item1Type = playerStats.GetEquippedItemClass(0);
         item1 = playerStats.GetEquippedItem(0);
-        if (item1>0)
+        if (item1>=0)
         {
             if (item1Type == 1)
             {
@@ -97,7 +97,7 @@ public class Assassin : BaseClass
         
         item2Type = playerStats.GetEquippedItemClass(1);
         item2 = playerStats.GetEquippedItem(1);
-        if (item2>0)
+        if (item2>=0)
         {
             if (item2Type == 1)
             {
@@ -111,7 +111,7 @@ public class Assassin : BaseClass
 
         item3Type = playerStats.GetEquippedItemClass(2);
         item3 = playerStats.GetEquippedItem(2);
-        if (item3>0)
+        if (item3>=0)
         {
             if (item3Type == 1)
             {
@@ -125,7 +125,7 @@ public class Assassin : BaseClass
 
         item4Type = playerStats.GetEquippedItemClass(3);
         item4 = playerStats.GetEquippedItem(3);
-        if (item4>0)
+        if (item4>=0)
         {
             if (item4Type == 1)
             {
@@ -139,7 +139,7 @@ public class Assassin : BaseClass
 
         item5Type = playerStats.GetEquippedItemClass(4);
         item5 = playerStats.GetEquippedItem(4);
-        if (item5>0)
+        if (item5>=0)
         {
             if (item5Type == 1)
             {
@@ -153,7 +153,7 @@ public class Assassin : BaseClass
         
         item6Type = playerStats.GetEquippedItemClass(5);
         item6 = playerStats.GetEquippedItem(5);
-        if (item6>0)
+        if (item6>=0)
         {
             if (item6Type == 1)
             {
@@ -167,7 +167,7 @@ public class Assassin : BaseClass
 
         item7Type = playerStats.GetEquippedItemClass(6);
         item7 = playerStats.GetEquippedItem(6);
-        if (item7>0)
+        if (item7>=0)
         {
             if (item7Type == 1)
             {
@@ -181,7 +181,7 @@ public class Assassin : BaseClass
 
         item8Type = playerStats.GetEquippedItemClass(7);
         item8 = playerStats.GetEquippedItem(7);
-        if (item8>0)
+        if (item8>=0)
         {
             if (item8Type == 1)
             {
@@ -202,7 +202,7 @@ public class Assassin : BaseClass
 
     public float GetArmorMultiplier()
     {
-        return mageArmorMultiplier;
+        return assassinArmorMultiplier;
     }
 
     //Handles animation changes
@@ -381,7 +381,6 @@ public class Assassin : BaseClass
         //On collision with something, it checks if its a projectile. If it is, then it gets the damage from the projectile's script
         if(other.gameObject.CompareTag("Enemy Projectile") && !dashing) {
             enemyProjectileScript = other.GetComponent<EnemyProjectileScript>();
-
             enemyDamage = enemyProjectileScript.GetProjectileDamage() - playerStats.GetArmor();
             Destroy(other.gameObject);
             currentHealth -= enemyDamage;
@@ -402,8 +401,17 @@ public class Assassin : BaseClass
 
     //item class = item ability class type (0 = mage, 1 = assassin, -1 = classless item)
     void UseItemInHotbar(int itemSlot, int itemClass, int item, GameObject itemObject) {
+        float manaCost = 0;
+        if (itemClass == 1)
+        {
+            manaCost = assassinAbilityStats[item, 1];
+        }
+        else
+        {
+            manaCost = itemsList.GetManaCost(item);
+        }
 
-        if (currentMana > itemsList.GetManaCost(item)) {
+        if (currentMana > manaCost) {
 
             shootDirection = Input.mousePosition;
             shootDirection.z = 0.0f;
@@ -412,21 +420,17 @@ public class Assassin : BaseClass
             shootDirection = shootDirection.normalized;
             angle = Mathf.Atan2(shootDirection.y, shootDirection.x);
 
-            if (itemClass<0)
+            if (itemClass==1)
             {
                 if (assassinAbilityStats[item, 4] == 0) 
                 {
-
                     newMelee = Instantiate(itemObject, (new Vector3(Mathf.Cos(angle - 0.5f), Mathf.Sin(angle - 0.5f), 0) + transform.position), Quaternion.Euler(0, 0, Mathf.Rad2Deg * angle - 90));
                     newMelee.transform.parent = gameObject.transform;
-
-                } 
+                }
                 else 
                 {
-
                     newProjectile = Instantiate(itemObject, (new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0) + transform.position), Quaternion.Euler(0, 0, 0));
                     newProjectile.GetComponent<ProjectileScript>().angle = angle;
-
                 }
             }
             else 
@@ -518,13 +522,20 @@ public class Assassin : BaseClass
                         cooldown8 = itemsList.GetCooldown(item);
                     }; itemCooldowns[7].SetActive(true); itemCooldowns[7].GetComponent<CooldownUI>().SetMaxCooldown(cooldown8); break;
             }
-            currentMana -= itemsList.GetManaCost(item);
+            if (itemClass==1)
+            {
+                currentMana -= assassinAbilityStats[item, 1];
+            }
+            else
+            {
+                currentMana -= itemsList.GetManaCost(item);
+            }
         }
     }
 
     public int GetAbilityDamage(int index)
     {
-        return assassinAbilityStats[index, 0];
+        return assassinAbilityStats[index, 0] * baseDamage;
     }
 
     public GameObject GetAbilityObject(int index)
@@ -535,5 +546,10 @@ public class Assassin : BaseClass
     public string GetAbilityName(int index)
     {
         return assassinAbilityNames[index];
+    }
+
+    public int GetCooldown(int index)
+    {
+        return assassinAbilityStats[index, 2];
     }
 }

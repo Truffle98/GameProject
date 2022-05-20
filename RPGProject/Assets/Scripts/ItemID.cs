@@ -24,7 +24,10 @@ public class ItemID : MonoBehaviour
     }
 
     void Update() {
-        transform.RotateAround(transform.position, Vector3.up, 100 * Time.deltaTime);
+        if (abilityType==-1)
+        {
+            transform.RotateAround(transform.position, Vector3.up, 100 * Time.deltaTime);
+        }
     }
     
 }

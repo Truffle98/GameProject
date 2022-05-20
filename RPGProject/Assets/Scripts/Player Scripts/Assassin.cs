@@ -25,8 +25,8 @@ public class Assassin : BaseClass
     private float assassinArmorMultiplier = baseArmorMultiplier + 0.25f;
 
     //Nested array: 0: damage, 1: mana cost, 2: cooldown, 3: ability variation, 4: item type
-    protected string[] assassinAbilityNames = {"Dash", "Thorn"};
-    protected int[,] assassinAbilityStats = new int[2, 5] { {0, 20, 100, 0, 0}, {15, 50, 2500, 0, 0} };
+    protected string[] assassinAbilityNames = {"Dash", "Thorn", "Shadow Clone"};
+    protected int[,] assassinAbilityStats = new int[3, 5] { {0, 20, 100, 0, 2}, {15, 50, 2500, 0, 2}, {0, 30, 1250, 0, 2} };
     public GameObject[] assassinAbilityObjects;
 
     public float GetMaxMana()
@@ -427,10 +427,19 @@ public class Assassin : BaseClass
                     newMelee = Instantiate(itemObject, (new Vector3(Mathf.Cos(angle - 0.5f), Mathf.Sin(angle - 0.5f), 0) + transform.position), Quaternion.Euler(0, 0, Mathf.Rad2Deg * angle - 90));
                     newMelee.transform.parent = gameObject.transform;
                 }
-                else 
+                else if (assassinAbilityStats[item, 4] == 1) 
                 {
                     newProjectile = Instantiate(itemObject, (new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0) + transform.position), Quaternion.Euler(0, 0, 0));
                     newProjectile.GetComponent<ProjectileScript>().angle = angle;
+                } 
+                else if (item == 0) 
+                {
+                    Instantiate(itemObject, transform.position, Quaternion.Euler(0,0,0));
+                } 
+                else if (item == 1) 
+                {
+                    newMelee = Instantiate(itemObject, transform.position, Quaternion.Euler(0,0,0));
+                    newMelee.transform.parent = gameObject.transform;
                 }
             }
             else 
@@ -439,11 +448,13 @@ public class Assassin : BaseClass
                 {
                     newMelee = Instantiate(itemObject, (new Vector3(Mathf.Cos(angle - 0.5f), Mathf.Sin(angle - 0.5f), 0) + transform.position), Quaternion.Euler(0, 0, Mathf.Rad2Deg * angle - 90));
                     newMelee.transform.parent = gameObject.transform;
+                    newMelee.GetComponent<MeleeScript>().damage = playerStats.GetItemDamage(item);
                 }
                 else 
                 {
                     newProjectile = Instantiate(itemObject, (new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0) + transform.position), Quaternion.Euler(0, 0, 0));
                     newProjectile.GetComponent<ProjectileScript>().angle = angle;
+                    newProjectile.GetComponent<ProjectileScript>().damage = playerStats.GetItemDamage(item);
                 }
             }
             

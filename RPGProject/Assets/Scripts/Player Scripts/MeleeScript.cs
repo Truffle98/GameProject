@@ -6,7 +6,7 @@ public class MeleeScript : MonoBehaviour
 {
     public int itemID;
     public int abilityClass; //-1: classless melee item, 0: mage, 1: assassin
-    private float damage;
+    public float damage;
     private int classDecision;
     private Vector3 shootDirection, startingPosition;
     private PlayerStats playerStats;
@@ -22,7 +22,9 @@ public class MeleeScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+    
         player = GameObject.FindWithTag("Character");
+        /*
         playerStats = GameObject.Find("Player Stats").GetComponent<PlayerStats>();
         classDecision = 1;
         if (classDecision == 0)
@@ -45,7 +47,7 @@ public class MeleeScript : MonoBehaviour
         else 
         {
             damage = playerStats.GetItemDamage(itemID);
-        }
+        }*/
 
         /*shootDirection = Input.mousePosition;
         shootDirection.z = 0.0f;

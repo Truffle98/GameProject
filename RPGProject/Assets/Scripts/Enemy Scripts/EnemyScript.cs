@@ -9,10 +9,10 @@ public class EnemyScript : MonoBehaviour
     private GameObject player, newObject, target;
     public GameObject enemyProjectile;
     private float currentHealth, speed, AOEDamage, angle, distanceToTarget;
-    private int timer = 0, cooldown, findNewLocationTimer, AOECooldown = 0, itemDrop = -1, itemDropChoice, itemBound = 0, startBound = 0, turnedDuration = 0, lastSeenTarget = 0;
+    private int timer = 0, cooldown, findNewLocationTimer, AOECooldown = 0, itemDrop = -1, itemDropChoice, itemBound = 0, startBound = 0, turnedDuration = 0;
     private int[] scaledItemDropList = new int[100];
     private bool count = true, targetSpotted, turned = false;
-    public int cooldownMax, maxHealth = 100, experience;
+    public int cooldownMax, maxHealth = 100, experience, lastSeenTarget = 0;
     //Drop list should contain item ids and item drop percentages list should contain the percentages in integer from (90 for 90% for example)
     public int[] itemDropList;
     public int[] itemDropPercentagesList;
@@ -112,6 +112,7 @@ public class EnemyScript : MonoBehaviour
             }
                
         } else if (Time.timeScale == 1) {
+            agent.ResetPath();
             MoveCharacter(movement);
         }
 
@@ -128,7 +129,6 @@ public class EnemyScript : MonoBehaviour
         else if (other.gameObject.CompareTag("Sword"))
         {
             TakeDamage(other.GetComponent<MeleeScript>().GetDamage());
-            Destroy(other.gameObject);
         }
         else if (other.gameObject.CompareTag("Turned Enemy Projectile")) 
         {

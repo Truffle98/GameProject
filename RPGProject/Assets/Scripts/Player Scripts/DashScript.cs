@@ -44,6 +44,10 @@ public class DashScript : MonoBehaviour
         if (assassinScript.dashing == false || dashCount == 24) {
             assassinScript.dashing = false;
             player.GetComponent<SpriteRenderer>().enabled = true;
+            GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+            for (int i = 0; i < enemies.Length; i++) {
+                enemies[i].GetComponent<EnemyScript>().lastSeenTarget = 0;
+            }
             Destroy(gameObject);
         }
         if (dashCooldown <= 0) {

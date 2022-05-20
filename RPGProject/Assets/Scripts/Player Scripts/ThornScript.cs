@@ -12,9 +12,9 @@ public class ThornScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        player = GameObject.Find("Assassin(Clone)");
+        /*player = GameObject.Find("Assassin(Clone)");
         transform.position = player.transform.position;
-        transform.rotation = Quaternion.Euler(0,0,0);
+        transform.rotation = Quaternion.Euler(0,0,0);*/
         if (gameObject.CompareTag("AOE")) {
             wheel2 = Instantiate(wheel2Object, new Vector3 (0,0,0), Quaternion.Euler(0,0,0));
             wheel2.transform.parent = transform.parent;

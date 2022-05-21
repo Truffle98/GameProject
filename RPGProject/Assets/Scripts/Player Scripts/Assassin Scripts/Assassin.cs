@@ -23,6 +23,7 @@ public class Assassin : BaseClass
     public bool dashing = false;
     private EnemyProjectileScript enemyProjectileScript;
     private float assassinArmorMultiplier = baseArmorMultiplier + 0.25f;
+    private SoundManager soundManager;
 
     //Nested array: 0: damage, 1: mana cost, 2: cooldown, 3: ability variation, 4: item type
     protected string[] assassinAbilityNames = {"Dash", "Thorn", "Shadow Clone", "Caltrops", "Thousand Cuts"};
@@ -44,6 +45,7 @@ public class Assassin : BaseClass
         itemsList = GameObject.Find("ItemObjectList").GetComponent<Items>();
         inventoryOpener = GameObject.Find("InventoryOpener").GetComponent<InventoryOpener>();
         armorEquipOpener = GameObject.Find("Armor Equip Opener").GetComponent<ArmorEquipOpener>();
+        soundManager = GameObject.Find("Sound Effects Manager").GetComponent<SoundManager>();
        
         manaRegenerationSpeed = .02f;
 
@@ -212,16 +214,19 @@ public class Assassin : BaseClass
         {
             //transform.localScale = new Vector3(-6, 6, 6);
             gameObject.GetComponent<SpriteRenderer>().flipX = true;
+            soundManager.PlayWalking();
         }
         else if (horizontalInput < -.01f)
         {
             //transform.localScale = Vector3.one * 6;
             gameObject.GetComponent<SpriteRenderer>().flipX = false;
+            soundManager.PlayWalking();
         }
 
         if (verticalInput > .01f)
         {
             movingUp = true;
+            soundManager.PlayWalking();
         }
         else if (verticalInput == 0)
         {
@@ -236,6 +241,7 @@ public class Assassin : BaseClass
         }
         else if (verticalInput < -.01f)
         {
+            soundManager.PlayWalking();
             movingDown = true;
         }
     }
@@ -468,6 +474,7 @@ public class Assassin : BaseClass
                     newMelee = Instantiate(itemObject, (new Vector3(Mathf.Cos(angle - 0.5f), Mathf.Sin(angle - 0.5f), 0) + transform.position), Quaternion.Euler(0, 0, Mathf.Rad2Deg * angle - 90));
                     newMelee.transform.parent = gameObject.transform;
                     newMelee.GetComponent<MeleeScript>().damage = playerStats.GetItemDamage(item);
+                    soundManager.PlaySwing();
                 }
                 else 
                 {

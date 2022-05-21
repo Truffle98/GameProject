@@ -12,8 +12,8 @@ public class ThousandCutsParent : MonoBehaviour
 
     void Update() {
         if (daggerTimer == 0) {
-            rX = Random.Range(-0.5f, 0.5f);
-            rY = Random.Range(-0.5f, 0.5f);
+            rX = Random.Range(-0.25f, 0.25f);
+            rY = Random.Range(-0.25f, 0.25f);
             newDagger = Instantiate(dagger, (new Vector3(Mathf.Cos(angle + rX), Mathf.Sin(angle + rY), 0) + transform.position), Quaternion.Euler(0, 0, Mathf.Rad2Deg * angle - 45));
             newDagger.transform.parent = gameObject.transform;
             newDagger.GetComponent<ThousandCutsDagger>().damage = damage;

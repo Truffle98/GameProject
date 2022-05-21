@@ -20,14 +20,14 @@ public class Assassin : BaseClass
     private GameObject item1Object, item2Object, item3Object, item4Object, item5Object, item6Object, item7Object, item8Object, newMelee, newProjectile;
     public ManaBar manaBar;
     public HealthBar1 healthbar;
-    public bool dashing = false;
     private EnemyProjectileScript enemyProjectileScript;
+    private SoundEffects soundEffects;
+    public bool dashing = false;
     private float assassinArmorMultiplier = baseArmorMultiplier + 0.25f;
-    private SoundManager soundManager;
 
     //Nested array: 0: damage, 1: mana cost, 2: cooldown, 3: ability variation, 4: item type
     protected string[] assassinAbilityNames = {"Dash", "Thorn", "Shadow Clone", "Caltrops", "Thousand Cuts"};
-    protected int[,] assassinAbilityStats = new int[5, 5] { {0, 20, 100, 0, 2}, {15, 50, 2500, 0, 2}, {0, 30, 1250, 0, 2}, {5, 30, 500, 0, 2}, {5, 20, 750, 0, 2} };
+    protected int[,] assassinAbilityStats = new int[5, 5] { {0, 10, 100, 0, 2}, {15, 25, 2500, 0, 2}, {0, 30, 1250, 0, 2}, {5, 30, 500, 0, 2}, {5, 20, 750, 0, 2} };
     public GameObject[] assassinAbilityObjects;
 
     public float GetMaxMana()
@@ -45,7 +45,7 @@ public class Assassin : BaseClass
         itemsList = GameObject.Find("ItemObjectList").GetComponent<Items>();
         inventoryOpener = GameObject.Find("InventoryOpener").GetComponent<InventoryOpener>();
         armorEquipOpener = GameObject.Find("Armor Equip Opener").GetComponent<ArmorEquipOpener>();
-        soundManager = GameObject.Find("Sound Effects Manager").GetComponent<SoundManager>();
+        soundEffects = gameObject.GetComponent<SoundEffects>();
        
         manaRegenerationSpeed = .02f;
 
@@ -64,7 +64,6 @@ public class Assassin : BaseClass
     //Runs every frame
     private void Update()
     {
-
         inventoryOrArmorEquipOpen = inventoryOpener.InventoryOpenState() || armorEquipOpener.ArmorEquipOpenState();
 
         if (!dashing) {
@@ -73,7 +72,6 @@ public class Assassin : BaseClass
 
             //Sets character velocity
             body.velocity = new Vector2(horizontalInput * baseSpeed, verticalInput * baseSpeed);
-
             //Flips sprites and helps facilitate sprite transitions
             changeSprite(horizontalInput, verticalInput);
 
@@ -214,19 +212,16 @@ public class Assassin : BaseClass
         {
             //transform.localScale = new Vector3(-6, 6, 6);
             gameObject.GetComponent<SpriteRenderer>().flipX = true;
-            soundManager.PlayWalking();
         }
         else if (horizontalInput < -.01f)
         {
             //transform.localScale = Vector3.one * 6;
             gameObject.GetComponent<SpriteRenderer>().flipX = false;
-            soundManager.PlayWalking();
         }
 
         if (verticalInput > .01f)
         {
             movingUp = true;
-            soundManager.PlayWalking();
         }
         else if (verticalInput == 0)
         {
@@ -241,7 +236,6 @@ public class Assassin : BaseClass
         }
         else if (verticalInput < -.01f)
         {
-            soundManager.PlayWalking();
             movingDown = true;
         }
     }
@@ -474,7 +468,7 @@ public class Assassin : BaseClass
                     newMelee = Instantiate(itemObject, (new Vector3(Mathf.Cos(angle - 0.5f), Mathf.Sin(angle - 0.5f), 0) + transform.position), Quaternion.Euler(0, 0, Mathf.Rad2Deg * angle - 90));
                     newMelee.transform.parent = gameObject.transform;
                     newMelee.GetComponent<MeleeScript>().damage = playerStats.GetItemDamage(item);
-                    soundManager.PlaySwing();
+                    soundEffects.Swing();
                 }
                 else 
                 {

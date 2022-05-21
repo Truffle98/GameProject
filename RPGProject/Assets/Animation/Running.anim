@@ -22,7 +22,7 @@ AnimationClip:
     - time: 0
       value: {fileID: 21300000, guid: 692a95cc32e5244afb81ab5da96f50b4, type: 3}
     - time: 0.16666667
-      value: {fileID: 21300000, guid: 4643618a4cdd243cfbfdc8c12a87fb21, type: 3}
+      value: {fileID: 21300000, guid: 692a95cc32e5244afb81ab5da96f50b4, type: 3}
     - time: 0.33333334
       value: {fileID: 21300000, guid: 13fdaf175205e4b59bae159aecf31378, type: 3}
     - time: 0.5
@@ -49,7 +49,7 @@ AnimationClip:
       isPPtrCurve: 1
     pptrCurveMapping:
     - {fileID: 21300000, guid: 692a95cc32e5244afb81ab5da96f50b4, type: 3}
-    - {fileID: 21300000, guid: 4643618a4cdd243cfbfdc8c12a87fb21, type: 3}
+    - {fileID: 21300000, guid: 692a95cc32e5244afb81ab5da96f50b4, type: 3}
     - {fileID: 21300000, guid: 13fdaf175205e4b59bae159aecf31378, type: 3}
     - {fileID: 21300000, guid: 014025c11e3b5474191e83f66dd5f8d1, type: 3}
     - {fileID: 21300000, guid: 014025c11e3b5474191e83f66dd5f8d1, type: 3}
@@ -77,4 +77,11 @@ AnimationClip:
   m_EulerEditorCurves: []
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
-  m_Events: []
+  m_Events:
+  - time: 0.33333334
+    functionName: Walk
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0

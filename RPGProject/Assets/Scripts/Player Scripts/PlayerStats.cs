@@ -11,6 +11,7 @@ public class PlayerStats : Items
     private string itemName;
     private Mage mage;
     private Assassin assassin;
+    private SoundEffects soundEffects;
 
 
     //FIRST NUMBER IN NESTED ARRAY IS THE ITEM/ABILITY CLASS [-1: CLASSLESS, 0: MAGE, 1: ASSASSIN], SECOND NUMBER IS THE ITEM/ABILITY LOCAL INDEX. FIREBALL FOR EXAMPLE IS {0, 0}
@@ -25,15 +26,6 @@ public class PlayerStats : Items
     private int[] coinPurse = {0, 0, 0};
     private int inventoryFailedPickupCooldown = 0, messageCooldown = 0;
 
-    public bool isItemInSlot(int index)
-    {
-        if (itemLineup[index, 0] == -1 && itemLineup[index, 1] == -1)
-        {
-            return false;
-        }
-        return true;
-    }
-
     void Start()
     {
         if (classDecision == 0)
@@ -43,7 +35,17 @@ public class PlayerStats : Items
         else if (classDecision == 1)
         {
             assassin = GameObject.Find("Assassin(Clone)").GetComponent<Assassin>();
+            soundEffects = GameObject.Find("Assassin(Clone)").GetComponent<SoundEffects>();
         }
+    }
+    
+    public bool isItemInSlot(int index)
+    {
+        if (itemLineup[index, 0] == -1 && itemLineup[index, 1] == -1)
+        {
+            return false;
+        }
+        return true;
     }
 
     public bool isWeapon(int index, int itemClass)
@@ -288,6 +290,7 @@ public class PlayerStats : Items
             if (Input.GetKey(KeyCode.F))
             {
                 if (inventoryFailedPickupCooldown <= 0) {
+                    soundEffects.Pickup();
                     PutItemInInventory(itemID, IAClass, other);
                     itemID = -1;
                 } else if (messageCooldown <= 0) {

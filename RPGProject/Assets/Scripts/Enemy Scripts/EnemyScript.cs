@@ -9,7 +9,7 @@ public class EnemyScript : MonoBehaviour
     private GameObject player, newObject, target;
     public GameObject enemyProjectile;
     private float currentHealth, speed, AOEDamage, angle, distanceToTarget;
-    private int timer = 0, cooldown, findNewLocationTimer, AOECooldown = 0, itemDrop = -1, itemDropChoice, itemBound = 0, startBound = 0, turnedDuration = 0;
+    private int timer = 0, cooldown, findNewLocationTimer, AOECooldown = 0, itemDrop = -1, itemDropChoice, itemBound = 0, startBound = 0, turnedDuration = 0, classDecision;
     private int[] scaledItemDropList = new int[100];
     private bool count = true, targetSpotted, turned = false;
     public int cooldownMax, maxHealth = 100, experience, lastSeenTarget = 0;
@@ -26,6 +26,7 @@ public class EnemyScript : MonoBehaviour
     private NavMeshAgent agent;
     private NavMeshHit hit;
     private AOEScript AOEScript;
+    private SoundEffects soundEffects;
     //public bool shouldRotate = false;
 
     public HealthBar1 healthBar;
@@ -33,6 +34,8 @@ public class EnemyScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        classDecision = 1;
+
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
         rb = this.GetComponent<Rigidbody2D>();
@@ -41,6 +44,15 @@ public class EnemyScript : MonoBehaviour
         agent.updateUpAxis = false;
         playerStats = GameObject.Find("Player Stats").GetComponent<PlayerStats>();
         itemsList = GameObject.Find("ItemObjectList").GetComponent<Items>();
+        if (classDecision == 0)
+        {
+            soundEffects = GameObject.Find("MageClass(Clone)").GetComponent<SoundEffects>();
+        }
+        else if (classDecision == 1)
+        {
+            soundEffects = GameObject.Find("Assassin(Clone)").GetComponent<SoundEffects>();
+        }
+        
         player = GameObject.FindWithTag("Character");
         target = player;
     }
@@ -226,6 +238,10 @@ public class EnemyScript : MonoBehaviour
 
         Instantiate(itemsList.GetItemObject(itemDrop), transform.position, new Quaternion(0, 0, 0, 0));
         playerStats.GetExperience(experience);
+
+        //Death Sound effects
+        soundEffects.EnemyDied();
+
         Destroy(gameObject);
 
     }

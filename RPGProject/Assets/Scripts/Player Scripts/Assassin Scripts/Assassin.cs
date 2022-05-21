@@ -10,7 +10,7 @@ public class Assassin : BaseClass
     public int cooldown1 = 0, cooldown2 = 0, cooldown3 = 0, cooldown4 = 0, cooldown5 = 0, cooldown6 = 0, cooldown7 = 0, cooldown8 = 0;
     public Rigidbody2D body;
     private Animator anim;
-    private bool movingUp, movingDown, inventoryOrArmorEquipOpen;
+    private bool movingUp, movingDown, inventoryOrArmorEquipOpen, flipped;
     private PlayerStats playerStats;
     private InventoryOpener inventoryOpener;
     private ArmorEquipOpener armorEquipOpener;
@@ -23,7 +23,6 @@ public class Assassin : BaseClass
     public bool dashing = false;
     private EnemyProjectileScript enemyProjectileScript;
     private float assassinArmorMultiplier = baseArmorMultiplier + 0.25f;
-    private GameObject characterParent;
 
     //Nested array: 0: damage, 1: mana cost, 2: cooldown, 3: ability variation, 4: item type
     protected string[] assassinAbilityNames = {"Dash", "Thorn", "Shadow Clone", "Caltrops", "Thousand Cuts"};
@@ -45,7 +44,6 @@ public class Assassin : BaseClass
         itemsList = GameObject.Find("ItemObjectList").GetComponent<Items>();
         inventoryOpener = GameObject.Find("InventoryOpener").GetComponent<InventoryOpener>();
         armorEquipOpener = GameObject.Find("Armor Equip Opener").GetComponent<ArmorEquipOpener>();
-        characterParent = GameObject.Find("CharacterParent");
        
         manaRegenerationSpeed = .02f;
 
@@ -72,8 +70,7 @@ public class Assassin : BaseClass
             verticalInput = Input.GetAxis("Vertical");
 
             //Sets character velocity
-            characterParent.GetComponent<Rigidbody2D>().velocity = new Vector2(horizontalInput * baseSpeed, verticalInput * baseSpeed);
-            transform.position = characterParent.transform.position;
+            body.velocity = new Vector2(horizontalInput * baseSpeed, verticalInput * baseSpeed);
 
             //Flips sprites and helps facilitate sprite transitions
             changeSprite(horizontalInput, verticalInput);
@@ -213,11 +210,13 @@ public class Assassin : BaseClass
     {
         if (horizontalInput > .01f)
         {
-            transform.localScale = new Vector3(-6, 6, 6);
+            //transform.localScale = new Vector3(-6, 6, 6);
+            gameObject.GetComponent<SpriteRenderer>().flipX = true;
         }
         else if (horizontalInput < -.01f)
         {
-            transform.localScale = Vector3.one * 6;
+            //transform.localScale = Vector3.one * 6;
+            gameObject.GetComponent<SpriteRenderer>().flipX = false;
         }
 
         if (verticalInput > .01f)
@@ -428,7 +427,7 @@ public class Assassin : BaseClass
                 if (assassinAbilityStats[item, 4] == 0) 
                 {
                     newMelee = Instantiate(itemObject, (new Vector3(Mathf.Cos(angle - 0.5f), Mathf.Sin(angle - 0.5f), 0) + transform.position), Quaternion.Euler(0, 0, Mathf.Rad2Deg * angle - 90));
-                    newMelee.transform.parent = characterParent.transform;
+                    newMelee.transform.parent = gameObject.transform;
                 }
                 else if (assassinAbilityStats[item, 4] == 1) 
                 {
@@ -442,7 +441,7 @@ public class Assassin : BaseClass
                 else if (item == 1) 
                 {
                     newMelee = Instantiate(itemObject, transform.position, Quaternion.Euler(0,0,0));
-                    newMelee.transform.parent = characterParent.transform;
+                    newMelee.transform.parent = gameObject.transform;
                 }
                 else if (item == 2)
                 {
@@ -451,13 +450,13 @@ public class Assassin : BaseClass
                 else if (item == 3)
                 {
                     newMelee = Instantiate(itemObject, transform.position, Quaternion.Euler(0,0,0));
-                    newMelee.transform.parent = characterParent.transform;
+                    newMelee.transform.parent = gameObject.transform;
                     newMelee.GetComponent<CaltropParent>().damage = assassinAbilityStats[3, 0];
                 }
                 else if (item == 4) 
                 {
                     newMelee = Instantiate(itemObject, transform.position, Quaternion.Euler(0, 0, 0));
-                    newMelee.transform.parent = characterParent.transform;
+                    newMelee.transform.parent = gameObject.transform;
                     newMelee.GetComponent<ThousandCutsParent>().angle = angle;
                     newMelee.GetComponent<ThousandCutsParent>().damage = assassinAbilityStats[4, 0];
                 }
@@ -467,7 +466,7 @@ public class Assassin : BaseClass
                 if (itemsList.GetItemType(item) == 0)
                 {
                     newMelee = Instantiate(itemObject, (new Vector3(Mathf.Cos(angle - 0.5f), Mathf.Sin(angle - 0.5f), 0) + transform.position), Quaternion.Euler(0, 0, Mathf.Rad2Deg * angle - 90));
-                    newMelee.transform.parent = characterParent.transform;
+                    newMelee.transform.parent = gameObject.transform;
                     newMelee.GetComponent<MeleeScript>().damage = playerStats.GetItemDamage(item);
                 }
                 else 

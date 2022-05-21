@@ -4,18 +4,25 @@ using UnityEngine;
 
 public class SoundManager : MonoBehaviour
 {
-    public AudioSource swing, hit, pickup, walking;
+    public AudioClip swing, hit, pickup, walking;
+    private AudioSource source;
     
-    /*public void PlaySwing {
-        swing.Play();
+    void Start() {
+        source = gameObject.GetComponent<AudioSource>();
     }
-    public void PlayHit {
+
+    public void PlaySwing () {
+        source.clip = swing;
+        source.Play();
+    }
+    /*public void PlayHit () {
         hit.Play();
     }
-    public void PlayPickup {
+    public void PlayPickup () {
         pickup.Play();
-    }
-    public void PlayWalking {
-        walking.Play();
     }*/
+    public void PlayWalking () {
+        source.clip = walking;
+        source.Play();
+    }
 }

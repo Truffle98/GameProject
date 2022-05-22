@@ -12,4 +12,9 @@ public class textEditorScript : MonoBehaviour
     {
         TMProTextSpace.SetText(stackNum);
     }
+
+    public void SetLevel(string level)
+    {
+        TMProTextSpace.SetText(level);
+    }
 }

@@ -557,4 +557,9 @@ public class Mage : BaseClass
     {
         return mageAbilityNames[index];
     }
+
+    public void LevelUp(int level)
+    {
+
+    }
 }

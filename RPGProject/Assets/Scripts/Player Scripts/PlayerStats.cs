@@ -7,11 +7,14 @@ public class PlayerStats : Items
     private ItemID itemIDClass;
     private MenuTest menuTest;
     private float damage, armor = 0, mageArmorMultiplier = 1.5f;
-    private int classDecision = 1, itemID, itemArmorType, experienceTotal, IAClass;
+    private int classDecision = 1, itemID, itemArmorType, experienceTotal, IAClass, level = 1, currentExperience, levelThreshold;
     private string itemName;
     private Mage mage;
     private Assassin assassin;
     private SoundEffects soundEffects;
+    public ExperienceBar experienceBar;
+    public textEditorScript textScript;
+
 
 
     //FIRST NUMBER IN NESTED ARRAY IS THE ITEM/ABILITY CLASS [-1: CLASSLESS, 0: MAGE, 1: ASSASSIN], SECOND NUMBER IS THE ITEM/ABILITY LOCAL INDEX. FIREBALL FOR EXAMPLE IS {0, 0}
@@ -37,6 +40,10 @@ public class PlayerStats : Items
             assassin = GameObject.Find("Assassin(Clone)").GetComponent<Assassin>();
             soundEffects = GameObject.Find("Assassin(Clone)").GetComponent<SoundEffects>();
         }
+
+        experienceBar.SetMaxExperience(10); // 10 should be replaced by levelthreshold which calculates itself based on the 'GetLevelThreshold(level)' function
+        currentExperience = 0;
+        textScript.SetLevel(level.ToString());
     }
     
     public bool isItemInSlot(int index)
@@ -112,9 +119,7 @@ public class PlayerStats : Items
     {
         return inventoryStacks[indexInInventory];
     }
-    public void GetExperience(int experience) {
-        experienceTotal += experience;
-    }
+
     public void switchItemToInventory(int index, int itemID, int IAClass, string fromWhere)
     {
         itemName = itemNames[itemID];
@@ -297,6 +302,35 @@ public class PlayerStats : Items
                     Debug.Log("Inventory pickup failed, currently on cooldown");
                     messageCooldown = 500;
                 }
+            }
+        }
+    }
+
+    public void IncreaseExperience(int exp)
+    {
+        currentExperience += exp;
+        experienceBar.SetExperience(currentExperience);
+
+        //Need to implement a level threshold so that we can check if our experience breaks it. Need thomas's function. I'll create a function like "GetLevelThreshold(int level)"
+        //This function will take "level" (x value for function) and plug it into the function and return the level threshold (y value for function).
+        if (currentExperience >= 10) //for now i use 10 exp as the first level threshold (should be replaced by levelThreshold)
+        {
+            currentExperience -= 10; //10 should be replaced by "levelThreshold"
+
+            level++;
+            //levelThreshold = GetLevelThreshold(level);
+            experienceBar.SetMaxExperience(15); //15 should be replaced by levelThreshold
+            experienceBar.SetExperience(currentExperience);
+            textScript.SetLevel(level.ToString());
+
+            if (classDecision == 0)
+            {
+                //Determines the class stats based on the level it recieves
+                mage.LevelUp(level);
+            }
+            else if (classDecision == 1)
+            {
+                assassin.LevelUp(level);
             }
         }
     }

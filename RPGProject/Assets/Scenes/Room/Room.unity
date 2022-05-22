@@ -205,6 +205,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 224626985}
     - target: {fileID: 515296463042163576, guid: a9d666e75dc7d06408dda37a0cf159cc, type: 3}
+      propertyPath: experienceDrop
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 515296463042163576, guid: a9d666e75dc7d06408dda37a0cf159cc, type: 3}
       propertyPath: itemDropList.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -253,6 +257,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1483561904, guid: 79f3716cd8914d3429f6850d14f93165, type: 3}
+      propertyPath: experienceDrop
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 4252532296001976583, guid: 79f3716cd8914d3429f6850d14f93165, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -367,6 +375,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 515296463042163576, guid: a9d666e75dc7d06408dda37a0cf159cc, type: 3}
+      propertyPath: experienceDrop
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 515296463042163576, guid: a9d666e75dc7d06408dda37a0cf159cc, type: 3}
       propertyPath: itemDropList.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -464,6 +476,10 @@ PrefabInstance:
       propertyPath: healthBar
       value: 
       objectReference: {fileID: 1765317849}
+    - target: {fileID: 515296463042163576, guid: a9d666e75dc7d06408dda37a0cf159cc, type: 3}
+      propertyPath: experienceDrop
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 515296463042163576, guid: a9d666e75dc7d06408dda37a0cf159cc, type: 3}
       propertyPath: itemDropList.Array.size
       value: 2
@@ -635,6 +651,10 @@ PrefabInstance:
       propertyPath: healthBar
       value: 
       objectReference: {fileID: 293922254}
+    - target: {fileID: 515296463042163576, guid: a9d666e75dc7d06408dda37a0cf159cc, type: 3}
+      propertyPath: experienceDrop
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 515296463042163576, guid: a9d666e75dc7d06408dda37a0cf159cc, type: 3}
       propertyPath: itemDropList.Array.size
       value: 2
@@ -4321,6 +4341,10 @@ PrefabInstance:
       propertyPath: healthBar
       value: 
       objectReference: {fileID: 2055119066}
+    - target: {fileID: 515296463042163576, guid: a9d666e75dc7d06408dda37a0cf159cc, type: 3}
+      propertyPath: experienceDrop
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 515296463042163576, guid: a9d666e75dc7d06408dda37a0cf159cc, type: 3}
       propertyPath: itemDropList.Array.size
       value: 2

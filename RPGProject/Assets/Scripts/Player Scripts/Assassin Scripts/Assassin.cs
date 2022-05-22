@@ -600,4 +600,9 @@ public class Assassin : BaseClass
     {
         return assassinAbilityStats[index, 2];
     }
+
+    public void LevelUp(int level)
+    {
+
+    }
 }

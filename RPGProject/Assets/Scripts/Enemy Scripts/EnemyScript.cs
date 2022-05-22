@@ -12,7 +12,7 @@ public class EnemyScript : MonoBehaviour
     private int timer = 0, cooldown, findNewLocationTimer, AOECooldown = 0, itemDrop = -1, itemDropChoice, itemBound = 0, startBound = 0, turnedDuration = 0, classDecision;
     private int[] scaledItemDropList = new int[100];
     private bool count = true, targetSpotted, turned = false;
-    public int cooldownMax, maxHealth = 100, experience, lastSeenTarget = 0;
+    public int cooldownMax, maxHealth = 100, experienceDrop, lastSeenTarget = 0;
     //Drop list should contain item ids and item drop percentages list should contain the percentages in integer from (90 for 90% for example)
     public int[] itemDropList;
     public int[] itemDropPercentagesList;
@@ -237,7 +237,7 @@ public class EnemyScript : MonoBehaviour
         itemDrop = scaledItemDropList[itemDropChoice];
 
         Instantiate(itemsList.GetItemObject(itemDrop), transform.position, new Quaternion(0, 0, 0, 0));
-        playerStats.GetExperience(experience);
+        playerStats.IncreaseExperience(experienceDrop);
 
         //Death Sound effects
         soundEffects.EnemyDied();

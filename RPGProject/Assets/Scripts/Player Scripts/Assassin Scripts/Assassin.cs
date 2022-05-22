@@ -6,18 +6,18 @@ public class Assassin : BaseClass
 {
     private float horizontalInput, verticalInput, maxHealth = baseHealth * 2, currentHealth, enemyDamage, maxMana = baseMana * 2, currentMana, angle, manaRegenerationSpeed;
     private Vector3 shootDirection;
-    private int item1, item2, item3, item4, item5, item6, item7, item8, item1Type, item2Type, item3Type, item4Type, item5Type, item6Type, item7Type, item8Type;
+    private int item1, item2, item3, item4, item5, item6, item7, item8, item1Type, item2Type, item3Type, item4Type, item5Type, item6Type, item7Type, item8Type, empowerWeaponTimer = 0;
     public int cooldown1 = 0, cooldown2 = 0, cooldown3 = 0, cooldown4 = 0, cooldown5 = 0, cooldown6 = 0, cooldown7 = 0, cooldown8 = 0;
     public Rigidbody2D body;
     private Animator anim;
-    private bool movingUp, movingDown, inventoryOrArmorEquipOpen, flipped;
+    private bool movingUp, movingDown, inventoryOrArmorEquipOpen, empowerWeapon = false;
     private PlayerStats playerStats;
     private InventoryOpener inventoryOpener;
     private ArmorEquipOpener armorEquipOpener;
     private Items itemsList;
     public GameObject[] itemCooldowns;
     private CooldownUI cooldownUI;
-    private GameObject item1Object, item2Object, item3Object, item4Object, item5Object, item6Object, item7Object, item8Object, newMelee, newProjectile;
+    private GameObject item1Object, item2Object, item3Object, item4Object, item5Object, item6Object, item7Object, item8Object, newMelee, newProjectile, newObject;
     public ManaBar manaBar;
     public HealthBar1 healthbar;
     private EnemyProjectileScript enemyProjectileScript;
@@ -26,8 +26,8 @@ public class Assassin : BaseClass
     private float assassinArmorMultiplier = baseArmorMultiplier + 0.25f;
 
     //Nested array: 0: damage, 1: mana cost, 2: cooldown, 3: ability variation, 4: item type
-    protected string[] assassinAbilityNames = {"Dash", "Thorn", "Shadow Clone", "Caltrops", "Thousand Cuts"};
-    protected int[,] assassinAbilityStats = new int[5, 5] { {0, 10, 100, 0, 2}, {15, 25, 2500, 0, 2}, {0, 30, 1250, 0, 2}, {5, 30, 500, 0, 2}, {5, 20, 750, 0, 2} };
+    protected string[] assassinAbilityNames = {"Dash", "Thorn", "Empower Weapon", "Caltrops", "Thousand Cuts" };
+    protected int[,] assassinAbilityStats = new int[5, 5] { {0, 10, 100, 0, 2}, {15, 25, 2500, 0, 2}, {10, 15, 1000, 0, 2}, {5, 30, 500, 0, 2}, {5, 20, 750, 0, 2} };
     public GameObject[] assassinAbilityObjects;
 
     public float GetMaxMana()
@@ -196,6 +196,14 @@ public class Assassin : BaseClass
         if (!inventoryOrArmorEquipOpen)
         {
             Attack();
+        }
+
+        if (empowerWeapon && empowerWeaponTimer > 0) {
+            empowerWeaponTimer--;
+        } else if (empowerWeapon && empowerWeaponTimer <= 0) {
+            empowerWeapon = false;
+        } else if (!empowerWeapon && empowerWeaponTimer > 0) {
+            empowerWeaponTimer = 0;
         }
 
     }
@@ -395,7 +403,7 @@ public class Assassin : BaseClass
         }
     }
 
-    void OnTriggerStay2D(Collider2D other) {
+    void OnCollisionEnter2D(Collision2D other) {
         if (other.gameObject.CompareTag("Wall") && dashing) {
             dashing = false;
         }
@@ -445,7 +453,8 @@ public class Assassin : BaseClass
                 }
                 else if (item == 2)
                 {
-
+                    empowerWeapon = true;
+                    empowerWeaponTimer = 2500;
                 }
                 else if (item == 3)
                 {
@@ -468,6 +477,14 @@ public class Assassin : BaseClass
                     newMelee = Instantiate(itemObject, (new Vector3(Mathf.Cos(angle - 0.5f), Mathf.Sin(angle - 0.5f), 0) + transform.position), Quaternion.Euler(0, 0, Mathf.Rad2Deg * angle - 90));
                     newMelee.transform.parent = gameObject.transform;
                     newMelee.GetComponent<MeleeScript>().damage = playerStats.GetItemDamage(item);
+                    if (empowerWeapon) {
+                        newObject = Instantiate(assassinAbilityObjects[2], (new Vector3(Mathf.Cos(angle - 0.6f) * 1.5f, Mathf.Sin(angle - 0.6f) * 1.5f, 0) + transform.position), Quaternion.Euler(0, 0, Mathf.Rad2Deg * angle - 135));
+                        newObject.transform.parent = newMelee.transform;
+                        newMelee.AddComponent<BuffWeapon>();
+                        newMelee.GetComponent<BuffWeapon>().damage = assassinAbilityStats[2, 0];
+                        newMelee.GetComponent<BuffWeapon>().effect = assassinAbilityObjects[2];
+                        empowerWeaponTimer -= 500;
+                    }
                     soundEffects.Swing();
                 }
                 else 

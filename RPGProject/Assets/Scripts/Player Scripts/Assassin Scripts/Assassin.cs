@@ -27,7 +27,7 @@ public class Assassin : BaseClass
 
     //Nested array: 0: damage, 1: mana cost, 2: cooldown, 3: ability variation, 4: item type
     protected string[] assassinAbilityNames = {"Dash", "Thorn", "Empower Weapon", "Caltrops", "Thousand Cuts" };
-    protected int[,] assassinAbilityStats = new int[5, 5] { {0, 10, 100, 0, 2}, {15, 25, 2500, 0, 2}, {10, 15, 1000, 0, 2}, {5, 30, 500, 0, 2}, {5, 20, 750, 0, 2} };
+    protected int[,] assassinAbilityStats = new int[5, 5] { {0, 10, 100, 0, 2}, {15, 25, 2500, 0, 2}, {5, 15, 1000, 0, 2}, {5, 30, 500, 0, 2}, {5, 20, 750, 0, 2} };
     public GameObject[] assassinAbilityObjects;
 
     public float GetMaxMana()
@@ -450,6 +450,23 @@ public class Assassin : BaseClass
                 {
                     newMelee = Instantiate(itemObject, transform.position, Quaternion.Euler(0,0,0));
                     newMelee.transform.parent = gameObject.transform;
+                    if (empowerWeapon) {
+                        newObject = Instantiate(assassinAbilityObjects[2], (new Vector3(0, 1, 0) + transform.position), Quaternion.Euler(0, 0, Mathf.Rad2Deg * angle - 135));
+                        newObject.transform.parent = newMelee.transform;
+                        newObject = Instantiate(assassinAbilityObjects[2], (new Vector3(0, -1, 0) + transform.position), Quaternion.Euler(0, 0, Mathf.Rad2Deg * angle - 135));
+                        newObject.transform.parent = newMelee.transform;
+                        newObject.transform.Rotate(new Vector3(0,0,180));
+                        newObject = Instantiate(assassinAbilityObjects[2], (new Vector3(1, 0, 0) + transform.position), Quaternion.Euler(0, 0, Mathf.Rad2Deg * angle - 135));
+                        newObject.transform.parent = newMelee.transform;
+                        newObject.transform.Rotate(new Vector3(0,0,-90));
+                        newObject = Instantiate(assassinAbilityObjects[2], (new Vector3(-1, 0, 0) + transform.position), Quaternion.Euler(0, 0, Mathf.Rad2Deg * angle - 135));
+                        newObject.transform.parent = newMelee.transform;
+                        newObject.transform.Rotate(new Vector3(0,0,90));
+                        newMelee.AddComponent<BuffWeapon>();
+                        newMelee.GetComponent<BuffWeapon>().damage = assassinAbilityStats[2, 0];
+                        newMelee.GetComponent<BuffWeapon>().effect = assassinAbilityObjects[2];
+                        empowerWeaponTimer -= 500;
+                    }
                 }
                 else if (item == 2)
                 {

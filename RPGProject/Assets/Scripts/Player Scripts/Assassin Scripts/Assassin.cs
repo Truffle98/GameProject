@@ -465,7 +465,7 @@ public class Assassin : BaseClass
                         newMelee.AddComponent<BuffWeapon>();
                         newMelee.GetComponent<BuffWeapon>().damage = assassinAbilityStats[2, 0];
                         newMelee.GetComponent<BuffWeapon>().effect = assassinAbilityObjects[2];
-                        empowerWeaponTimer -= 500;
+                        empowerWeaponTimer -= 2500;
                     }
                 }
                 else if (item == 2)
@@ -477,7 +477,14 @@ public class Assassin : BaseClass
                 {
                     newMelee = Instantiate(itemObject, transform.position, Quaternion.Euler(0,0,0));
                     newMelee.transform.parent = gameObject.transform;
-                    newMelee.GetComponent<CaltropParent>().damage = assassinAbilityStats[3, 0];
+                    if (empowerWeapon)
+                    {
+                        newMelee.GetComponent<CaltropParent>().damage = assassinAbilityStats[3, 0];
+                        newMelee.GetComponent<CaltropParent>().effect = assassinAbilityObjects[2];
+                        newMelee.GetComponent<CaltropParent>().effectDamage = assassinAbilityStats[2, 0];
+                        empowerWeaponTimer -= 2500;
+                    }
+                    
                 }
                 else if (item == 4) 
                 {

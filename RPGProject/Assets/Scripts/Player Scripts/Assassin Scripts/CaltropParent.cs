@@ -5,10 +5,10 @@ using UnityEngine;
 public class CaltropParent : MonoBehaviour
 {
     private float totalDistance = 0;
-    public float damage;
+    public float damage, effectDamage;
     private Vector3 oldPos;
-    public GameObject caltrop;
-    private GameObject newCaltrop;
+    public GameObject caltrop, effect;
+    private GameObject newCaltrop, newEffect;
 
     void Start()
     {
@@ -23,6 +23,16 @@ public class CaltropParent : MonoBehaviour
         if (totalDistance > 1) {
             newCaltrop = Instantiate(caltrop, transform.position, Quaternion.Euler(0,0,0));
             newCaltrop.GetComponent<Caltrop>().damage = damage;
+            if (effect != null)
+            {
+                newEffect = Instantiate(effect, transform.position, Quaternion.Euler(0,0,0));
+                newEffect.transform.parent = newCaltrop.transform;
+                newEffect.transform.localScale = new Vector3 (1.8f, 3f, 1);
+                newCaltrop.AddComponent<BuffWeapon>();
+                newCaltrop.GetComponent<BuffWeapon>().effect = effect;
+                newCaltrop.GetComponent<BuffWeapon>().damage = effectDamage;
+                Debug.Log("dn");
+            }
             totalDistance = 0;
         }
     }

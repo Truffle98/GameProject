@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class ThousandCutsParent : MonoBehaviour
 {
-    public float damage, angle;
+    public float damage, angle, effectDamage;
     private float rX, rY;
     private int daggerCount = 0, daggerTimer = 0;
-    public GameObject dagger;
-    private GameObject newDagger;
+    public GameObject dagger, effect;
+    private GameObject newDagger, newEffect;
 
     void Update() {
         if (daggerTimer == 0) {
@@ -19,6 +19,15 @@ public class ThousandCutsParent : MonoBehaviour
             newDagger.GetComponent<ThousandCutsDagger>().damage = damage;
             daggerCount++;
             daggerTimer = 30;
+            if (effect != null)
+            {
+                newEffect = Instantiate(effect, (new Vector3(Mathf.Cos(angle + rX) * 1.3f, Mathf.Sin(angle + rY) * 1.3f, 0) + transform.position), Quaternion.Euler(0, 0, Mathf.Rad2Deg * angle - 90));
+                newEffect.transform.parent = newDagger.transform;
+                newEffect.transform.localScale = new Vector3 (1.8f, 3f, 1);
+                newDagger.AddComponent<BuffWeapon>();
+                newDagger.GetComponent<BuffWeapon>().effect = effect;
+                newDagger.GetComponent<BuffWeapon>().damage = effectDamage;
+            }
             if (daggerCount == 10) {
                 Destroy(gameObject);
             }

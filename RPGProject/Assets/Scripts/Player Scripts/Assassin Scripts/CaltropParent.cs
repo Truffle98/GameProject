@@ -31,7 +31,6 @@ public class CaltropParent : MonoBehaviour
                 newCaltrop.AddComponent<BuffWeapon>();
                 newCaltrop.GetComponent<BuffWeapon>().effect = effect;
                 newCaltrop.GetComponent<BuffWeapon>().damage = effectDamage;
-                Debug.Log("dn");
             }
             totalDistance = 0;
         }

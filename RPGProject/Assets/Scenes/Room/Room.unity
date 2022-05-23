@@ -205,6 +205,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 224626985}
     - target: {fileID: 515296463042163576, guid: a9d666e75dc7d06408dda37a0cf159cc, type: 3}
+      propertyPath: enemyObject
+      value: 
+      objectReference: {fileID: 539876474}
+    - target: {fileID: 515296463042163576, guid: a9d666e75dc7d06408dda37a0cf159cc, type: 3}
+      propertyPath: damageNumber
+      value: 
+      objectReference: {fileID: 3124648095357946873, guid: 1316c414784714267a234c9559aba688, type: 3}
+    - target: {fileID: 515296463042163576, guid: a9d666e75dc7d06408dda37a0cf159cc, type: 3}
       propertyPath: experienceDrop
       value: 2
       objectReference: {fileID: 0}
@@ -250,6 +258,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a9d666e75dc7d06408dda37a0cf159cc, type: 3}
+--- !u!1 &539876474 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 515296463042163572, guid: a9d666e75dc7d06408dda37a0cf159cc, type: 3}
+  m_PrefabInstance: {fileID: 539876473}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &660938638
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -257,6 +270,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1483561904, guid: 79f3716cd8914d3429f6850d14f93165, type: 3}
+      propertyPath: enemyObject
+      value: 
+      objectReference: {fileID: 660938639}
+    - target: {fileID: 1483561904, guid: 79f3716cd8914d3429f6850d14f93165, type: 3}
+      propertyPath: damageNumber
+      value: 
+      objectReference: {fileID: 3124648095357946873, guid: 1316c414784714267a234c9559aba688, type: 3}
     - target: {fileID: 1483561904, guid: 79f3716cd8914d3429f6850d14f93165, type: 3}
       propertyPath: experienceDrop
       value: 4
@@ -319,6 +340,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 79f3716cd8914d3429f6850d14f93165, type: 3}
+--- !u!1 &660938639 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4682850731514513326, guid: 79f3716cd8914d3429f6850d14f93165, type: 3}
+  m_PrefabInstance: {fileID: 660938638}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &924064344
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -375,6 +401,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 515296463042163576, guid: a9d666e75dc7d06408dda37a0cf159cc, type: 3}
+      propertyPath: enemyObject
+      value: 
+      objectReference: {fileID: 924064346}
+    - target: {fileID: 515296463042163576, guid: a9d666e75dc7d06408dda37a0cf159cc, type: 3}
+      propertyPath: damageNumber
+      value: 
+      objectReference: {fileID: 3124648095357946873, guid: 1316c414784714267a234c9559aba688, type: 3}
+    - target: {fileID: 515296463042163576, guid: a9d666e75dc7d06408dda37a0cf159cc, type: 3}
       propertyPath: experienceDrop
       value: 15
       objectReference: {fileID: 0}
@@ -415,6 +449,11 @@ PrefabInstance:
 --- !u!4 &924064345 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 515296463042163574, guid: a9d666e75dc7d06408dda37a0cf159cc, type: 3}
+  m_PrefabInstance: {fileID: 924064344}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &924064346 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 515296463042163572, guid: a9d666e75dc7d06408dda37a0cf159cc, type: 3}
   m_PrefabInstance: {fileID: 924064344}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1061994477
@@ -477,6 +516,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1765317849}
     - target: {fileID: 515296463042163576, guid: a9d666e75dc7d06408dda37a0cf159cc, type: 3}
+      propertyPath: enemyObject
+      value: 
+      objectReference: {fileID: 1061994478}
+    - target: {fileID: 515296463042163576, guid: a9d666e75dc7d06408dda37a0cf159cc, type: 3}
+      propertyPath: damageNumber
+      value: 
+      objectReference: {fileID: 3124648095357946873, guid: 1316c414784714267a234c9559aba688, type: 3}
+    - target: {fileID: 515296463042163576, guid: a9d666e75dc7d06408dda37a0cf159cc, type: 3}
       propertyPath: experienceDrop
       value: 2
       objectReference: {fileID: 0}
@@ -530,6 +577,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a9d666e75dc7d06408dda37a0cf159cc, type: 3}
+--- !u!1 &1061994478 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 515296463042163572, guid: a9d666e75dc7d06408dda37a0cf159cc, type: 3}
+  m_PrefabInstance: {fileID: 1061994477}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1215165530 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 515296463042163574, guid: a9d666e75dc7d06408dda37a0cf159cc, type: 3}
@@ -652,6 +704,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 293922254}
     - target: {fileID: 515296463042163576, guid: a9d666e75dc7d06408dda37a0cf159cc, type: 3}
+      propertyPath: enemyObject
+      value: 
+      objectReference: {fileID: 1379243222}
+    - target: {fileID: 515296463042163576, guid: a9d666e75dc7d06408dda37a0cf159cc, type: 3}
+      propertyPath: damageNumber
+      value: 
+      objectReference: {fileID: 3124648095357946873, guid: 1316c414784714267a234c9559aba688, type: 3}
+    - target: {fileID: 515296463042163576, guid: a9d666e75dc7d06408dda37a0cf159cc, type: 3}
       propertyPath: experienceDrop
       value: 2
       objectReference: {fileID: 0}
@@ -697,6 +757,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a9d666e75dc7d06408dda37a0cf159cc, type: 3}
+--- !u!1 &1379243222 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 515296463042163572, guid: a9d666e75dc7d06408dda37a0cf159cc, type: 3}
+  m_PrefabInstance: {fileID: 1379243221}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1438848427
 GameObject:
   m_ObjectHideFlags: 0
@@ -4342,6 +4407,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2055119066}
     - target: {fileID: 515296463042163576, guid: a9d666e75dc7d06408dda37a0cf159cc, type: 3}
+      propertyPath: enemyObject
+      value: 
+      objectReference: {fileID: 515296464040294498}
+    - target: {fileID: 515296463042163576, guid: a9d666e75dc7d06408dda37a0cf159cc, type: 3}
+      propertyPath: damageNumber
+      value: 
+      objectReference: {fileID: 3124648095357946873, guid: 1316c414784714267a234c9559aba688, type: 3}
+    - target: {fileID: 515296463042163576, guid: a9d666e75dc7d06408dda37a0cf159cc, type: 3}
       propertyPath: experienceDrop
       value: 2
       objectReference: {fileID: 0}
@@ -4387,3 +4460,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a9d666e75dc7d06408dda37a0cf159cc, type: 3}
+--- !u!1 &515296464040294498 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 515296463042163572, guid: a9d666e75dc7d06408dda37a0cf159cc, type: 3}
+  m_PrefabInstance: {fileID: 515296464040294497}
+  m_PrefabAsset: {fileID: 0}

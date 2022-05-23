@@ -6,8 +6,8 @@ using UnityEngine.AI;
 public class EnemyScript : MonoBehaviour
 {
     private PlayerStats playerStats;
-    private GameObject player, newObject, target;
-    public GameObject enemyProjectile;
+    private GameObject player, newObject, target, newDamageNumber;
+    public GameObject enemyProjectile, damageNumber, enemyObject;
     private float currentHealth, speed, AOEDamage, angle, distanceToTarget;
     private int timer = 0, cooldown, findNewLocationTimer, AOECooldown = 0, itemDrop = -1, itemDropChoice, itemBound = 0, startBound = 0, turnedDuration = 0, classDecision;
     private int[] scaledItemDropList = new int[100];
@@ -250,6 +250,10 @@ public class EnemyScript : MonoBehaviour
 
         currentHealth -= damageTaken;
         healthBar.SetHealth(currentHealth);
+
+        newDamageNumber = Instantiate(damageNumber, (enemyObject.transform.position + GameObject.Find("Assassin(Clone)").gameObject.transform.position)/2 + new Vector3(0, Random.Range(-.5f,.51f), 0), Quaternion.Euler(0,0,0));
+        newDamageNumber.GetComponent<DamageNumberScript>().SetDamageNumber(damageTaken.ToString());
+        Destroy(newDamageNumber, 1);
 
         if(currentHealth <= 0) {
             Die();

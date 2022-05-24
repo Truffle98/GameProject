@@ -59,9 +59,10 @@ public class SlotEditor : MonoBehaviour
                 textEditor.ChangeStackNumber(null);
             }
 
-            else if (img.enabled == true && !healing && playerStats.isConsumable(itemID, itemClass))
+            else if (img.enabled == true && !healing && cooldown == 0 && playerStats.isConsumable(itemID, itemClass))
             {
                 textEditor = textMeshPro.GetComponent<textEditorScript>();
+                cooldown = 50;
 
                 playerStats.ConsumeItem(inventoryIndex, itemID);
                 playerStats.HealCharacter(itemID);

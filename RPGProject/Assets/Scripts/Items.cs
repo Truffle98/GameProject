@@ -5,11 +5,11 @@ using UnityEngine;
 
 public class Items : BaseClass
 {
-    protected string[] itemNames = new string[] { "Gold Coin", "Silver Coin", "Copper Coin", "Stick", "Boots of Swiftness", "Long Sword" };
-    //Indices inside the imbeded array represent (-1 value = nothing): 0:damage, 1:stack max, 2:mana, 3:cooldown, 4:item type (-1 = not weapon, 0 = melee, 1 = ranged),
-    //5: armor type (-1 = not armor, 0 = head, 1 = chest, 2 = boots/legs, 3 = ring one, 4 = ring two), 6: armor value
-    protected int[,] itemStats = new int[6, 7] { {0,0,0,0,-1,-1,0}, {0,100,0,0,-1,-1,0}, {0,100,0,0,-1,-1,0}, {0,10,0,0,-1,-1,0}, 
-                                                 {0,1,0,0,-1,2,2}, {5,1,0,50,0,-1,0} };
+    protected string[] itemNames = new string[] { "Gold Coin", "Silver Coin", "Copper Coin", "Stick", "Boots of Swiftness", "Long Sword", "Small Health Pot" };
+    //Indices inside the imbeded array represent (-1 value = nothing): 0:damage, 1:stack max, 2:mana, 3:cooldown, 4:item type (-1 = not weapon, 0 = melee, 1 = ranged, 2 = consumable),
+    //5: armor type (-1 = not armor, 0 = head, 1 = chest, 2 = boots/legs, 3 = ring one, 4 = ring two), 6: armor value, 7: heal amount
+    protected int[,] itemStats = new int[7, 8] { {0,0,0,0,-1,-1,0,0}, {0,100,0,0,-1,-1,0,0}, {0,100,0,0,-1,-1,0,0}, {0,10,0,0,-1,-1,0,0}, 
+                                                 {0,1,0,0,-1,2,2,0}, {5,1,0,50,0,-1,0,0}, {0,10,0,0,2,-1,0,20} };
 
     public float GetItemDamage(int itemID)
     {
@@ -37,5 +37,9 @@ public class Items : BaseClass
     public int GetItemArmorType(int itemID)
     {
         return itemStats[itemID, 5];
+    }
+    public int GetHealAmount(int itemID)
+    {
+        return itemStats[itemID, 7];
     }
 }

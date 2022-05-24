@@ -128,6 +128,63 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 904752622962932205, guid: 26b9bea57d411814baf55c188b395690, type: 3}
   m_PrefabInstance: {fileID: 1469875416}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &59238897
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 726485153020778874, guid: dc83220dd8669374d89e120ac0cab0e2, type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 726485153020778874, guid: dc83220dd8669374d89e120ac0cab0e2, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -4.2303114
+      objectReference: {fileID: 0}
+    - target: {fileID: 726485153020778874, guid: dc83220dd8669374d89e120ac0cab0e2, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -4.6296062
+      objectReference: {fileID: 0}
+    - target: {fileID: 726485153020778874, guid: dc83220dd8669374d89e120ac0cab0e2, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 726485153020778874, guid: dc83220dd8669374d89e120ac0cab0e2, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 726485153020778874, guid: dc83220dd8669374d89e120ac0cab0e2, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 726485153020778874, guid: dc83220dd8669374d89e120ac0cab0e2, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 726485153020778874, guid: dc83220dd8669374d89e120ac0cab0e2, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 726485153020778874, guid: dc83220dd8669374d89e120ac0cab0e2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 726485153020778874, guid: dc83220dd8669374d89e120ac0cab0e2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 726485153020778874, guid: dc83220dd8669374d89e120ac0cab0e2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 726485153020778885, guid: dc83220dd8669374d89e120ac0cab0e2, type: 3}
+      propertyPath: m_Name
+      value: Small Health Pot (2)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: dc83220dd8669374d89e120ac0cab0e2, type: 3}
 --- !u!1 &269221712
 GameObject:
   m_ObjectHideFlags: 0
@@ -323,6 +380,71 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1158016894262276618, guid: 11508ab3e1b359a4cb7452f3dccaa6cf, type: 3}
   m_PrefabInstance: {fileID: 386207835}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &545411702
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 726485153020778874, guid: dc83220dd8669374d89e120ac0cab0e2, type: 3}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 726485153020778874, guid: dc83220dd8669374d89e120ac0cab0e2, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 726485153020778874, guid: dc83220dd8669374d89e120ac0cab0e2, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 726485153020778874, guid: dc83220dd8669374d89e120ac0cab0e2, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -3.5894294
+      objectReference: {fileID: 0}
+    - target: {fileID: 726485153020778874, guid: dc83220dd8669374d89e120ac0cab0e2, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -2.3618708
+      objectReference: {fileID: 0}
+    - target: {fileID: 726485153020778874, guid: dc83220dd8669374d89e120ac0cab0e2, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 726485153020778874, guid: dc83220dd8669374d89e120ac0cab0e2, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 726485153020778874, guid: dc83220dd8669374d89e120ac0cab0e2, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 726485153020778874, guid: dc83220dd8669374d89e120ac0cab0e2, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 726485153020778874, guid: dc83220dd8669374d89e120ac0cab0e2, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 726485153020778874, guid: dc83220dd8669374d89e120ac0cab0e2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 726485153020778874, guid: dc83220dd8669374d89e120ac0cab0e2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 726485153020778874, guid: dc83220dd8669374d89e120ac0cab0e2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 726485153020778885, guid: dc83220dd8669374d89e120ac0cab0e2, type: 3}
+      propertyPath: m_Name
+      value: Small Health Pot
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: dc83220dd8669374d89e120ac0cab0e2, type: 3}
 --- !u!4 &633029526 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 904752622962932205, guid: 26b9bea57d411814baf55c188b395690, type: 3}
@@ -365,6 +487,7 @@ MonoBehaviour:
   - {fileID: 4677624160778609120, guid: 11508ab3e1b359a4cb7452f3dccaa6cf, type: 3}
   - {fileID: 1892823183401524243, guid: adf0530e40c6ad2419cbce9f9c4ad737, type: 3}
   - {fileID: 6410972012924807927, guid: eb5d60e6bac349e4a8d7e5b46c9bbeb6, type: 3}
+  - {fileID: 726485153020778885, guid: dc83220dd8669374d89e120ac0cab0e2, type: 3}
 --- !u!4 &682062857
 Transform:
   m_ObjectHideFlags: 0
@@ -378,7 +501,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &682062858
 MonoBehaviour:
@@ -392,6 +515,63 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7cdb8845804cfc46b6dcd51ed7218b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1001 &697641259
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 726485153020778874, guid: dc83220dd8669374d89e120ac0cab0e2, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 726485153020778874, guid: dc83220dd8669374d89e120ac0cab0e2, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -2.6330366
+      objectReference: {fileID: 0}
+    - target: {fileID: 726485153020778874, guid: dc83220dd8669374d89e120ac0cab0e2, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -3.9985845
+      objectReference: {fileID: 0}
+    - target: {fileID: 726485153020778874, guid: dc83220dd8669374d89e120ac0cab0e2, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 726485153020778874, guid: dc83220dd8669374d89e120ac0cab0e2, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 726485153020778874, guid: dc83220dd8669374d89e120ac0cab0e2, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 726485153020778874, guid: dc83220dd8669374d89e120ac0cab0e2, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 726485153020778874, guid: dc83220dd8669374d89e120ac0cab0e2, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 726485153020778874, guid: dc83220dd8669374d89e120ac0cab0e2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 726485153020778874, guid: dc83220dd8669374d89e120ac0cab0e2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 726485153020778874, guid: dc83220dd8669374d89e120ac0cab0e2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 726485153020778885, guid: dc83220dd8669374d89e120ac0cab0e2, type: 3}
+      propertyPath: m_Name
+      value: Small Health Pot (4)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: dc83220dd8669374d89e120ac0cab0e2, type: 3}
 --- !u!4 &797505452 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1158016894262276618, guid: 11508ab3e1b359a4cb7452f3dccaa6cf, type: 3}
@@ -525,7 +705,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &905025222
 MonoBehaviour:
@@ -1053,6 +1233,63 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 11508ab3e1b359a4cb7452f3dccaa6cf, type: 3}
+--- !u!1001 &1310099634
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 726485153020778874, guid: dc83220dd8669374d89e120ac0cab0e2, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 726485153020778874, guid: dc83220dd8669374d89e120ac0cab0e2, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1.7358018
+      objectReference: {fileID: 0}
+    - target: {fileID: 726485153020778874, guid: dc83220dd8669374d89e120ac0cab0e2, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -4.4718513
+      objectReference: {fileID: 0}
+    - target: {fileID: 726485153020778874, guid: dc83220dd8669374d89e120ac0cab0e2, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 726485153020778874, guid: dc83220dd8669374d89e120ac0cab0e2, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 726485153020778874, guid: dc83220dd8669374d89e120ac0cab0e2, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 726485153020778874, guid: dc83220dd8669374d89e120ac0cab0e2, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 726485153020778874, guid: dc83220dd8669374d89e120ac0cab0e2, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 726485153020778874, guid: dc83220dd8669374d89e120ac0cab0e2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 726485153020778874, guid: dc83220dd8669374d89e120ac0cab0e2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 726485153020778874, guid: dc83220dd8669374d89e120ac0cab0e2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 726485153020778885, guid: dc83220dd8669374d89e120ac0cab0e2, type: 3}
+      propertyPath: m_Name
+      value: Small Health Pot (3)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: dc83220dd8669374d89e120ac0cab0e2, type: 3}
 --- !u!1 &1375662733
 GameObject:
   m_ObjectHideFlags: 0
@@ -1191,7 +1428,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &1428133495
 AudioSource:
@@ -1205,7 +1442,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: b038b6fcc6c30744aae81a3f991ef620, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.1
+  m_Volume: 0
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -1358,6 +1595,63 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 26b9bea57d411814baf55c188b395690, type: 3}
+--- !u!1001 &1639064648
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 726485153020778874, guid: dc83220dd8669374d89e120ac0cab0e2, type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 726485153020778874, guid: dc83220dd8669374d89e120ac0cab0e2, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -5.3543196
+      objectReference: {fileID: 0}
+    - target: {fileID: 726485153020778874, guid: dc83220dd8669374d89e120ac0cab0e2, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -3.2196665
+      objectReference: {fileID: 0}
+    - target: {fileID: 726485153020778874, guid: dc83220dd8669374d89e120ac0cab0e2, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 726485153020778874, guid: dc83220dd8669374d89e120ac0cab0e2, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 726485153020778874, guid: dc83220dd8669374d89e120ac0cab0e2, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 726485153020778874, guid: dc83220dd8669374d89e120ac0cab0e2, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 726485153020778874, guid: dc83220dd8669374d89e120ac0cab0e2, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 726485153020778874, guid: dc83220dd8669374d89e120ac0cab0e2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 726485153020778874, guid: dc83220dd8669374d89e120ac0cab0e2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 726485153020778874, guid: dc83220dd8669374d89e120ac0cab0e2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 726485153020778885, guid: dc83220dd8669374d89e120ac0cab0e2, type: 3}
+      propertyPath: m_Name
+      value: Small Health Pot (1)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: dc83220dd8669374d89e120ac0cab0e2, type: 3}
 --- !u!1 &1681259208
 GameObject:
   m_ObjectHideFlags: 0
@@ -1392,7 +1686,7 @@ Transform:
   - {fileID: 1375662734}
   - {fileID: 269221715}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1717583473
 PrefabInstance:
@@ -1808,7 +2102,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2050526410
 MonoBehaviour:

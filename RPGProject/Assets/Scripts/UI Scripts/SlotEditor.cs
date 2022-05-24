@@ -11,7 +11,7 @@ public class SlotEditor : MonoBehaviour
     public int inventoryIndex;
     private int cooldown = 0, itemID, armorType, itemClass, itemType;
     private float damage, armor;
-    private string stackNum;
+    private bool healing;
     private Image img;
     private PlayerStats playerStats;
     [SerializeField] private Items items;
@@ -37,6 +37,8 @@ public class SlotEditor : MonoBehaviour
 
     void Update()
     {
+        healing = playerStats.CharacterIsHealing();
+
         gameObject.GetComponent<Button>().onClick.AddListener( () => 
         {
             if (img.enabled == true && cooldown==0 && playerStats.isWeapon(itemID, itemClass)){
@@ -44,7 +46,6 @@ public class SlotEditor : MonoBehaviour
                 playerStats.switchItemToHotBar(inventoryIndex, itemID, itemClass);
                 cooldown = 50;
 
-                stackNum = playerStats.GetItemStack(inventoryIndex).ToString();
                 textEditor = textMeshPro.GetComponent<textEditorScript>();
                 textEditor.ChangeStackNumber(null);
             }
@@ -54,9 +55,21 @@ public class SlotEditor : MonoBehaviour
                 playerStats.SwitchItemToArmorEquip(inventoryIndex, itemID, itemClass);
                 cooldown = 50;
                 
-                stackNum = playerStats.GetItemStack(inventoryIndex).ToString();
                 textEditor = textMeshPro.GetComponent<textEditorScript>();
                 textEditor.ChangeStackNumber(null);
+            }
+
+            else if (img.enabled == true && !healing && playerStats.isConsumable(itemID, itemClass))
+            {
+                textEditor = textMeshPro.GetComponent<textEditorScript>();
+
+                playerStats.ConsumeItem(inventoryIndex, itemID);
+                playerStats.HealCharacter(itemID);
+                if (playerStats.GetItemStack(inventoryIndex) == 0)
+                {
+                    img.enabled = false;
+                    textEditor.ChangeStackNumber(null);
+                }
             }
         });
 

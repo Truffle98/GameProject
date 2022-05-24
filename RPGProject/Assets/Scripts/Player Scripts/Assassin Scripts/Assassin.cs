@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class Assassin : BaseClass
 {
-    private float horizontalInput, verticalInput, maxHealth = baseHealth * 2, currentHealth, enemyDamage, maxMana = baseMana * 2, currentMana, angle, manaRegenerationSpeed;
+    private float horizontalInput, verticalInput, maxHealth = baseHealth * 2, currentHealth, enemyDamage, maxMana = baseMana * 2, currentMana, angle, manaRegenerationSpeed,
+    healAmount = 0;
     private Vector3 shootDirection;
-    private int item1, item2, item3, item4, item5, item6, item7, item8, item1Type, item2Type, item3Type, item4Type, item5Type, item6Type, item7Type, item8Type, empowerWeaponTimer = 0;
+    private int item1, item2, item3, item4, item5, item6, item7, item8, item1Type, item2Type, item3Type, item4Type, item5Type, item6Type, item7Type, item8Type, 
+    empowerWeaponTimer = 0, healCount = 0;
     public int cooldown1 = 0, cooldown2 = 0, cooldown3 = 0, cooldown4 = 0, cooldown5 = 0, cooldown6 = 0, cooldown7 = 0, cooldown8 = 0;
     public Rigidbody2D body;
     private Animator anim;
-    private bool movingUp, movingDown, inventoryOrArmorEquipOpen, empowerWeapon = false;
+    private bool movingUp, movingDown, inventoryOrArmorEquipOpen, empowerWeapon = false, healing = false;
     private PlayerStats playerStats;
     private InventoryOpener inventoryOpener;
     private ArmorEquipOpener armorEquipOpener;
@@ -79,6 +81,28 @@ public class Assassin : BaseClass
             anim.SetBool("Running", horizontalInput != 0);
             anim.SetBool("UpRunning", movingUp);
             anim.SetBool("DownRunning", movingDown);
+        }
+
+        if (healing)
+        {
+            if (healCount < 500)
+            {
+                if (currentHealth+healAmount<=maxHealth)
+                {
+                    currentHealth += healAmount;
+                }
+                else
+                {
+                    currentHealth = maxHealth;
+                }
+                healthbar.SetHealth(currentHealth);
+                healCount++;
+            }
+            else
+            {
+                healing = false;
+                healCount = 0;
+            }
         }
 
         item1Type = playerStats.GetEquippedItemClass(0);
@@ -634,5 +658,16 @@ public class Assassin : BaseClass
     public void LevelUp(int level)
     {
 
+    }
+
+    public void Heal(int itemID)
+    {
+        healAmount = itemsList.GetHealAmount(itemID)/500f;
+        healing = true;
+    }
+
+    public bool IsHealing()
+    {
+        return healing;
     }
 }

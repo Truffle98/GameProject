@@ -41,9 +41,11 @@ public class PlayerStats : Items
             soundEffects = GameObject.Find("Assassin(Clone)").GetComponent<SoundEffects>();
         }
 
-        experienceBar.SetMaxExperience(10); // 10 should be replaced by levelthreshold which calculates itself based on the 'GetLevelThreshold(level)' function
+        levelThreshold = GetLevelThreshold(level);
+        experienceBar.SetMaxExperience(levelThreshold);
         currentExperience = 0;
         textScript.SetLevel(level.ToString());
+
     }
     
     public bool isItemInSlot(int index)
@@ -61,14 +63,11 @@ public class PlayerStats : Items
         {
             return true;
         }
-        else if (itemStats[index, 4] >= 0)
+        else if (itemStats[index, 4] == 0 || itemStats[index, 4] == 1)
         {
             return true;
         }
-        else
-        {
-            return false;
-        }
+        return false;
     }
 
     public bool isArmor(int index, int itemClass)
@@ -77,10 +76,33 @@ public class PlayerStats : Items
         {
             return true;
         }
-        else 
+        return false;
+    }
+
+    public bool isConsumable(int index, int itemClass)
+    {
+        if (itemClass<0 && itemStats[index, 4]==2)
         {
-            return false;
+            return true;
         }
+        return false;
+    }
+
+    public void HealCharacter(int itemID)
+    {
+        if (classDecision==0)
+        {
+            //mage.heal
+        }
+        else if (classDecision==1)
+        {
+            assassin.Heal(itemID);
+        }
+    }
+
+    public bool CharacterIsHealing()
+    {
+        return assassin.IsHealing();
     }
 
     public int GetEquippedItemClass(int index)
@@ -173,7 +195,6 @@ public class PlayerStats : Items
     }
     public void SwitchItemToArmorEquip(int indexInInventory, int itemID, int IACLass)
     {
-
         itemName = itemNames[itemID];
         itemArmorType = GetItemArmorType(itemID);
         if (IAClass == -1)
@@ -212,6 +233,21 @@ public class PlayerStats : Items
                     return;
                 }
             }
+        }
+    }
+    public void ConsumeItem(int indexInInventory, int itemID)
+    {
+        itemName = itemNames[itemID];
+        Debug.Log($"Consumed {itemName}");
+        if (inventoryStacks[indexInInventory]>1)
+        {
+            inventoryStacks[indexInInventory] -= 1;
+        }
+        else
+        {
+            inventoryStacks[indexInInventory] -= 1;
+            inventory[indexInInventory,0] = -1;
+            inventory[indexInInventory,1] = -1;
         }
     }
     public float GetArmor()
@@ -311,15 +347,13 @@ public class PlayerStats : Items
         currentExperience += exp;
         experienceBar.SetExperience(currentExperience);
 
-        //Need to implement a level threshold so that we can check if our experience breaks it. Need thomas's function. I'll create a function like "GetLevelThreshold(int level)"
-        //This function will take "level" (x value for function) and plug it into the function and return the level threshold (y value for function).
-        if (currentExperience >= 10) //for now i use 10 exp as the first level threshold (should be replaced by levelThreshold)
+        if (currentExperience >= levelThreshold)
         {
-            currentExperience -= 10; //10 should be replaced by "levelThreshold"
+            currentExperience -= levelThreshold;
 
             level++;
-            //levelThreshold = GetLevelThreshold(level);
-            experienceBar.SetMaxExperience(15); //15 should be replaced by levelThreshold
+            levelThreshold = GetLevelThreshold(level);
+            experienceBar.SetMaxExperience(levelThreshold);
             experienceBar.SetExperience(currentExperience);
             textScript.SetLevel(level.ToString());
 
@@ -333,6 +367,11 @@ public class PlayerStats : Items
                 assassin.LevelUp(level);
             }
         }
+    }
+
+    public int GetLevelThreshold(int level)
+    {
+        return (int) Mathf.Round(.2f*(Mathf.Pow((level+10), 2.3f)));
     }
 
     private void Update() {

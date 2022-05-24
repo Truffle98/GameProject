@@ -8,8 +8,8 @@ public class EnemyScript : MonoBehaviour
     private PlayerStats playerStats;
     private GameObject player, newObject, target, newDamageNumber;
     public GameObject enemyProjectile, damageNumber, enemyObject;
-    private float currentHealth, speed, AOEDamage, angle, distanceToTarget;
-    private int timer = 0, cooldown, findNewLocationTimer, AOECooldown = 0, itemDrop = -1, itemDropChoice, itemBound = 0, startBound = 0, turnedDuration = 0, classDecision;
+    private float currentHealth, speed, AOEDamage, angle, distanceToTarget, originalMaxSpeed;
+    private int timer = 0, cooldown, findNewLocationTimer, AOECooldown = 0, itemDrop = -1, itemDropChoice, itemBound = 0, startBound = 0, turnedDuration = 0, classDecision, slowDuration = 0;
     private int[] scaledItemDropList = new int[100];
     private bool count = true, targetSpotted, turned = false;
     public int cooldownMax, maxHealth = 100, experienceDrop, lastSeenTarget = 0;
@@ -55,6 +55,7 @@ public class EnemyScript : MonoBehaviour
         
         player = GameObject.FindWithTag("Character");
         target = player;
+        originalMaxSpeed = maxSpeed;
     }
 
     // Update is called once per frame
@@ -109,6 +110,13 @@ public class EnemyScript : MonoBehaviour
                 turned = false;
             }
         }
+
+        if (slowDuration > 1) {
+            slowDuration--;
+        } else if (slowDuration == 1) {
+            maxSpeed = originalMaxSpeed;
+            slowDuration--;
+        }
     }
 
     void FixedUpdate() {
@@ -116,6 +124,7 @@ public class EnemyScript : MonoBehaviour
         if (targetSpotted) {
             if (distanceToTarget > shootDistance - 1) {
                 agent.SetDestination(target.transform.position);
+                agent.speed = maxSpeed;
                 //MoveCharacter(movement);
             } else if (distanceToTarget < fleeDistance) {
                 agent.SetDestination(transform.position - target.transform.position);
@@ -275,6 +284,12 @@ public class EnemyScript : MonoBehaviour
             }
             target = potentialTarget;
         }
-        Debug.Log("yes");
+    }
+
+    public void Slow(float potency, int duration) {
+
+        maxSpeed = maxSpeed * (1 - potency);
+        slowDuration = duration;
+
     }
 }

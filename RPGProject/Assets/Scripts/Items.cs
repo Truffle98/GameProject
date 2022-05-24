@@ -13,7 +13,7 @@ public class Items : BaseClass
 
     public float GetItemDamage(int itemID)
     {
-        return (float)itemStats[itemID, 0]*baseDamage;
+        return (float)itemStats[itemID, 0];
     }
     public float GetItemArmor(int itemID)
     {

@@ -5,7 +5,7 @@ using UnityEngine;
 public class CaltropParent : MonoBehaviour
 {
     private float totalDistance = 0;
-    public float damage, effectDamage;
+    public float damage, effectDamage, slow = 0;
     private Vector3 oldPos;
     public GameObject caltrop, effect;
     private GameObject newCaltrop, newEffect;
@@ -31,6 +31,9 @@ public class CaltropParent : MonoBehaviour
                 newCaltrop.AddComponent<BuffWeapon>();
                 newCaltrop.GetComponent<BuffWeapon>().effect = effect;
                 newCaltrop.GetComponent<BuffWeapon>().damage = effectDamage;
+            }
+            if (slow > 0) {
+                newCaltrop.GetComponent<Caltrop>().slow = slow;
             }
             totalDistance = 0;
         }

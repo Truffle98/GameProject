@@ -5,7 +5,7 @@ using UnityEngine;
 public class Assassin : BaseClass
 {
     private float horizontalInput, verticalInput, maxHealth = baseHealth * 2, currentHealth, enemyDamage, maxMana = baseMana * 2, currentMana, angle, manaRegenerationSpeed,
-    healAmount = 0, speed;
+    healAmount = 0, speed, damage, caltropSlow = 0.3f;
     private Vector3 shootDirection;
     private int item1, item2, item3, item4, item5, item6, item7, item8, item1Type, item2Type, item3Type, item4Type, item5Type, item6Type, item7Type, item8Type, 
     empowerWeaponTimer = 0, healCount = 0, bloodRushTimer = 0;
@@ -29,7 +29,7 @@ public class Assassin : BaseClass
 
     //Nested array: 0: damage, 1: mana cost, 2: cooldown, 3: ability variation, 4: item type
     protected string[] assassinAbilityNames = {"Dash", "Thorn", "Empower Weapon", "Caltrops", "Thousand Cuts", "Blood Rush" };
-    protected int[,] assassinAbilityStats = new int[6, 5] { {0, 10, 100, 0, 2}, {15, 25, 2500, 0, 2}, {5, 15, 1000, 0, 2}, {5, 30, 500, 0, 2}, {5, 20, 750, 0, 2}, {0, 15, 1000, 0, 2} };
+    protected int[,] assassinAbilityStats = new int[6, 5] { {0, 10, 100, 0, 2}, {15, 25, 2500, 0, 2}, {5, 15, 1000, 0, 2}, {5, 30, 500, 1, 2}, {5, 20, 750, 0, 2}, {0, 15, 1000, 0, 2} };
     public GameObject[] assassinAbilityObjects;
 
     public float GetMaxMana()
@@ -56,6 +56,7 @@ public class Assassin : BaseClass
         manaBar.SetMaxMana(maxMana);
         currentMana = maxMana;
         speed = baseSpeed;
+        damage = baseDamage;
         
         for (int index = 0; index < itemCooldowns.Length; index++)
         {
@@ -235,6 +236,7 @@ public class Assassin : BaseClass
             bloodRushTimer--;
         } else if (bloodRushTimer == 1) {
             speed = baseSpeed;
+            damage = baseDamage;
             bloodRushTimer--;
         }
 
@@ -482,6 +484,7 @@ public class Assassin : BaseClass
                 {
                     newMelee = Instantiate(itemObject, transform.position, Quaternion.Euler(0,0,0));
                     newMelee.transform.parent = gameObject.transform;
+                    newMelee.GetComponent<AOEScript>().damage = GetAbilityDamage(1);
                     if (empowerWeapon) {
                         newObject = Instantiate(assassinAbilityObjects[2], (new Vector3(0, 1, 0) + transform.position), Quaternion.Euler(0, 0, Mathf.Rad2Deg * angle - 135));
                         newObject.transform.parent = newMelee.transform;
@@ -495,7 +498,7 @@ public class Assassin : BaseClass
                         newObject.transform.parent = newMelee.transform;
                         newObject.transform.Rotate(new Vector3(0,0,90));
                         newMelee.AddComponent<BuffWeapon>();
-                        newMelee.GetComponent<BuffWeapon>().damage = assassinAbilityStats[2, 0];
+                        newMelee.GetComponent<BuffWeapon>().damage = GetAbilityDamage(2);
                         newMelee.GetComponent<BuffWeapon>().effect = assassinAbilityObjects[2];
                         empowerWeaponTimer -= 2500;
                     }
@@ -509,12 +512,15 @@ public class Assassin : BaseClass
                 {
                     newMelee = Instantiate(itemObject, transform.position, Quaternion.Euler(0,0,0));
                     newMelee.transform.parent = gameObject.transform;
-                    newMelee.GetComponent<CaltropParent>().damage = assassinAbilityStats[3, 0];
+                    newMelee.GetComponent<CaltropParent>().damage = GetAbilityDamage(3);
                     if (empowerWeapon)
                     {
                         newMelee.GetComponent<CaltropParent>().effect = assassinAbilityObjects[2];
-                        newMelee.GetComponent<CaltropParent>().effectDamage = assassinAbilityStats[2, 0];
+                        newMelee.GetComponent<CaltropParent>().effectDamage = GetAbilityDamage(2);
                         empowerWeaponTimer -= 2500;
+                    }
+                    if (assassinAbilityStats[3, 3] == 1) {
+                        newMelee.GetComponent<CaltropParent>().slow += caltropSlow;
                     }
                     
                 }
@@ -527,7 +533,7 @@ public class Assassin : BaseClass
                     if (empowerWeapon)
                     {
                         newMelee.GetComponent<ThousandCutsParent>().effect = assassinAbilityObjects[2];
-                        newMelee.GetComponent<ThousandCutsParent>().effectDamage = assassinAbilityStats[2, 0];
+                        newMelee.GetComponent<ThousandCutsParent>().effectDamage = GetAbilityDamage(2);
                         empowerWeaponTimer -= 2500;
                     }
                 }
@@ -536,7 +542,12 @@ public class Assassin : BaseClass
                     if (currentHealth > 20) 
                     {
                         bloodRushTimer = 750;
-                        speed = baseSpeed * 1.5f;
+                        if (assassinAbilityStats[5, 3] == 0) {
+                            speed = baseSpeed * 1.5f;
+                        } else {
+                            speed = baseSpeed * 1.25f;
+                            damage = baseDamage * 1.25f;
+                        }
                         currentHealth -= (20);
                         healthbar.SetHealth(currentHealth);
                     }
@@ -548,12 +559,12 @@ public class Assassin : BaseClass
                 {
                     newMelee = Instantiate(itemObject, (new Vector3(Mathf.Cos(angle - 0.5f), Mathf.Sin(angle - 0.5f), 0) + transform.position), Quaternion.Euler(0, 0, Mathf.Rad2Deg * angle - 90));
                     newMelee.transform.parent = gameObject.transform;
-                    newMelee.GetComponent<MeleeScript>().damage = playerStats.GetItemDamage(item);
+                    newMelee.GetComponent<MeleeScript>().damage = playerStats.GetItemDamage(item) * damage;
                     if (empowerWeapon) {
                         newObject = Instantiate(assassinAbilityObjects[2], (new Vector3(Mathf.Cos(angle - 0.6f) * 1.5f, Mathf.Sin(angle - 0.6f) * 1.5f, 0) + transform.position), Quaternion.Euler(0, 0, Mathf.Rad2Deg * angle - 135));
                         newObject.transform.parent = newMelee.transform;
                         newMelee.AddComponent<BuffWeapon>();
-                        newMelee.GetComponent<BuffWeapon>().damage = assassinAbilityStats[2, 0];
+                        newMelee.GetComponent<BuffWeapon>().damage = GetAbilityDamage(2);
                         newMelee.GetComponent<BuffWeapon>().effect = assassinAbilityObjects[2];
                         empowerWeaponTimer -= 500;
                     }
@@ -563,7 +574,7 @@ public class Assassin : BaseClass
                 {
                     newProjectile = Instantiate(itemObject, (new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0) + transform.position), Quaternion.Euler(0, 0, 0));
                     newProjectile.GetComponent<ProjectileScript>().angle = angle;
-                    newProjectile.GetComponent<ProjectileScript>().damage = playerStats.GetItemDamage(item);
+                    newProjectile.GetComponent<ProjectileScript>().damage = playerStats.GetItemDamage(item) * damage;
                 }
             }
             
@@ -653,9 +664,9 @@ public class Assassin : BaseClass
         }
     }
 
-    public int GetAbilityDamage(int index)
+    public float GetAbilityDamage(int index)
     {
-        return assassinAbilityStats[index, 0] * baseDamage;
+        return assassinAbilityStats[index, 0] * damage;
     }
 
     public GameObject GetAbilityObject(int index)

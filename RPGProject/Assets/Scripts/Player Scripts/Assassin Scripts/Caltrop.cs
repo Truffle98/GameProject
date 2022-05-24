@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Caltrop : MonoBehaviour
 {
-    public float damage;
+    public float damage, slow = 0;
 
     void Start () {
         Destroy(gameObject, 10);
@@ -14,6 +14,9 @@ public class Caltrop : MonoBehaviour
 
         if (other.CompareTag("Enemy")) {
             other.GetComponent<EnemyScript>().TakeDamage(damage);
+            if (slow > 0) {
+                other.GetComponent<EnemyScript>().Slow(slow, 500);
+            }
             Destroy(gameObject);
         }
 

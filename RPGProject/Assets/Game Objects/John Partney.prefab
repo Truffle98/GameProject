@@ -124,13 +124,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyProjectile: {fileID: 3246578418983402623, guid: 99755d472385ae442a71a0cf5adde0a2, type: 3}
+  damageNumber: {fileID: 3124648095357946873, guid: 1316c414784714267a234c9559aba688, type: 3}
+  enemyObject: {fileID: 4682850731514513326}
   cooldownMax: 500
   maxHealth: 200
+  experienceDrop: 10
+  lastSeenTarget: 0
   itemDropList: 
   itemDropPercentagesList: 
   engageDistance: 8
   shootDistance: 4
-  maxSpeed: 2
+  maxSpeed: 4
   fleeDistance: 2
   healthBar: {fileID: 4252532295865217900}
 --- !u!58 &2351591672552922381

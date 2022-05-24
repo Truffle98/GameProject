@@ -270,18 +270,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1483561904, guid: 79f3716cd8914d3429f6850d14f93165, type: 3}
-      propertyPath: enemyObject
-      value: 
-      objectReference: {fileID: 660938639}
-    - target: {fileID: 1483561904, guid: 79f3716cd8914d3429f6850d14f93165, type: 3}
-      propertyPath: damageNumber
-      value: 
-      objectReference: {fileID: 3124648095357946873, guid: 1316c414784714267a234c9559aba688, type: 3}
-    - target: {fileID: 1483561904, guid: 79f3716cd8914d3429f6850d14f93165, type: 3}
-      propertyPath: experienceDrop
-      value: 10
-      objectReference: {fileID: 0}
     - target: {fileID: 4252532296001976583, guid: 79f3716cd8914d3429f6850d14f93165, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -340,11 +328,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 79f3716cd8914d3429f6850d14f93165, type: 3}
---- !u!1 &660938639 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4682850731514513326, guid: 79f3716cd8914d3429f6850d14f93165, type: 3}
-  m_PrefabInstance: {fileID: 660938638}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &924064344
 PrefabInstance:
   m_ObjectHideFlags: 0

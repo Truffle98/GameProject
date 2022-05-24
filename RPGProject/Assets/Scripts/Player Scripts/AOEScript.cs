@@ -6,11 +6,10 @@ public class AOEScript : MonoBehaviour
 {
     public int classType;
     public int itemID;
-    public float lifespan;
+    public float lifespan, damage;
     private PlayerStats playerStats;
     private Assassin assassin;
     private Mage mage;
-    private float damage;
     
     public float GetAOEDamage() {
         return damage;
@@ -19,7 +18,7 @@ public class AOEScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        classType = 1;
+        /*classType = 1;
         if (classType == 0)
         {
             mage = GameObject.Find("Mage(Clone)").GetComponent<Mage>();
@@ -34,7 +33,7 @@ public class AOEScript : MonoBehaviour
         {
             playerStats = GameObject.Find("Player Stats").GetComponent<PlayerStats>();
             damage = playerStats.GetItemDamage(itemID) * 0.2f;
-        }
+        }*/
         Destroy(gameObject, lifespan);
     }
 

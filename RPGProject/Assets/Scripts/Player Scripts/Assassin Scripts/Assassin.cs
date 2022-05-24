@@ -5,10 +5,10 @@ using UnityEngine;
 public class Assassin : BaseClass
 {
     private float horizontalInput, verticalInput, maxHealth = baseHealth * 2, currentHealth, enemyDamage, maxMana = baseMana * 2, currentMana, angle, manaRegenerationSpeed,
-    healAmount = 0;
+    healAmount = 0, speed;
     private Vector3 shootDirection;
     private int item1, item2, item3, item4, item5, item6, item7, item8, item1Type, item2Type, item3Type, item4Type, item5Type, item6Type, item7Type, item8Type, 
-    empowerWeaponTimer = 0, healCount = 0;
+    empowerWeaponTimer = 0, healCount = 0, bloodRushTimer = 0;
     public int cooldown1 = 0, cooldown2 = 0, cooldown3 = 0, cooldown4 = 0, cooldown5 = 0, cooldown6 = 0, cooldown7 = 0, cooldown8 = 0;
     public Rigidbody2D body;
     private Animator anim;
@@ -28,8 +28,8 @@ public class Assassin : BaseClass
     private float assassinArmorMultiplier = baseArmorMultiplier + 0.25f;
 
     //Nested array: 0: damage, 1: mana cost, 2: cooldown, 3: ability variation, 4: item type
-    protected string[] assassinAbilityNames = {"Dash", "Thorn", "Empower Weapon", "Caltrops", "Thousand Cuts" };
-    protected int[,] assassinAbilityStats = new int[5, 5] { {0, 10, 100, 0, 2}, {15, 25, 2500, 0, 2}, {5, 15, 1000, 0, 2}, {5, 30, 500, 0, 2}, {5, 20, 750, 0, 2} };
+    protected string[] assassinAbilityNames = {"Dash", "Thorn", "Empower Weapon", "Caltrops", "Thousand Cuts", "Blood Rush" };
+    protected int[,] assassinAbilityStats = new int[6, 5] { {0, 10, 100, 0, 2}, {15, 25, 2500, 0, 2}, {5, 15, 1000, 0, 2}, {5, 30, 500, 0, 2}, {5, 20, 750, 0, 2}, {0, 15, 1000, 0, 2} };
     public GameObject[] assassinAbilityObjects;
 
     public float GetMaxMana()
@@ -55,6 +55,7 @@ public class Assassin : BaseClass
         currentHealth = maxHealth;
         manaBar.SetMaxMana(maxMana);
         currentMana = maxMana;
+        speed = baseSpeed;
         
         for (int index = 0; index < itemCooldowns.Length; index++)
         {
@@ -73,7 +74,7 @@ public class Assassin : BaseClass
             verticalInput = Input.GetAxis("Vertical");
 
             //Sets character velocity
-            body.velocity = new Vector2(horizontalInput * baseSpeed, verticalInput * baseSpeed);
+            body.velocity = new Vector2(horizontalInput * speed, verticalInput * speed);
             //Flips sprites and helps facilitate sprite transitions
             changeSprite(horizontalInput, verticalInput);
 
@@ -228,6 +229,13 @@ public class Assassin : BaseClass
             empowerWeapon = false;
         } else if (!empowerWeapon && empowerWeaponTimer > 0) {
             empowerWeaponTimer = 0;
+        }
+
+        if (bloodRushTimer > 1) {
+            bloodRushTimer--;
+        } else if (bloodRushTimer == 1) {
+            speed = baseSpeed;
+            bloodRushTimer--;
         }
 
     }
@@ -521,6 +529,16 @@ public class Assassin : BaseClass
                         newMelee.GetComponent<ThousandCutsParent>().effect = assassinAbilityObjects[2];
                         newMelee.GetComponent<ThousandCutsParent>().effectDamage = assassinAbilityStats[2, 0];
                         empowerWeaponTimer -= 2500;
+                    }
+                }
+                else if (item == 5)
+                {
+                    if (currentHealth > 20) 
+                    {
+                        bloodRushTimer = 750;
+                        speed = baseSpeed * 1.5f;
+                        currentHealth -= (20);
+                        healthbar.SetHealth(currentHealth);
                     }
                 }
             }

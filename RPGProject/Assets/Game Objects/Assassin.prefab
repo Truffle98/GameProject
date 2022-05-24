@@ -4239,6 +4239,7 @@ MonoBehaviour:
   - {fileID: 2385053704213769511, guid: f7cf57547f06e414cb13832503dca9a1, type: 3}
   - {fileID: 6289707744915197012, guid: 2b449da18fbedc849be6572a95655fe1, type: 3}
   - {fileID: 608703805860730322, guid: 1a19c988eb355be43a40e12ede04174a, type: 3}
+  - {fileID: 3075006762418536211, guid: 70b5d29bbc5a0d5428ac2803e001ebad, type: 3}
 --- !u!114 &1522684173062930180
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6690,6 +6691,18 @@ PrefabInstance:
     - target: {fileID: -143864795023892166, guid: 0a651968f6cb6da4db9415bc5d305698, type: 3}
       propertyPath: itemLineup.Array.data[7]
       value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: -143864795023892166, guid: 0a651968f6cb6da4db9415bc5d305698, type: 3}
+      propertyPath: inventoryStacks.Array.data[0]
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -143864795023892166, guid: 0a651968f6cb6da4db9415bc5d305698, type: 3}
+      propertyPath: inventoryStacks.Array.data[1]
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -143864795023892166, guid: 0a651968f6cb6da4db9415bc5d305698, type: 3}
+      propertyPath: inventoryStacks.Array.data[2]
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1898754722440032962, guid: 0a651968f6cb6da4db9415bc5d305698, type: 3}
       propertyPath: m_RootOrder

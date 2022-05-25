@@ -5,6 +5,7 @@ using UnityEngine;
 public class ThousandCutsParent : MonoBehaviour
 {
     public float damage, angle, effectDamage;
+    public int effectType;
     private float rX, rY;
     private int daggerCount = 0, daggerTimer = 0;
     public GameObject dagger, effect;
@@ -27,6 +28,7 @@ public class ThousandCutsParent : MonoBehaviour
                 newDagger.AddComponent<BuffWeapon>();
                 newDagger.GetComponent<BuffWeapon>().effect = effect;
                 newDagger.GetComponent<BuffWeapon>().damage = effectDamage;
+                newDagger.GetComponent<BuffWeapon>().type = effectType;
             }
             if (daggerCount == 10) {
                 Destroy(gameObject);

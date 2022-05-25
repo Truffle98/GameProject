@@ -6,6 +6,7 @@ public class CaltropParent : MonoBehaviour
 {
     private float totalDistance = 0;
     public float damage, effectDamage, slow = 0;
+    public int effectType;
     private Vector3 oldPos;
     public GameObject caltrop, effect;
     private GameObject newCaltrop, newEffect;
@@ -31,6 +32,7 @@ public class CaltropParent : MonoBehaviour
                 newCaltrop.AddComponent<BuffWeapon>();
                 newCaltrop.GetComponent<BuffWeapon>().effect = effect;
                 newCaltrop.GetComponent<BuffWeapon>().damage = effectDamage;
+                newCaltrop.GetComponent<BuffWeapon>().type = effectType;
             }
             if (slow > 0) {
                 newCaltrop.GetComponent<Caltrop>().slow = slow;

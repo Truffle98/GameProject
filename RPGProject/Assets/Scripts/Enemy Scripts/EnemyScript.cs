@@ -8,15 +8,15 @@ public class EnemyScript : MonoBehaviour
     private PlayerStats playerStats;
     private GameObject player, newObject, target, newDamageNumber;
     public GameObject enemyProjectile, damageNumber, enemyObject;
-    private float currentHealth, speed, AOEDamage, angle, distanceToTarget, originalMaxSpeed;
-    private int timer = 0, cooldown, findNewLocationTimer, AOECooldown = 0, itemDrop = -1, itemDropChoice, itemBound = 0, startBound = 0, turnedDuration = 0, classDecision, slowDuration = 0;
+    private float currentHealth, speed, AOEDamage, angle, distanceToTarget, originalMaxSpeed, originalDamage;
+    private int timer = 0, cooldown, findNewLocationTimer, AOECooldown = 0, itemDrop = -1, itemDropChoice, itemBound = 0, startBound = 0, turnedDuration = 0, classDecision, slowDuration = 0, reduceDamageDuration = 0;
     private int[] scaledItemDropList = new int[100];
     private bool count = true, targetSpotted, turned = false;
     public int cooldownMax, maxHealth = 100, experienceDrop, lastSeenTarget = 0;
     //Drop list should contain item ids and item drop percentages list should contain the percentages in integer from (90 for 90% for example)
     public int[] itemDropList;
     public int[] itemDropPercentagesList;
-    public float engageDistance, shootDistance, maxSpeed, fleeDistance;
+    public float engageDistance, shootDistance, maxSpeed, fleeDistance, damage;
     private ProjectileScript projectileStats;
     private MeleeScript meleeWeaponStats;
     private Vector3 shootDirection, direction;
@@ -56,6 +56,7 @@ public class EnemyScript : MonoBehaviour
         player = GameObject.FindWithTag("Character");
         target = player;
         originalMaxSpeed = maxSpeed;
+        originalDamage = damage;
     }
 
     // Update is called once per frame
@@ -116,6 +117,13 @@ public class EnemyScript : MonoBehaviour
         } else if (slowDuration == 1) {
             maxSpeed = originalMaxSpeed;
             slowDuration--;
+        }
+
+        if (reduceDamageDuration > 1) {
+            reduceDamageDuration--;
+        } else if (reduceDamageDuration == 1) {
+            damage = originalDamage;
+            reduceDamageDuration--;
         }
     }
 
@@ -224,6 +232,7 @@ public class EnemyScript : MonoBehaviour
 
         newObject = Instantiate(enemyProjectile, (new Vector3(shootDirection.x, shootDirection.y, 0) + transform.position), Quaternion.Euler(new Vector3(0,0,0)));
         newObject.GetComponent<EnemyProjectileScript>().angle = angle;
+        newObject.GetComponent<EnemyProjectileScript>().damage = damage;
         if (turned) {
             newObject.tag = "Turned Enemy Projectile";
         }
@@ -290,6 +299,13 @@ public class EnemyScript : MonoBehaviour
 
         maxSpeed = maxSpeed * (1 - potency);
         slowDuration = duration;
+
+    }
+
+    public void ReduceDamage(float potency, int duration) {
+
+        damage = damage * (1 - potency);
+        reduceDamageDuration = duration;
 
     }
 }

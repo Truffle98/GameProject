@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 5582459789808698334}
   - component: {fileID: 3466618315265498095}
   m_Layer: 0
-  m_Name: BuffWeapon
+  m_Name: BuffWeaponFire
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

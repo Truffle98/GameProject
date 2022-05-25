@@ -5,6 +5,7 @@ using UnityEngine;
 public class BuffWeaponAttach : MonoBehaviour
 {
     public float damage;
+    public int type;
     public EnemyScript enemyScript;
     private GameObject[] effects;
     private Transform[] transforms;
@@ -28,10 +29,21 @@ public class BuffWeaponAttach : MonoBehaviour
             Destroy(gameObject);
         }
         if (cooldown == 0)
-        {
-            enemyScript.TakeDamage(damage);
-            cooldown = 250;
-            count++;
+        {  
+            if (type == 0 || type == 2) {
+                enemyScript.TakeDamage(damage);
+                cooldown = 250;
+                count++;
+                if (type == 2) {
+                    enemyScript.ReduceDamage(0.25f, 750);
+                    type = 0;
+                }
+            } else if (type == 1) {
+                enemyScript.Slow(0.5f, 750);
+            }
+        }
+        if (cooldown == -750) {
+            Destroy(gameObject);
         }
         cooldown--;
     }

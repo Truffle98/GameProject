@@ -7,6 +7,7 @@ public class BuffWeapon : MonoBehaviour
     private GameObject newObject;
     public GameObject effect;
     public float damage;
+    public int type;
 
     void OnTriggerEnter2D(Collider2D other) 
     {
@@ -16,7 +17,9 @@ public class BuffWeapon : MonoBehaviour
             newObject.transform.parent = other.transform;
             newObject.AddComponent<BuffWeaponAttach>();
             newObject.GetComponent<BuffWeaponAttach>().damage = damage;
+            newObject.GetComponent<BuffWeaponAttach>().type = type;
             newObject.GetComponent<BuffWeaponAttach>().enemyScript = other.GetComponent<EnemyScript>();
+            
         }
     }
 }

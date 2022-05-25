@@ -136,6 +136,7 @@ MonoBehaviour:
   shootDistance: 4
   maxSpeed: 4
   fleeDistance: 2
+  damage: 20
   healthBar: {fileID: 4252532295865217900}
 --- !u!58 &2351591672552922381
 CircleCollider2D:

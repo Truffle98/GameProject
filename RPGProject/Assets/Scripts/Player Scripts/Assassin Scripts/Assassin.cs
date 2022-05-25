@@ -29,7 +29,8 @@ public class Assassin : BaseClass
 
     //Nested array: 0: damage, 1: mana cost, 2: cooldown, 3: ability variation, 4: item type
     protected string[] assassinAbilityNames = {"Dash", "Thorn", "Empower Weapon", "Caltrops", "Thousand Cuts", "Blood Rush" };
-    protected int[,] assassinAbilityStats = new int[6, 5] { {0, 10, 100, 0, 2}, {15, 25, 2500, 0, 2}, {5, 15, 1000, 0, 2}, {5, 30, 500, 1, 2}, {5, 20, 750, 0, 2}, {0, 15, 1000, 0, 2} };
+    protected int[,] assassinAbilityStats = new int[6, 5] { {0, 10, 100, 0, 2}, {15, 25, 2500, 0, 2}, {0, 15, 1000, 1, 2}, {5, 30, 500, 1, 2}, {5, 20, 750, 0, 2}, {0, 15, 1000, 0, 2} };
+    //array for empower weapon type 0 = {5, 15, 1000, 0, 2}
     public GameObject[] assassinAbilityObjects;
 
     public float GetMaxMana()
@@ -500,6 +501,7 @@ public class Assassin : BaseClass
                         newMelee.AddComponent<BuffWeapon>();
                         newMelee.GetComponent<BuffWeapon>().damage = GetAbilityDamage(2);
                         newMelee.GetComponent<BuffWeapon>().effect = assassinAbilityObjects[2];
+                        newMelee.GetComponent<BuffWeapon>().type = assassinAbilityStats[2, 3];
                         empowerWeaponTimer -= 2500;
                     }
                 }
@@ -517,6 +519,7 @@ public class Assassin : BaseClass
                     {
                         newMelee.GetComponent<CaltropParent>().effect = assassinAbilityObjects[2];
                         newMelee.GetComponent<CaltropParent>().effectDamage = GetAbilityDamage(2);
+                        newMelee.GetComponent<CaltropParent>().effectType = assassinAbilityStats[2, 3];
                         empowerWeaponTimer -= 2500;
                     }
                     if (assassinAbilityStats[3, 3] == 1) {
@@ -534,6 +537,7 @@ public class Assassin : BaseClass
                     {
                         newMelee.GetComponent<ThousandCutsParent>().effect = assassinAbilityObjects[2];
                         newMelee.GetComponent<ThousandCutsParent>().effectDamage = GetAbilityDamage(2);
+                        newMelee.GetComponent<ThousandCutsParent>().effectType = assassinAbilityStats[2, 3];
                         empowerWeaponTimer -= 2500;
                     }
                 }
@@ -566,6 +570,7 @@ public class Assassin : BaseClass
                         newMelee.AddComponent<BuffWeapon>();
                         newMelee.GetComponent<BuffWeapon>().damage = GetAbilityDamage(2);
                         newMelee.GetComponent<BuffWeapon>().effect = assassinAbilityObjects[2];
+                        newMelee.GetComponent<BuffWeapon>().type = assassinAbilityStats[2, 3];
                         empowerWeaponTimer -= 500;
                     }
                     soundEffects.Swing();

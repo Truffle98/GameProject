@@ -28,8 +28,8 @@ public class Assassin : BaseClass
     private float assassinArmorMultiplier = baseArmorMultiplier + 0.25f;
 
     //Nested array: 0: damage, 1: mana cost, 2: cooldown, 3: ability variation, 4: item type
-    protected string[] assassinAbilityNames = {"Dash", "Thorn", "Empower Weapon", "Caltrops", "Thousand Cuts", "Blood Rush" };
-    protected int[,] assassinAbilityStats = new int[6, 5] { {0, 10, 100, 0, 2}, {15, 25, 2500, 0, 2}, {0, 15, 1000, 1, 2}, {5, 30, 500, 1, 2}, {5, 20, 750, 0, 2}, {0, 15, 1000, 0, 2} };
+    protected string[] assassinAbilityNames = {"Dash", "Thorn", "Empower Weapon", "Caltrops", "Thousand Cuts", "Blood Rush", "Boomerang" };
+    protected int[,] assassinAbilityStats = new int[7, 5] { {0, 10, 100, 0, 2}, {15, 25, 2500, 0, 2}, {0, 15, 1000, 1, 2}, {5, 30, 500, 1, 2}, {5, 20, 750, 0, 2}, {0, 15, 1000, 0, 2}, {20, 5, 500, 0, 2} };
     //array for empower weapon type 0 = {5, 15, 1000, 0, 2}
     public GameObject[] assassinAbilityObjects;
 
@@ -555,6 +555,12 @@ public class Assassin : BaseClass
                         currentHealth -= (20);
                         healthbar.SetHealth(currentHealth);
                     }
+                }
+                else if (item == 6)
+                {
+                    newProjectile = Instantiate(itemObject, (new Vector3(Mathf.Cos(angle - 0.8f), Mathf.Sin(angle - 0.8f), 0) + transform.position), Quaternion.Euler(0, 0, Mathf.Rad2Deg * angle - 180));
+                    newProjectile.GetComponent<BoomerangScript>().point = transform.position + new Vector3 (Mathf.Cos(angle) * 4, Mathf.Sin(angle) * 4, 0);
+                    newProjectile.GetComponent<BoomerangScript>().damage = GetAbilityDamage(6);
                 }
             }
             else 

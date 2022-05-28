@@ -28,14 +28,10 @@ public class DashScript : MonoBehaviour
         assassinScript.dashing = true;
         assassinScript.body.velocity = new Vector2(0, 0);
 
-        assassinScript.cooldowns[0] = assassinScript.GetCooldown(0); if (playerStats.isItemInSlot(0)) assassinScript.itemCooldowns[0].SetActive(true); assassinScript.itemCooldowns[0].GetComponent<CooldownUI>().SetMaxCooldown(assassinScript.GetCooldown(0));
-        assassinScript.cooldowns[1] = assassinScript.GetCooldown(0); if (playerStats.isItemInSlot(1)) assassinScript.itemCooldowns[1].SetActive(true); assassinScript.itemCooldowns[1].GetComponent<CooldownUI>().SetMaxCooldown(assassinScript.GetCooldown(0));
-        assassinScript.cooldowns[2] = assassinScript.GetCooldown(0); if (playerStats.isItemInSlot(2)) assassinScript.itemCooldowns[2].SetActive(true); assassinScript.itemCooldowns[2].GetComponent<CooldownUI>().SetMaxCooldown(assassinScript.GetCooldown(0));
-        assassinScript.cooldowns[3] = assassinScript.GetCooldown(0); if (playerStats.isItemInSlot(3)) assassinScript.itemCooldowns[3].SetActive(true); assassinScript.itemCooldowns[3].GetComponent<CooldownUI>().SetMaxCooldown(assassinScript.GetCooldown(0));
-        assassinScript.cooldowns[4] = assassinScript.GetCooldown(0); if (playerStats.isItemInSlot(4)) assassinScript.itemCooldowns[4].SetActive(true); assassinScript.itemCooldowns[4].GetComponent<CooldownUI>().SetMaxCooldown(assassinScript.GetCooldown(0));
-        assassinScript.cooldowns[5] = assassinScript.GetCooldown(0); if (playerStats.isItemInSlot(5)) assassinScript.itemCooldowns[5].SetActive(true); assassinScript.itemCooldowns[5].GetComponent<CooldownUI>().SetMaxCooldown(assassinScript.GetCooldown(0));
-        assassinScript.cooldowns[6] = assassinScript.GetCooldown(0); if (playerStats.isItemInSlot(6)) assassinScript.itemCooldowns[6].SetActive(true); assassinScript.itemCooldowns[6].GetComponent<CooldownUI>().SetMaxCooldown(assassinScript.GetCooldown(0));
-        assassinScript.cooldowns[7] = assassinScript.GetCooldown(0); if (playerStats.isItemInSlot(7)) assassinScript.itemCooldowns[7].SetActive(true); assassinScript.itemCooldowns[7].GetComponent<CooldownUI>().SetMaxCooldown(assassinScript.GetCooldown(0));
+        for (int i = 0; i < 8; i++)
+        {
+            assassinScript.cooldowns[i] = assassinScript.GetCooldown(0); if (playerStats.isItemInSlot(i)) assassinScript.itemCooldowns[i].SetActive(true); assassinScript.itemCooldowns[i].GetComponent<CooldownUI>().SetMaxCooldown(assassinScript.GetCooldown(0));
+        }
     }
 
     // Update is called once per frame

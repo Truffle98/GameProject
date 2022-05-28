@@ -29,7 +29,7 @@ public class Assassin : BaseClass
 
     //Nested array: 0: damage, 1: mana cost, 2: cooldown, 3: ability variation, 4: item type
     protected string[] assassinAbilityNames = {"Dash", "Thorn", "Empower Weapon", "Caltrops", "Thousand Cuts", "Blood Rush", "Boomerang" };
-    protected int[,] assassinAbilityStats = new int[7, 5] { {0, 10, 100, 0, 2}, {15, 25, 2500, 0, 2}, {0, 15, 1000, 1, 2}, {5, 30, 500, 1, 2}, {5, 20, 750, 0, 2}, {0, 15, 1000, 0, 2}, {20, 5, 500, 0, 2} };
+    protected int[,] assassinAbilityStats = new int[7, 5] { {0, 10, 100, 0, 2}, {15, 25, 2500, 0, 2}, {0, 15, 1000, 1, 2}, {5, 30, 500, 1, 2}, {5, 20, 750, 0, 2}, {0, 15, 1000, 0, 2}, {20, 5, 1000, 1, 2} };
     //array for empower weapon type 0 = {5, 15, 1000, 0, 2}
     public GameObject[] assassinAbilityObjects;
 
@@ -432,6 +432,8 @@ public class Assassin : BaseClass
                     newProjectile = Instantiate(itemObject, (new Vector3(Mathf.Cos(angle - 0.8f), Mathf.Sin(angle - 0.8f), 0) + transform.position), Quaternion.Euler(0, 0, Mathf.Rad2Deg * angle - 180));
                     newProjectile.GetComponent<BoomerangScript>().point = transform.position + new Vector3 (Mathf.Cos(angle) * 4, Mathf.Sin(angle) * 4, 0);
                     newProjectile.GetComponent<BoomerangScript>().damage = GetAbilityDamage(6);
+                    newProjectile.GetComponent<BoomerangScript>().itemSlot = itemSlot;
+                    newProjectile.GetComponent<BoomerangScript>().variation = assassinAbilityStats[6, 3];
                 }
             }
             else 

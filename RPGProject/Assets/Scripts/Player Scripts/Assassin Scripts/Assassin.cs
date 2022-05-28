@@ -7,11 +7,9 @@ public class Assassin : BaseClass
     private float horizontalInput, verticalInput, maxHealth = baseHealth * 2, currentHealth, enemyDamage, maxMana = baseMana * 2, currentMana, angle, manaRegenerationSpeed,
     healAmount = 0, speed, damage, caltropSlow = 0.3f;
     private Vector3 shootDirection;
-    private int item1, item2, item3, item4, item5, item6, item7, item8, item1Type, item2Type, item3Type, item4Type, item5Type, item6Type, item7Type, item8Type, 
-    empowerWeaponTimer = 0, healCount = 0, bloodRushTimer = 0;
-    private int[] items = new int[8], itemTypes = new int[8];
-    public int cooldown1 = 0, cooldown2 = 0, cooldown3 = 0, cooldown4 = 0, cooldown5 = 0, cooldown6 = 0, cooldown7 = 0, cooldown8 = 0;
-    public int[] cooldowns = { 0, 0, 0, 0, 0, 0, 0, 0 };
+    private int empowerWeaponTimer = 0, healCount = 0, bloodRushTimer = 0;
+    public int[] cooldowns = new int[8], itemTypes = new int[8], items = new int[8];
+    public GameObject[] itemObjects = new GameObject[8];
     public Rigidbody2D body;
     private Animator anim;
     private bool movingUp, movingDown, inventoryOrArmorEquipOpen, empowerWeapon = false, healing = false;
@@ -20,9 +18,8 @@ public class Assassin : BaseClass
     private ArmorEquipOpener armorEquipOpener;
     private Items itemsList;
     public GameObject[] itemCooldowns;
+    private GameObject newMelee, newProjectile, newObject;
     private CooldownUI cooldownUI;
-    private GameObject item1Object, item2Object, item3Object, item4Object, item5Object, item6Object, item7Object, item8Object, newMelee, newProjectile, newObject;
-    private GameObject[] itemObjects = new GameObject[8];
     public ManaBar manaBar;
     public HealthBar1 healthbar;
     private EnemyProjectileScript enemyProjectileScript;
@@ -110,133 +107,20 @@ public class Assassin : BaseClass
                 healCount = 0;
             }
         }
- 
-        for (int i = 0; i < itemTypes.Length; i++) 
+
+        for (int i = 0; i<8; i++)
         {
             itemTypes[i] = playerStats.GetEquippedItemClass(i);
             items[i] = playerStats.GetEquippedItem(i);
-            if (itemTypes[i] == 1) 
+            if (itemTypes[i] >= 0)
             {
                 itemObjects[i] = assassinAbilityObjects[items[i]];
             }
-            else if (itemTypes[i] == -1)
+            else
             {
-                Debug.Log(items[i]);
                 itemObjects[i] = itemsList.GetItemObject(items[i]);
-            } 
-        }
-
-        /*item1Type = playerStats.GetEquippedItemClass(0);
-        item1 = playerStats.GetEquippedItem(0);
-        if (item1>=0)
-        {
-            if (item1Type == 1)
-            {
-                item1Object = assassinAbilityObjects[item1];
-            }
-            else 
-            {
-                item1Object = itemsList.GetItemObject(item1);
             }
         }
-        
-        item2Type = playerStats.GetEquippedItemClass(1);
-        item2 = playerStats.GetEquippedItem(1);
-        if (item2>=0)
-        {
-            if (item2Type == 1)
-            {
-                item2Object = assassinAbilityObjects[item2];
-            }
-            else 
-            {
-                item2Object = itemsList.GetItemObject(item2);
-            }
-        }
-
-        item3Type = playerStats.GetEquippedItemClass(2);
-        item3 = playerStats.GetEquippedItem(2);
-        if (item3>=0)
-        {
-            if (item3Type == 1)
-            {
-                item3Object = assassinAbilityObjects[item3];
-            }
-            else 
-            {
-                item3Object = itemsList.GetItemObject(item3);
-            }
-        }
-
-        item4Type = playerStats.GetEquippedItemClass(3);
-        item4 = playerStats.GetEquippedItem(3);
-        if (item4>=0)
-        {
-            if (item4Type == 1)
-            {
-                item4Object = assassinAbilityObjects[item4];
-            }
-            else 
-            {
-                item4Object = itemsList.GetItemObject(item4);
-            }
-        }
-
-        item5Type = playerStats.GetEquippedItemClass(4);
-        item5 = playerStats.GetEquippedItem(4);
-        if (item5>=0)
-        {
-            if (item5Type == 1)
-            {
-                item5Object = assassinAbilityObjects[item5];
-            }
-            else 
-            {
-                item5Object = itemsList.GetItemObject(item5);
-            }
-        }
-        
-        item6Type = playerStats.GetEquippedItemClass(5);
-        item6 = playerStats.GetEquippedItem(5);
-        if (item6>=0)
-        {
-            if (item6Type == 1)
-            {
-                item6Object = assassinAbilityObjects[item6];
-            }
-            else 
-            {
-                item6Object = itemsList.GetItemObject(item6);
-            }
-        }
-
-        item7Type = playerStats.GetEquippedItemClass(6);
-        item7 = playerStats.GetEquippedItem(6);
-        if (item7>=0)
-        {
-            if (item7Type == 1)
-            {
-                item7Object = assassinAbilityObjects[item7];
-            }
-            else 
-            {
-                item7Object = itemsList.GetItemObject(item7);
-            }
-        }
-
-        item8Type = playerStats.GetEquippedItemClass(7);
-        item8 = playerStats.GetEquippedItem(7);
-        if (item8>=0)
-        {
-            if (item8Type == 1)
-            {
-                item8Object = assassinAbilityObjects[item8];
-            }
-            else 
-            {
-                item8Object = itemsList.GetItemObject(item8);
-            }
-        }*/
 
         if (!inventoryOrArmorEquipOpen)
         {
@@ -305,7 +189,7 @@ public class Assassin : BaseClass
     {
         if (Input.GetMouseButtonDown(0) && cooldowns[0] == 0 && Time.timeScale == 1) 
         {
-            if (item1>-1)
+            if (items[0]>-1)
             {
                 UseItemInHotbar(0, itemTypes[0], items[0], itemObjects[0]);
             }
@@ -314,7 +198,7 @@ public class Assassin : BaseClass
         //Accesses second item in hotbar
         else if (Input.GetMouseButtonDown(1) && cooldowns[1] == 0 && Time.timeScale == 1)
         {
-            if (item2>-1)
+            if (items[1]>-1)
             {
                 if(currentMana>itemsList.GetManaCost(playerStats.GetEquippedItem(1)))
                 {
@@ -325,7 +209,7 @@ public class Assassin : BaseClass
 
         else if (Input.GetKeyDown(KeyCode.Q) && cooldowns[2] == 0 && Time.timeScale == 1) {
 
-            if (item3>-1)
+            if (items[2]>-1)
             {
                 if(currentMana>itemsList.GetManaCost(playerStats.GetEquippedItem(2)))
                 {
@@ -337,7 +221,7 @@ public class Assassin : BaseClass
 
         else if (Input.GetKeyDown(KeyCode.E) && cooldowns[3] == 0 && Time.timeScale == 1) {
 
-            if (item4>-1)
+            if (items[3]>-1)
             {
                 if(currentMana>itemsList.GetManaCost(playerStats.GetEquippedItem(3)))
                 {
@@ -349,7 +233,7 @@ public class Assassin : BaseClass
 
         else if (Input.GetKeyDown(KeyCode.Alpha1) && cooldowns[4] == 0 && Time.timeScale == 1) 
         {
-            if (item5>-1)
+            if (items[4]>-1)
             {
                 UseItemInHotbar(4, itemTypes[4], items[4], itemObjects[4]);
             }
@@ -358,7 +242,7 @@ public class Assassin : BaseClass
         //Accesses second item in hotbar
         else if (Input.GetKeyDown(KeyCode.Alpha2) && cooldowns[5] == 0 && Time.timeScale == 1)
         {
-            if (item6>-1)
+            if (items[5]>-1)
             {
                 if(currentMana>itemsList.GetManaCost(playerStats.GetEquippedItem(5)))
                 {
@@ -369,7 +253,7 @@ public class Assassin : BaseClass
 
         else if (Input.GetKeyDown(KeyCode.Alpha3) && cooldowns[6] == 0 && Time.timeScale == 1) {
 
-            if (item7>-1)
+            if (items[6]>-1)
             {
                 if(currentMana>itemsList.GetManaCost(playerStats.GetEquippedItem(6)))
                 {
@@ -381,7 +265,7 @@ public class Assassin : BaseClass
 
         else if (Input.GetKeyDown(KeyCode.Alpha4) && cooldowns[7] == 0 && Time.timeScale == 1) {
 
-            if (item8>-1)
+            if (items[7]>-1)
             {
                 if(currentMana>itemsList.GetManaCost(playerStats.GetEquippedItem(7)))
                 {
@@ -396,56 +280,15 @@ public class Assassin : BaseClass
             currentMana += manaRegenerationSpeed;
         }
 
-        for (int i = 0; i < cooldowns.Length; i++)
+        for (int cooldown = 0; cooldown<8; cooldown++)
         {
-            if (cooldowns[i] > 0 && Time.timeScale == 1)
+            if (cooldowns[cooldown] > 0 && Time.timeScale == 1)
             {
-                cooldowns[i]--;
-                cooldownUI = itemCooldowns[i].GetComponent<CooldownUI>();
-                cooldownUI.SetCooldown(cooldowns[i]);
+                cooldowns[cooldown]--;
+                cooldownUI = itemCooldowns[cooldown].GetComponent<CooldownUI>();
+                cooldownUI.SetCooldown(cooldowns[cooldown]);
             }
         }
-
-        /*if (cooldown1 > 0 && Time.timeScale == 1) {
-            cooldowns[0]--;
-            cooldownUI = itemCooldowns[0].GetComponent<CooldownUI>();
-            cooldownUI.SetCooldown(cooldowns[0]);
-        }
-        if (cooldown2 > 0 && Time.timeScale == 1) {
-            cooldowns[1]--;
-            cooldownUI = itemCooldowns[1].GetComponent<CooldownUI>();
-            cooldownUI.SetCooldown(cooldowns[1]);
-        }
-        if (cooldown3 > 0 && Time.timeScale == 1) {
-            cooldowns[2]--;
-            cooldownUI = itemCooldowns[2].GetComponent<CooldownUI>();
-            cooldownUI.SetCooldown(cooldowns[2]);
-        }
-        if (cooldown4 > 0 && Time.timeScale == 1) {
-            cooldowns[3]--;
-            cooldownUI = itemCooldowns[3].GetComponent<CooldownUI>();
-            cooldownUI.SetCooldown(cooldowns[3]);
-        }
-        if (cooldown5 > 0 && Time.timeScale == 1) {
-            cooldowns[4]--;
-            cooldownUI = itemCooldowns[4].GetComponent<CooldownUI>();
-            cooldownUI.SetCooldown(cooldowns[4]);
-        }
-        if (cooldown6 > 0 && Time.timeScale == 1) {
-            cooldowns[5]--;
-            cooldownUI = itemCooldowns[5].GetComponent<CooldownUI>();
-            cooldownUI.SetCooldown(cooldowns[5]);
-        }
-        if (cooldown7 > 0 && Time.timeScale == 1) {
-            cooldown7--;
-            cooldownUI = itemCooldowns[6].GetComponent<CooldownUI>();
-            cooldownUI.SetCooldown(cooldowns[6]);
-        }
-        if (cooldown8 > 0 && Time.timeScale == 1) {
-            cooldown8--;
-            cooldownUI = itemCooldowns[7].GetComponent<CooldownUI>();
-            cooldownUI.SetCooldown(cooldowns[7]);
-        }*/
 
         manaBar.SetMana(currentMana);
     }
@@ -616,93 +459,25 @@ public class Assassin : BaseClass
                     newProjectile.GetComponent<ProjectileScript>().damage = playerStats.GetItemDamage(item) * damage;
                 }
             }
-            
-            if (itemTypes[itemSlot] == 1)
-            {
-                cooldowns[itemSlot] = assassinAbilityStats[item, 2];
-            }
-            else
-            {
-                cooldowns[itemSlot] = itemsList.GetCooldown(item);
-            }
-            itemCooldowns[itemSlot].SetActive(true);
-            itemCooldowns[itemSlot].GetComponent<CooldownUI>().SetMaxCooldown(cooldowns[itemSlot]);
 
-            /*switch(itemSlot)
+            for (int index = 0; index<8; index++)
             {
-                case 0:
-                    if (item1Type == 1)
+                if (itemSlot == index)
+                {
+                    if (itemTypes[index] == 1)
                     {
-                        cooldown1 = assassinAbilityStats[item, 2];
+                        cooldowns[index] = assassinAbilityStats[item, 2];
                     }
                     else
                     {
-                        cooldown1 = itemsList.GetCooldown(item);
-                    }; itemCooldowns[0].SetActive(true); itemCooldowns[0].GetComponent<CooldownUI>().SetMaxCooldown(cooldown1); break;
-                case 1: 
-                    if (item2Type == 1)
-                    {
-                        cooldown2 = assassinAbilityStats[item, 2];
+                        cooldowns[index] = itemsList.GetCooldown(item);
                     }
-                    else
-                    {
-                        cooldown2 = itemsList.GetCooldown(item);
-                    }; itemCooldowns[1].SetActive(true); itemCooldowns[1].GetComponent<CooldownUI>().SetMaxCooldown(cooldown2); break;
-                case 2: 
-                    if (item3Type == 1)
-                    {
-                        cooldown3 = assassinAbilityStats[item, 2];
-                    }
-                    else
-                    {
-                        cooldown3 = itemsList.GetCooldown(item);
-                    }; itemCooldowns[2].SetActive(true); itemCooldowns[2].GetComponent<CooldownUI>().SetMaxCooldown(cooldown3); break;
-                case 3: 
-                    if (item4Type == 1)
-                    {
-                        cooldown4 = assassinAbilityStats[item, 2];
-                    }
-                    else
-                    {
-                        cooldown4 = itemsList.GetCooldown(item);
-                    }; itemCooldowns[3].SetActive(true); itemCooldowns[3].GetComponent<CooldownUI>().SetMaxCooldown(cooldown4); break;
-                case 4: 
-                    if (item5Type == 1)
-                    {
-                        cooldown5 = assassinAbilityStats[item, 2];
-                    }
-                    else
-                    {
-                        cooldown5 = itemsList.GetCooldown(item);
-                    }; itemCooldowns[4].SetActive(true); itemCooldowns[4].GetComponent<CooldownUI>().SetMaxCooldown(cooldown5); break;
-                case 5: 
-                    if (item6Type == 1)
-                    {
-                        cooldown6 = assassinAbilityStats[item, 2];
-                    }
-                    else
-                    {
-                        cooldown6 = itemsList.GetCooldown(item);
-                    }; itemCooldowns[5].SetActive(true); itemCooldowns[5].GetComponent<CooldownUI>().SetMaxCooldown(cooldown6); break;
-                case 6: 
-                    if (item7Type == 1)
-                    {
-                        cooldown7 = assassinAbilityStats[item, 2];
-                    }
-                    else
-                    {
-                        cooldown7 = itemsList.GetCooldown(item);
-                    }; itemCooldowns[6].SetActive(true); itemCooldowns[6].GetComponent<CooldownUI>().SetMaxCooldown(cooldown7); break;
-                case 7: 
-                    if (item8Type == 1)
-                    {
-                        cooldown8 = assassinAbilityStats[item, 2];
-                    }
-                    else
-                    {
-                        cooldown8 = itemsList.GetCooldown(item);
-                    }; itemCooldowns[7].SetActive(true); itemCooldowns[7].GetComponent<CooldownUI>().SetMaxCooldown(cooldown8); break;
-            }*/
+                    itemCooldowns[index].SetActive(true); 
+                    itemCooldowns[index].GetComponent<CooldownUI>().
+                    SetMaxCooldown(cooldowns[index]);
+                }
+            }
+            
             if (itemClass==1)
             {
                 currentMana -= assassinAbilityStats[item, 1];

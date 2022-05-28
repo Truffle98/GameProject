@@ -9,7 +9,9 @@ public class Assassin : BaseClass
     private Vector3 shootDirection;
     private int item1, item2, item3, item4, item5, item6, item7, item8, item1Type, item2Type, item3Type, item4Type, item5Type, item6Type, item7Type, item8Type, 
     empowerWeaponTimer = 0, healCount = 0, bloodRushTimer = 0;
+    private int[] items = new int[8], itemTypes = new int[8];
     public int cooldown1 = 0, cooldown2 = 0, cooldown3 = 0, cooldown4 = 0, cooldown5 = 0, cooldown6 = 0, cooldown7 = 0, cooldown8 = 0;
+    public int[] cooldowns = { 0, 0, 0, 0, 0, 0, 0, 0 };
     public Rigidbody2D body;
     private Animator anim;
     private bool movingUp, movingDown, inventoryOrArmorEquipOpen, empowerWeapon = false, healing = false;
@@ -20,6 +22,7 @@ public class Assassin : BaseClass
     public GameObject[] itemCooldowns;
     private CooldownUI cooldownUI;
     private GameObject item1Object, item2Object, item3Object, item4Object, item5Object, item6Object, item7Object, item8Object, newMelee, newProjectile, newObject;
+    private GameObject[] itemObjects = new GameObject[8];
     public ManaBar manaBar;
     public HealthBar1 healthbar;
     private EnemyProjectileScript enemyProjectileScript;
@@ -107,8 +110,23 @@ public class Assassin : BaseClass
                 healCount = 0;
             }
         }
+ 
+        for (int i = 0; i < itemTypes.Length; i++) 
+        {
+            itemTypes[i] = playerStats.GetEquippedItemClass(i);
+            items[i] = playerStats.GetEquippedItem(i);
+            if (itemTypes[i] == 1) 
+            {
+                itemObjects[i] = assassinAbilityObjects[items[i]];
+            }
+            else if (itemTypes[i] == -1)
+            {
+                Debug.Log(items[i]);
+                itemObjects[i] = itemsList.GetItemObject(items[i]);
+            } 
+        }
 
-        item1Type = playerStats.GetEquippedItemClass(0);
+        /*item1Type = playerStats.GetEquippedItemClass(0);
         item1 = playerStats.GetEquippedItem(0);
         if (item1>=0)
         {
@@ -218,7 +236,7 @@ public class Assassin : BaseClass
             {
                 item8Object = itemsList.GetItemObject(item8);
             }
-        }
+        }*/
 
         if (!inventoryOrArmorEquipOpen)
         {
@@ -285,89 +303,89 @@ public class Assassin : BaseClass
 
     private void Attack()
     {
-        if (Input.GetMouseButtonDown(0) && cooldown1 == 0 && Time.timeScale == 1) 
+        if (Input.GetMouseButtonDown(0) && cooldowns[0] == 0 && Time.timeScale == 1) 
         {
             if (item1>-1)
             {
-                UseItemInHotbar(0, item1Type, item1, item1Object);
+                UseItemInHotbar(0, itemTypes[0], items[0], itemObjects[0]);
             }
         }
 
         //Accesses second item in hotbar
-        else if (Input.GetMouseButtonDown(1) && cooldown2 == 0 && Time.timeScale == 1)
+        else if (Input.GetMouseButtonDown(1) && cooldowns[1] == 0 && Time.timeScale == 1)
         {
             if (item2>-1)
             {
                 if(currentMana>itemsList.GetManaCost(playerStats.GetEquippedItem(1)))
                 {
-                    UseItemInHotbar(1, item2Type, item2, item2Object);
+                    UseItemInHotbar(1, itemTypes[1], items[1], itemObjects[1]);
                 }
             }
         }
 
-        else if (Input.GetKeyDown(KeyCode.Q) && cooldown3 == 0 && Time.timeScale == 1) {
+        else if (Input.GetKeyDown(KeyCode.Q) && cooldowns[2] == 0 && Time.timeScale == 1) {
 
             if (item3>-1)
             {
                 if(currentMana>itemsList.GetManaCost(playerStats.GetEquippedItem(2)))
                 {
-                    UseItemInHotbar(2, item3Type, item3, item3Object);
+                    UseItemInHotbar(2, itemTypes[2], items[2], itemObjects[2]);
                 }
             }
 
         }
 
-        else if (Input.GetKeyDown(KeyCode.E) && cooldown4 == 0 && Time.timeScale == 1) {
+        else if (Input.GetKeyDown(KeyCode.E) && cooldowns[3] == 0 && Time.timeScale == 1) {
 
             if (item4>-1)
             {
                 if(currentMana>itemsList.GetManaCost(playerStats.GetEquippedItem(3)))
                 {
-                    UseItemInHotbar(3, item4Type, item4, item4Object);
+                    UseItemInHotbar(3, itemTypes[3], items[3], itemObjects[3]);
                 }
             }
 
         }
 
-        else if (Input.GetKeyDown(KeyCode.Alpha1) && cooldown5 == 0 && Time.timeScale == 1) 
+        else if (Input.GetKeyDown(KeyCode.Alpha1) && cooldowns[4] == 0 && Time.timeScale == 1) 
         {
             if (item5>-1)
             {
-                UseItemInHotbar(4, item5Type, item5, item5Object);
+                UseItemInHotbar(4, itemTypes[4], items[4], itemObjects[4]);
             }
         }
 
         //Accesses second item in hotbar
-        else if (Input.GetKeyDown(KeyCode.Alpha2) && cooldown6 == 0 && Time.timeScale == 1)
+        else if (Input.GetKeyDown(KeyCode.Alpha2) && cooldowns[5] == 0 && Time.timeScale == 1)
         {
             if (item6>-1)
             {
                 if(currentMana>itemsList.GetManaCost(playerStats.GetEquippedItem(5)))
                 {
-                    UseItemInHotbar(5, item6Type, item6, item6Object);
+                    UseItemInHotbar(5, itemTypes[5], items[5], itemObjects[5]);
                 }
             }
         }
 
-        else if (Input.GetKeyDown(KeyCode.Alpha3) && cooldown7 == 0 && Time.timeScale == 1) {
+        else if (Input.GetKeyDown(KeyCode.Alpha3) && cooldowns[6] == 0 && Time.timeScale == 1) {
 
             if (item7>-1)
             {
                 if(currentMana>itemsList.GetManaCost(playerStats.GetEquippedItem(6)))
                 {
-                    UseItemInHotbar(6, item7Type, item7, item7Object);
+                    UseItemInHotbar(6, itemTypes[6], items[6], itemObjects[6]);
                 }
             }
 
         }
 
-        else if (Input.GetKeyDown(KeyCode.Alpha4) && cooldown8 == 0 && Time.timeScale == 1) {
+        else if (Input.GetKeyDown(KeyCode.Alpha4) && cooldowns[7] == 0 && Time.timeScale == 1) {
 
             if (item8>-1)
             {
                 if(currentMana>itemsList.GetManaCost(playerStats.GetEquippedItem(7)))
                 {
-                    UseItemInHotbar(7, item8Type, item8, item8Object);
+                    UseItemInHotbar(7, itemTypes[7], items[7], itemObjects[7]);
                 }
             }
 
@@ -378,46 +396,56 @@ public class Assassin : BaseClass
             currentMana += manaRegenerationSpeed;
         }
 
-        if (cooldown1 > 0 && Time.timeScale == 1) {
-            cooldown1--;
+        for (int i = 0; i < cooldowns.Length; i++)
+        {
+            if (cooldowns[i] > 0 && Time.timeScale == 1)
+            {
+                cooldowns[i]--;
+                cooldownUI = itemCooldowns[i].GetComponent<CooldownUI>();
+                cooldownUI.SetCooldown(cooldowns[i]);
+            }
+        }
+
+        /*if (cooldown1 > 0 && Time.timeScale == 1) {
+            cooldowns[0]--;
             cooldownUI = itemCooldowns[0].GetComponent<CooldownUI>();
-            cooldownUI.SetCooldown(cooldown1);
+            cooldownUI.SetCooldown(cooldowns[0]);
         }
         if (cooldown2 > 0 && Time.timeScale == 1) {
-            cooldown2--;
+            cooldowns[1]--;
             cooldownUI = itemCooldowns[1].GetComponent<CooldownUI>();
-            cooldownUI.SetCooldown(cooldown2);
+            cooldownUI.SetCooldown(cooldowns[1]);
         }
         if (cooldown3 > 0 && Time.timeScale == 1) {
-            cooldown3--;
+            cooldowns[2]--;
             cooldownUI = itemCooldowns[2].GetComponent<CooldownUI>();
-            cooldownUI.SetCooldown(cooldown3);
+            cooldownUI.SetCooldown(cooldowns[2]);
         }
         if (cooldown4 > 0 && Time.timeScale == 1) {
-            cooldown4--;
+            cooldowns[3]--;
             cooldownUI = itemCooldowns[3].GetComponent<CooldownUI>();
-            cooldownUI.SetCooldown(cooldown4);
+            cooldownUI.SetCooldown(cooldowns[3]);
         }
         if (cooldown5 > 0 && Time.timeScale == 1) {
-            cooldown5--;
+            cooldowns[4]--;
             cooldownUI = itemCooldowns[4].GetComponent<CooldownUI>();
-            cooldownUI.SetCooldown(cooldown5);
+            cooldownUI.SetCooldown(cooldowns[4]);
         }
         if (cooldown6 > 0 && Time.timeScale == 1) {
-            cooldown6--;
+            cooldowns[5]--;
             cooldownUI = itemCooldowns[5].GetComponent<CooldownUI>();
-            cooldownUI.SetCooldown(cooldown6);
+            cooldownUI.SetCooldown(cooldowns[5]);
         }
         if (cooldown7 > 0 && Time.timeScale == 1) {
             cooldown7--;
             cooldownUI = itemCooldowns[6].GetComponent<CooldownUI>();
-            cooldownUI.SetCooldown(cooldown7);
+            cooldownUI.SetCooldown(cooldowns[6]);
         }
         if (cooldown8 > 0 && Time.timeScale == 1) {
             cooldown8--;
             cooldownUI = itemCooldowns[7].GetComponent<CooldownUI>();
-            cooldownUI.SetCooldown(cooldown8);
-        }
+            cooldownUI.SetCooldown(cooldowns[7]);
+        }*/
 
         manaBar.SetMana(currentMana);
     }
@@ -589,7 +617,18 @@ public class Assassin : BaseClass
                 }
             }
             
-            switch(itemSlot)
+            if (itemTypes[itemSlot] == 1)
+            {
+                cooldowns[itemSlot] = assassinAbilityStats[item, 2];
+            }
+            else
+            {
+                cooldowns[itemSlot] = itemsList.GetCooldown(item);
+            }
+            itemCooldowns[itemSlot].SetActive(true);
+            itemCooldowns[itemSlot].GetComponent<CooldownUI>().SetMaxCooldown(cooldowns[itemSlot]);
+
+            /*switch(itemSlot)
             {
                 case 0:
                     if (item1Type == 1)
@@ -663,7 +702,7 @@ public class Assassin : BaseClass
                     {
                         cooldown8 = itemsList.GetCooldown(item);
                     }; itemCooldowns[7].SetActive(true); itemCooldowns[7].GetComponent<CooldownUI>().SetMaxCooldown(cooldown8); break;
-            }
+            }*/
             if (itemClass==1)
             {
                 currentMana -= assassinAbilityStats[item, 1];

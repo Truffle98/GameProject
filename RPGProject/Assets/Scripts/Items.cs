@@ -27,7 +27,11 @@ public class Items : BaseClass
     {
         return itemStats[itemID, 3];
     }
-    public GameObject GetItemObject(int itemID) {
+    public GameObject GetItemObject(int itemID) 
+    {
+        if (itemID == -1) {
+            return null;
+        }
         return gameItems[itemID];
     }
     public int GetItemType(int itemID)

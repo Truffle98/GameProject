@@ -12,10 +12,11 @@ public class Assassin : BaseClass
     public GameObject[] itemObjects = new GameObject[8];
     public Rigidbody2D body;
     private Animator anim;
-    private bool movingUp, movingDown, inventoryOrArmorEquipOpen, empowerWeapon = false, healing = false;
+    private bool movingUp, movingDown, inventoryOrArmorEquipOpen, empowerWeapon = false, healing = false, promptIsOpen = false, dialogueIsOpen = false;
     private PlayerStats playerStats;
     private InventoryOpener inventoryOpener;
     private ArmorEquipOpener armorEquipOpener;
+    private InteractionDialogueOpener dialogueOpener;
     private Items itemsList;
     public GameObject[] itemCooldowns;
     private GameObject newMelee, newProjectile, newObject;
@@ -48,6 +49,7 @@ public class Assassin : BaseClass
         itemsList = GameObject.Find("ItemObjectList").GetComponent<Items>();
         inventoryOpener = GameObject.Find("InventoryOpener").GetComponent<InventoryOpener>();
         armorEquipOpener = GameObject.Find("Armor Equip Opener").GetComponent<ArmorEquipOpener>();
+        dialogueOpener = GameObject.Find("Interaction Dialogue Opener").GetComponent<InteractionDialogueOpener>();
         soundEffects = gameObject.GetComponent<SoundEffects>();
        
         manaRegenerationSpeed = .02f;
@@ -306,6 +308,21 @@ public class Assassin : BaseClass
             if(currentHealth <= 0) {
                 Destroy(gameObject);
             }
+        }
+
+        if (other.gameObject.CompareTag("Interactable"))
+        {
+            dialogueOpener.setInteractionPromptState(true);
+            promptIsOpen = true;
+        }
+    }
+
+    void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Interactable"))
+        {
+            dialogueOpener.setInteractionPromptState(false);
+            promptIsOpen = false;
         }
     }
 

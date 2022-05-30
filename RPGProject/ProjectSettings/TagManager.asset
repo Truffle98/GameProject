@@ -18,6 +18,7 @@ TagManager:
   - Undefined
   - Wave
   - Turned Enemy Projectile
+  - Interactable
   layers:
   - Default
   - TransparentFX

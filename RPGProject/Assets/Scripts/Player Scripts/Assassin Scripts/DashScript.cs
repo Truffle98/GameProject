@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class DashScript : MonoBehaviour
 {
-    private GameObject player;
+    private GameObject player, newObj;
+    public GameObject slash;
     private Assassin assassinScript;
     private PlayerStats playerStats;
     private int dashCooldown = 0, dashCount = 0;
-    private float angle;
+    public int variation;
+    public float angle, damage;
     private Vector3 shootDirection;
 
     // Start is called before the first frame update
@@ -43,6 +45,11 @@ public class DashScript : MonoBehaviour
             GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
             for (int i = 0; i < enemies.Length; i++) {
                 enemies[i].GetComponent<EnemyScript>().lastSeenTarget = 0;
+            }
+            if (variation == 1) {
+                newObj = Instantiate(slash, player.transform.position + new Vector3 (0, 2, 0), Quaternion.Euler(0,0,0));
+                newObj.GetComponent<DashSlash>().damage = damage;
+                newObj.GetComponent<DashSlash>().player = player;
             }
             Destroy(gameObject);
         }

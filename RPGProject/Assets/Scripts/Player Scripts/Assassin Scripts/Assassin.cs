@@ -30,7 +30,7 @@ public class Assassin : BaseClass
 
     //Nested array: 0: damage, 1: mana cost, 2: cooldown, 3: ability variation, 4: item type
     protected string[] assassinAbilityNames = {"Dash", "Thorn", "Empower Weapon", "Caltrops", "Thousand Cuts", "Blood Rush", "Boomerang" };
-    protected int[,] assassinAbilityStats = new int[7, 5] { {0, 10, 100, 0, 2}, {15, 25, 2500, 0, 2}, {0, 15, 1000, 1, 2}, {5, 30, 500, 1, 2}, {5, 20, 750, 0, 2}, {0, 15, 1000, 0, 2}, {20, 5, 1000, 1, 2} };
+    protected int[,] assassinAbilityStats = new int[7, 5] { {20, 10, 100, 1, 2}, {15, 25, 2500, 0, 2}, {0, 15, 1000, 1, 2}, {5, 30, 500, 1, 2}, {5, 20, 750, 0, 2}, {0, 15, 1000, 0, 2}, {20, 5, 1000, 1, 2} };
     //array for empower weapon type 0 = {5, 15, 1000, 0, 2}
     public GameObject[] assassinAbilityObjects;
 
@@ -367,7 +367,12 @@ public class Assassin : BaseClass
                 } 
                 else if (item == 0) 
                 {
-                    Instantiate(itemObject, transform.position, Quaternion.Euler(0,0,0));
+                    newMelee = Instantiate(itemObject, transform.position, Quaternion.Euler(0,0,0));
+                    newMelee.GetComponent<DashScript>().angle = angle;
+                    newMelee.GetComponent<DashScript>().variation = assassinAbilityStats[0, 3];
+                    if (assassinAbilityStats[0, 3] == 1) {
+                        newMelee.GetComponent<DashScript>().damage = GetAbilityDamage(0);
+                    }
                 } 
                 else if (item == 1) 
                 {
